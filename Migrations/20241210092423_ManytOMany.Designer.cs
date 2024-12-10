@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TireDrift.Data;
 
@@ -11,9 +12,11 @@ using TireDrift.Data;
 namespace TireDrift.Migrations
 {
     [DbContext(typeof(TiresDbContext))]
-    partial class TiresDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241210092423_ManytOMany")]
+    partial class ManytOMany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

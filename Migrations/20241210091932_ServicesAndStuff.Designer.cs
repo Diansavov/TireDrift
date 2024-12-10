@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TireDrift.Data;
 
@@ -11,9 +12,11 @@ using TireDrift.Data;
 namespace TireDrift.Migrations
 {
     [DbContext(typeof(TiresDbContext))]
-    partial class TiresDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241210091932_ServicesAndStuff")]
+    partial class ServicesAndStuff
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -233,36 +236,6 @@ namespace TireDrift.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OrderService", b =>
-                {
-                    b.Property<string>("OrdersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ServicesId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("OrdersId", "ServicesId");
-
-                    b.HasIndex("ServicesId");
-
-                    b.ToTable("OrderService");
-                });
-
-            modelBuilder.Entity("OrderTire", b =>
-                {
-                    b.Property<string>("OrdersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("TiresId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("OrdersId", "TiresId");
-
-                    b.HasIndex("TiresId");
-
-                    b.ToTable("OrderTire");
-                });
-
             modelBuilder.Entity("TireDrift.Models.Invoice", b =>
                 {
                     b.Property<string>("Id")
@@ -332,10 +305,15 @@ namespace TireDrift.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Service");
                 });
@@ -371,6 +349,9 @@ namespace TireDrift.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("PhotoUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -382,6 +363,8 @@ namespace TireDrift.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Tires");
                 });
@@ -452,36 +435,6 @@ namespace TireDrift.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OrderService", b =>
-                {
-                    b.HasOne("TireDrift.Models.Order", null)
-                        .WithMany()
-                        .HasForeignKey("OrdersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TireDrift.Models.Service", null)
-                        .WithMany()
-                        .HasForeignKey("ServicesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("OrderTire", b =>
-                {
-                    b.HasOne("TireDrift.Models.Order", null)
-                        .WithMany()
-                        .HasForeignKey("OrdersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TireDrift.Models.Tire", null)
-                        .WithMany()
-                        .HasForeignKey("TiresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TireDrift.Models.Invoice", b =>
                 {
                     b.HasOne("TireDrift.Models.User", "Client")
@@ -510,6 +463,27 @@ namespace TireDrift.Migrations
                     b.Navigation("Client");
 
                     b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("TireDrift.Models.Service", b =>
+                {
+                    b.HasOne("TireDrift.Models.Order", null)
+                        .WithMany("Services")
+                        .HasForeignKey("OrderId");
+                });
+
+            modelBuilder.Entity("TireDrift.Models.Tire", b =>
+                {
+                    b.HasOne("TireDrift.Models.Order", null)
+                        .WithMany("Tires")
+                        .HasForeignKey("OrderId");
+                });
+
+            modelBuilder.Entity("TireDrift.Models.Order", b =>
+                {
+                    b.Navigation("Services");
+
+                    b.Navigation("Tires");
                 });
 #pragma warning restore 612, 618
         }
