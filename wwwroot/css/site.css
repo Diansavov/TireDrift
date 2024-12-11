@@ -1,22 +1,35 @@
-html {
-  font-size: 14px;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures all elements use the same box-sizing model */
 }
-
-@media (min-width: 768px) {
+html {
+  font-size: 16px; /* Sets a base font size, typically 16px */
+  height: 100%; /* Ensure html element takes full height */
+}
+@media (max-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 14px; /* Reduces font size on smaller screens */
   }
 }
 
+body {
+  font-family: Arial, sans-serif; /* Default font-family */
+  font-size: 1rem; /* Default font size, relative to the html font size */
+  line-height: 1.5; /* Sets the line-height for readability */
+  background-color: #fff; /* Default background color */
+  color: #333; /* Default text color */
+  height: 100%; /* Ensures the body takes full height */
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+}
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
-
-html {
-  position: relative;
-  min-height: 100%;
+img {
+  max-width: 100%; /* Ensures images are responsive */
+  height: auto; /* Maintains aspect ratio */
+  display: block; /* Removes unwanted space below images */
 }
 
-body {
-  margin-bottom: 60px;
-}

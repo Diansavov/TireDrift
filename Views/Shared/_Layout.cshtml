@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TireDrift.styles.css" asp-append-version="true" />
+    @RenderSection("Styles", false)
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TireDrift</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
@@ -33,6 +34,22 @@
                                 asp-action="Tires">Tires</a>
                         </li>
                     </ul>
+                    <div class="d-flex gap-2">
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a class="btn btn-outline-success" asp-area="" asp-controller="Users" asp-action="LogIn"
+                                type="submit">Log In</a>
+                            <a class="btn btn-success" asp-area="" asp-controller="Users" asp-action="Register"
+                                type="submit">Register</a>
+                        }
+                        else
+                        {
+                            <div class="justify-content-center">
+                                <a class="btn btn-outline-success" asp-area="" asp-controller="Users"
+                                    asp-action="LogOut" type="submit">User Profile</a>
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>

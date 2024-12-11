@@ -1,0 +1,47 @@
+@model TireDrift.Models.ViewModels.LogInViewMode
+
+@{
+    ViewData["Title"] = "Log In";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/profile/login.css" asp-append-version="true" />
+}
+
+<div class="form-container">
+    <div class="child-form-container">
+        <div class="left-form">
+            <div class="form-title">
+                <h2>Log In</h2>
+                <div class="register">
+                    <p>Don't have an account? <a asp-controller="Gamblers" asp-action="Gamblers">Register</a></p>
+                </div>
+            </div>
+            <div>
+                <form asp-action="LogIn">
+                    <div class="input-field">
+                        <input id="loginInput" type="text" asp-for="Username">
+                        <label id="loginLabel" class="form-label-login">Username</label>
+                    </div>
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                    <div class="input-field">
+                        <input id="loginInput" type="password" asp-for="Password">
+                        <label id="loginLabel" class="form-label-login">Password</label>
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <div class="submit-button">
+                        <button type="submit" class="btn-submit">Log In</button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+        <div class="picture-part">
+
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/profile/logIn/logInTextAnimation.js"></script>
+}
