@@ -12,5 +12,9 @@ namespace TireDrift
         {
             return View();
         }
+        public IActionResult AddTire()
+        {
+            return View();
+        }
     }
 }
