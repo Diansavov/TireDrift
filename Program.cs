@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using TestIgnatov.Data.Seeds;
 using TireDrift.Data;
 using TireDrift.Models;
 
@@ -43,5 +44,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+RolesSeed.Seed(app);
 
 app.Run();

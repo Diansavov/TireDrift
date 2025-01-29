@@ -16,6 +16,5 @@ namespace TireDrift.Models
         public string Description { get; set; }
         public string PhotoUrl { get; set; }
         public List<Order> Orders { get; set; }
-
     }
 }
