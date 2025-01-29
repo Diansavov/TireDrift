@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<TiresDbContext>(options =>
-             options.UseSqlServer(builder.Configuration.GetConnectionString("TireDriftConnectionString")));
+             options.UseMySql(builder.Configuration.GetConnectionString("TireDriftConnectionString"), new MySqlServerVersion(new Version(10, 0, 1))));
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>().AddEntityFrameworkStores<TiresDbContext>();
 
