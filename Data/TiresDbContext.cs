@@ -9,10 +9,10 @@ namespace TireDrift.Data
             {
 
             }
+            public DbSet<User> Users { get; set; }
             public DbSet<Invoice> Invoices { get; set; }
             public DbSet<Order> Orders { get; set; }
             public DbSet<Supplier> Suppliers { get; set; }
             public DbSet<Tire> Tires { get; set; }
-            public DbSet<User> Users { get; set; }
     }
 }

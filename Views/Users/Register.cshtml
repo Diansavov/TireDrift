@@ -1,4 +1,4 @@
-@model TireDrift.Models.ViewModels.LogInViewMode
+@model TireDrift.Models.ViewModels.UserRegisterViewModel
 
 @{
     ViewData["Title"] = "Log In";
@@ -8,19 +8,38 @@
     <link rel="stylesheet" href="~/css/profile/login.css" asp-append-version="true" />
 }
 
-<form asp-action="LogIn">
-    <div class="input-field">
-        <input id="loginInput" type="text" asp-for="Username">
-        <label id="loginLabel" class="form-label-login">Username</label>
-    </div>
-    <span asp-validation-for="Username" class="text-danger"></span>
-    <div class="input-field">
-        <input id="loginInput" type="password" asp-for="Password">
-        <label id="loginLabel" class="form-label-login">Password</label>
-    </div>
-    <span asp-validation-for="Password" class="text-danger"></span>
-    <div class="submit-button">
-        <button type="submit" class="btn-submit">Log In</button>
+<form asp-action="Register">
+    <h2 class="form-title">Регистриране</h2>
+    <div class="inputs-container">
+        <div class="input-names">
+            <div class="input-name">
+                <input type="text" placeholder="Лично име" asp-for="FirstName" aria-required="true">
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="input-name">
+                <input type="text" placeholder="Фамилия" asp-for="LastName" aria-required="true">
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="input-field">
+            <input type="text" placeholder="Потребителско име" asp-for="UserName" aria-required="true">
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <div class="input-field">
+            <input id="Email" type="email" placeholder="Имейл" asp-for="Email" aria-required="true">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="input-field">
+            <input type="password" placeholder="Парола" asp-for="Password" aria-required="true">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="submit-button">
+            <button class="btn btn-primary" type="submit">Регистриране</button>
+        </div>
+        <div class="opposite-action">
+            <p>Имате акаунт? <a asp-controller="User" asp-action="LogIn">Влез сега!</a></p>
+        </div>
     </div>
 </form>
 

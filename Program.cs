@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TestIgnatov.Data.Seeds;
 using TireDrift.Data;
 using TireDrift.Models;
+using TireDrift.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,8 +24,10 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.Name = "UserCookie";
     options.LoginPath = "/Users/LogIn";
 });
-//Services
 
+
+//Services
+builder.Services.AddScoped<IUserService, UserService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

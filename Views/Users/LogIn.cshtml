@@ -1,4 +1,4 @@
-@model TireDrift.Models.ViewModels.LogInViewMode
+@model TireDrift.Models.ViewModels.UserLoginViewModel
 
 @{
     ViewData["Title"] = "Log In";
@@ -10,10 +10,10 @@
 
 <form asp-action="LogIn">
     <div class="input-field">
-        <input id="loginInput" type="text" asp-for="Username">
+        <input id="loginInput" type="text" asp-for="UserName">
         <label id="loginLabel" class="form-label-login">Username</label>
     </div>
-    <span asp-validation-for="Username" class="text-danger"></span>
+    <span asp-validation-for="UserName" class="text-danger"></span>
     <div class="input-field">
         <input id="loginInput" type="password" asp-for="Password">
         <label id="loginLabel" class="form-label-login">Password</label>
