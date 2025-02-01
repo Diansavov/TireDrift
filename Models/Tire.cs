@@ -6,6 +6,5 @@ namespace TireDrift.Models
     public class Tire : Service
     {
         public int Stock { get; set; }
-        public string ImagePath { get; set; }
     }
 }
