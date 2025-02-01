@@ -3,16 +3,20 @@
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Ensures all elements use the same box-sizing model */
+  box-sizing: border-box;
+  font-family: "Jost", serif;
 }
-html {
-  font-size: 16px; /* Sets a base font size, typically 16px */
-  height: 100%; /* Ensure html element takes full height */
+html,
+body {
+  height: 100%;
+  margin: 0;
 }
-@media (max-width: 768px) {
-  html {
-    font-size: 14px; /* Reduces font size on smaller screens */
-  }
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 body {
@@ -27,9 +31,3 @@ body {
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
-img {
-  max-width: 100%; /* Ensures images are responsive */
-  height: auto; /* Maintains aspect ratio */
-  display: block; /* Removes unwanted space below images */
-}
-

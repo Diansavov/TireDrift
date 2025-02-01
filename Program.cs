@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Services;
 using TestIgnatov.Data.Seeds;
 using TireDrift.Data;
 using TireDrift.Models;
@@ -28,6 +29,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 //Services
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITiresService, TiresService>();
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

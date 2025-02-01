@@ -1,0 +1,97 @@
+
+using System.Threading.Tasks;
+using AspNetCoreGeneratedDocument;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using TireDrift.Data;
+using TireDrift.Models;
+using TireDrift.Models.ViewModels;
+
+namespace Services
+{
+    public class TiresService : ITiresService
+    {
+        private readonly TiresDbContext _tiresDbContext;
+        public TiresService(TiresDbContext tiresDbContext)
+        {
+            _tiresDbContext = tiresDbContext;
+        }
+
+        public async Task AddTireAsync(TireViewModel addTireViewModel)
+        {
+            Tire tire = new Tire()
+            {
+                Name = addTireViewModel.Name,
+                Description = addTireViewModel.Description,
+                Price = addTireViewModel.Price,
+                Stock = addTireViewModel.Stock,
+            };
+
+            string imagePath = "";
+            using (var memoryStream = new MemoryStream())
+            {
+                addTireViewModel.Image.CopyTo(memoryStream);
+
+                imagePath = $"wwwroot/images/tires/{Guid.NewGuid().ToString()}.png";
+                Directory.CreateDirectory(Path.GetDirectoryName(imagePath));
+                FileStream fileStream = new FileStream(imagePath, FileMode.Create);
+                addTireViewModel.Image.CopyTo(fileStream);
+            }
+
+            tire.ImagePath = imagePath.Substring(7);
+
+            await _tiresDbContext.Tires.AddAsync(tire);
+            await _tiresDbContext.SaveChangesAsync();
+        }
+
+        public async Task<Tire> GetAsync(string id)
+        {
+            return await _tiresDbContext.Tires.FindAsync(id);
+        }
+
+        public List<Tire> GetAll()
+        {
+            return _tiresDbContext.Tires.ToList();
+        }
+
+        public async Task EditAsync(TireViewModel editTireViewModel)
+        {
+            Tire tire = await GetAsync(editTireViewModel.Id);
+            tire.Name = editTireViewModel.Name;
+            tire.Description = editTireViewModel.Description;
+            tire.Price = editTireViewModel.Price;
+            tire.Stock = editTireViewModel.Stock;
+
+            if (editTireViewModel.Image != null)
+            {
+                string imagePath = "";
+                using (var memoryStream = new MemoryStream())
+                {
+                    editTireViewModel.Image.CopyTo(memoryStream);
+
+                    imagePath = $"wwwroot/images/tires/{tire.ImagePath.Substring(14)}";
+                    Directory.CreateDirectory(Path.GetDirectoryName(imagePath));
+                    FileStream fileStream = new FileStream(imagePath, FileMode.Create);
+                    editTireViewModel.Image.CopyTo(fileStream);
+                }
+
+                tire.ImagePath = imagePath.Substring(7);
+            }
+
+            _tiresDbContext.Update(tire);
+            await _tiresDbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(string id)
+        {
+            Tire product = await GetAsync(id);
+            if (File.Exists($"wwwroot{product.ImagePath}"))
+            {
+                File.Delete($"wwwroot{product.ImagePath}");
+            }
+
+            _tiresDbContext.Tires.Remove(product);
+            await _tiresDbContext.SaveChangesAsync();
+        }
+    }
+}

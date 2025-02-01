@@ -1,6 +1,6 @@
 namespace Services
 {
-    interface IOrders
+    public interface IOrders
     {
         
     }

@@ -1,5 +1,37 @@
+@model List<Tire>
+
 @{
     ViewData["Title"] = "Tires";
 }
 
 All Tires
+<a class="btn btn-success" asp-controller="Tires" asp-action="AddTire">Add Tire</a>
+<div style="display: flex;">
+    @foreach (var tire in Model)
+    {
+        <div style="display: flex; flex-direction: column;">
+
+            <div style="display: flex; width: 200px; height: 200px;">
+                <img src="@tire.ImagePath"></img>
+            </div>
+            <div>
+                <span>@tire.Name</span>
+            </div>
+            <div>
+                <span>@tire.Description</span>
+            </div>
+            <div>
+                <span>@Math.Round(tire.Price, 2)</span>
+            </div>
+            <div>
+                <a class="btn btn-success">Buy</a>
+            </div>
+            <div>
+                <a asp-controller="Tires" asp-action="EditTire" asp-route-id="@tire.Id" class="btn btn-warning">Edit</a>
+            </div>
+            <div>
+                <a asp-controller="Tires" asp-action="DeleteTire" asp-route-id="@tire.Id" class="btn btn-danger">Del</a>
+            </div>
+        </div>
+    }
+</div>
