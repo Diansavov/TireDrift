@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TestIgnatov.Data.Seeds
 {
-    class RolesSeed
+    public class SeedRoles
     {
-        public static async void Seed(IApplicationBuilder applicationBuilder)
+        public static async Task Seed(IApplicationBuilder applicationBuilder)
         {
             using (var scope = applicationBuilder.ApplicationServices.CreateScope())
             {

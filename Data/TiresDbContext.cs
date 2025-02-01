@@ -14,5 +14,6 @@ namespace TireDrift.Data
             public DbSet<Order> Orders { get; set; }
             public DbSet<Supplier> Suppliers { get; set; }
             public DbSet<Tire> Tires { get; set; }
+            public DbSet<Service> Services { get; set; }
     }
 }

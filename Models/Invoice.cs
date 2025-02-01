@@ -10,7 +10,6 @@ namespace TireDrift.Models
         public string BulStat { get; set; }
         public User Client { get; set; }
         public DateTime Date { get; set; }
-        //Question?? Poruchka ili 3te poleta?
         public Order Order { get; set; }
     }
 }
