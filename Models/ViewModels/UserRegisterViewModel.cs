@@ -17,5 +17,7 @@ namespace TireDrift.Models.ViewModels
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Фамилното име е задължително")]
         public string LastName { get; set; }
+        [Required(ErrorMessage = "Телефонният номер е задължителен")]
+        public string PhoneNumber { get; set; }
     }
 }

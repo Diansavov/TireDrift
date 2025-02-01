@@ -45,6 +45,7 @@ namespace TireDrift.Services
                 Email = registerRequest.Email,
                 FirstName = registerRequest.FirstName,
                 LastName = registerRequest.LastName,
+                PhoneNumber = registerRequest.PhoneNumber,
             };
             var result = await _userManager.CreateAsync(user, registerRequest.Password);
 
