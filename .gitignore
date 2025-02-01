@@ -39,7 +39,8 @@ Thumbs.db
 ##########
 /bin
 /obj
-/wwwroot/images/profilePics
+/Migrations
+/wwwroot/images/tires
 
 .vs
 .vscode
