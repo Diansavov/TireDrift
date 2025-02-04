@@ -9,6 +9,7 @@ namespace TireDrift.Data
         {
             await SeedRoles.Seed(app);
             await SeedServices.Seed(app);
+            await SeedUsers.Seed(app);
         }
     }
 }
