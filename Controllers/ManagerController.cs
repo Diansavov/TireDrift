@@ -6,8 +6,24 @@ namespace TireDrift.Controllers;
 
 public class ManagerController : Controller
 {
-    public IActionResult Index()
+    public IActionResult ManagerPanel()
     {
+
+        return View();
+    }
+    public IActionResult AddWorker()
+    {
+        
+        return View();
+    }
+    public IActionResult EditWorker()
+    {
+        
+        return View();
+    }
+    public IActionResult Users()
+    {
+        
         return View();
     }
 }

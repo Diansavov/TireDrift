@@ -1,0 +1,56 @@
+@{
+    ViewData["Title"] = "Всички потребители";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/lib/datatables/datatables.min.css" />
+    <link rel="stylesheet" href="~/css/user-validate-table/user-validate-table.css" />
+    <script src="~/lib/datatables/datatables.min.js"></script>
+    <script src="~/js/user-table/users-all-data-table.js"></script>
+}
+<section class="section-container">
+    <div class="container-text text-title">
+        <h1>Всички потребители</h1>
+    </div>
+    <form id="search-form">
+        <div class="search-names-container bg-light">
+            <div class="search-names">
+                <input type="text" name="firstName" class="form-control border-0 bg-transparent"
+                    placeholder="Лично име" />
+            </div>
+            <div class="search-names">
+                <input type="text" name="middleName" class="form-control border-0 bg-transparent"
+                    placeholder="Бащино име" />
+            </div>
+            <div class="search-names">
+                <input type="text" name="lastName" class="form-control border-0 bg-transparent"
+                    placeholder="Фамилно име" />
+            </div>
+            <div class="col-1 search-icon-container">
+                <a type="submit" onclick="searchSubmit(); return false;">
+                    <i class="bi bi-search search-icon"></i>
+                </a>
+            </div>
+        </div>
+    </form>
+    <div class="users-container">
+        <table id="usersTable" class="table">
+            <thead>
+                <tr class="thead-row">
+                    <th>Потребителско име</th>
+                    <th>Роля</th>
+                    <th>Имейл</th>
+                    <th>Лично име</th>
+                    <th>Бащино име</th>
+                    <th>Фамилно име</th>
+                    <th>Телефонен номер</th>
+                    <th>Егн</th>
+                    <th>Дата на раждане</th>
+                    <th>Брой поръчки</th>
+                    <th>Брой бижута</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</section>
