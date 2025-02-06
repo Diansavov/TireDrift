@@ -13,10 +13,12 @@ namespace TireDrift.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        public UserService(UserManager<User> userManager, SignInManager<User> signInManager)
+        private  readonly TiresDbContext _tiresDbContext;
+        public UserService(UserManager<User> userManager, SignInManager<User> signInManager, TiresDbContext tiresDbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _tiresDbContext = tiresDbContext;
         }
 
         public async Task<SignInResult> LogIn(UserLoginViewModel logInRequest)
@@ -66,6 +68,26 @@ namespace TireDrift.Services
         {
             User user = await _userManager.FindByIdAsync(id);
             await _userManager.DeleteAsync(user);
+        }
+
+        public List<User> GetSearchedAsync(string firstName)
+        {
+            var users = _tiresDbContext.Users.ToList();
+            if (!firstName.IsNullOrEmpty())
+            {
+                users = users.Where(x => x.FirstName.ToLower().Contains(firstName.ToLower())).ToList();
+            }
+            
+            return users;
+        }
+
+        public async Task<List<object>> GetEmployeesAsync(string firstName)
+        {
+            var users = GetSearchedAsync(firstName);
+
+            users = await users.Where(x => _userManager.IsInRoleAsync(x, "User"));
+
+            return new List<object>();
         }
     }
 }

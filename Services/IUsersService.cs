@@ -10,6 +10,8 @@ namespace TireDrift.Services
         Task<IdentityResult> Register(UserRegisterViewModel registerRequest);
         Task LogOut();
         Task DeleteAsync(string id);
+        List<User> GetSearchedAsync(string firstName);
+        Task<List<object>> GetEmployeesAsync(string firstName);
 
     }
 }
