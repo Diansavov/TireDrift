@@ -1,0 +1,23 @@
+@model TireDrift.Models.ViewModels.SupplierViewModel
+
+@{
+    ViewData["Title"] = "Tires";
+}
+
+<form asp-action="EditSupplier" enctype="multipart/form-data">
+    <h2 class="form-title">Edit Supplier</h2>
+    <input type="text" hidden asp-for="Id">
+
+    <div class="inputs-container">
+        <div class="input-field">
+            <input type="text" placeholder="Име" asp-for="Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="input-field">
+            <input type="text" placeholder="Цена" asp-for="PhoneNumber">
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="submit-button">
+            <button class="btn btn-primary" type="submit">Редактиране на доставчик</button>
+        </div>
+</form>

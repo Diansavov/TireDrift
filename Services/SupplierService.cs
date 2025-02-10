@@ -2,6 +2,7 @@ using TireDrift.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using TireDrift.Models;
 using TireDrift.Data;
+using Microsoft.IdentityModel.Tokens;
 
 namespace TireDrift.Services
 {
@@ -24,11 +25,6 @@ namespace TireDrift.Services
             await _tiresDbContext.SaveChangesAsync();
         }
 
-        public Task AddSupplierAsync(TireViewModel addTireViewModel)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task DeleteAsync(string id)
         {
             Supplier supplier = await GetAsync(id);
@@ -41,7 +37,7 @@ namespace TireDrift.Services
         {
             Supplier tire = await GetAsync(editSupplier.Id);
             tire.Name = editSupplier.Name;
-            tire.Name = editSupplier.Name;
+            tire.PhoneNumber = editSupplier.PhoneNumber;
 
             _tiresDbContext.Update(tire);
             await _tiresDbContext.SaveChangesAsync();
@@ -57,6 +53,16 @@ namespace TireDrift.Services
         {
             return await _tiresDbContext.Suppliers.FindAsync(id);
         }
-        
+
+        public List<Supplier> GetSearched(string name)
+        {
+            List<Supplier> suppliers = GetAll();
+
+            if (!name.IsNullOrEmpty())
+            {
+                suppliers = suppliers.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
+            }
+            return suppliers;
+        }
     }
 }

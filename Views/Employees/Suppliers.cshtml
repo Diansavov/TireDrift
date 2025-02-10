@@ -5,7 +5,6 @@
 @section Styles {
     <link rel="stylesheet" href="~/lib/datatables/datatables.min.css" />
     <script src="~/lib/datatables/datatables.min.js"></script>
-    <script src="~/js/employees/employees-datatable.js"></script>
 
 }
 <section class="section-container">
@@ -15,7 +14,7 @@
     <form id="search-form">
         <div class="search-names-container bg-light">
             <div class="search-names">
-                <input type="text" name="firstName" class="form-control border-0 bg-transparent"
+                <input type="text" name="name" class="form-control border-0 bg-transparent"
                     placeholder="Лично име" />
             </div>
             <div class="col-1 search-icon-container">
@@ -30,11 +29,8 @@
             <thead>
                 <tr class="thead-row">
                     <th>Потребителско име</th>
-                    <th>Роля</th>
-                    <th>Имейл</th>
-                    <th>Лично име</th>
-                    <th>Фамилно име</th>
                     <th>Телефонен номер</th>
+                    <th>Действия</th>
                 </tr>
             </thead>
         </table>
@@ -42,5 +38,5 @@
 </section>
 
 @section Scripts {
-
+    <script src="~/js/employees/suppliers-datatable.js"></script>
 }

@@ -1,8 +1,4 @@
 
-using System.Threading.Tasks;
-using AspNetCoreGeneratedDocument;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.IdentityModel.Tokens;
 using TireDrift.Data;
 using TireDrift.Models;
