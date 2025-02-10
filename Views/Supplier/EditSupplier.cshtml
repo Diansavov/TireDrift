@@ -1,0 +1,41 @@
+@model TireDrift.Models.ViewModels.TireViewModel
+
+@{
+    ViewData["Title"] = "Tires";
+}
+
+<form asp-action="EditTire" enctype="multipart/form-data">
+    <h2 class="form-title">Edit Tire</h2>
+    <div class="inputs-container">
+        <div class="input-field" style="width: 200px; height: 200px;">
+            <label>Снимка</label>
+            <a id="image-link" class="image-display">
+                <img id="image" src="@Model.EditImagePath" />
+            </a>
+            <input id="image-input" class="image-input" accept="image/png" type="file" asp-for="Image" hidden>
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+        <div class="input-field">
+            <input type="text" placeholder="Име" asp-for="Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="input-field">
+            <input type="text" placeholder="Наличност" asp-for="Stock">
+            <span asp-validation-for="Stock" class="text-danger"></span>
+        </div>
+        <div class="input-field">
+            <input type="text" placeholder="Описание" asp-for="Description">
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="input-field">
+            <input type="text" placeholder="Цена" asp-for="Price">
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="submit-button">
+            <button class="btn btn-primary" type="submit">Edit tire</button>
+        </div>
+</form>
+
+@section Scripts {
+    <script src="~/js/tires/tire-image.js" asp-append-version="true"></script>
+}

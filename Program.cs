@@ -29,6 +29,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 //Services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITiresService, TiresService>();
+builder.Services.AddScoped<ISupplierService, SupplierService>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

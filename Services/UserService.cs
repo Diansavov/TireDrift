@@ -13,7 +13,7 @@ namespace TireDrift.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private  readonly TiresDbContext _tiresDbContext;
+        private readonly TiresDbContext _tiresDbContext;
         public UserService(UserManager<User> userManager, SignInManager<User> signInManager, TiresDbContext tiresDbContext)
         {
             _userManager = userManager;
@@ -77,17 +77,50 @@ namespace TireDrift.Services
             {
                 users = users.Where(x => x.FirstName.ToLower().Contains(firstName.ToLower())).ToList();
             }
-            
+
             return users;
         }
 
         public async Task<List<object>> GetEmployeesAsync(string firstName)
         {
             var users = GetSearchedAsync(firstName);
+            List<object> employees = new List<object>();
+            foreach (var user in users)
+            {
+                if (!await _userManager.IsInRoleAsync(user, "User"))
+                {
+                    var roleList = await _userManager.GetRolesAsync(user);
+                    string role = "";
+                    switch (roleList.FirstOrDefault())
+                    {
+                        case "Manager":
+                            role = "Мениджър";
+                            break;
+                        case "Consultant":
+                            role = "Консултант";
 
-            users = await users.Where(x => _userManager.IsInRoleAsync(x, "User"));
-
-            return new List<object>();
+                            break;
+                        case "Technician":
+                            role = "Техник";
+                            break;
+                        case "Logistics":
+                            role = "Логистичен персонал";
+                            break;
+                    }
+                    var employee = new
+                    {
+                        user.Id,
+                        user.UserName,
+                        user.FirstName,
+                        user.LastName,
+                        user.PhoneNumber,
+                        user.Email,
+                        Role = role
+                    };
+                    employees.Add(employee);
+                }
+            }
+            return employees;
         }
     }
 }

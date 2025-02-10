@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR.Protocol;
 using Services;
 using TireDrift.Models;
 using TireDrift.Models.ViewModels;
@@ -15,7 +16,15 @@ namespace TireDrift
         }
         public IActionResult Tires()
         {
-            List<Tire> tires = _tiresService.GetAll();
+            List<Tire> tires = _tiresService.SearchProducts(null, null);
+            return View(tires);
+        }
+        //Search
+        [HttpPost]
+        public IActionResult Tires(string name, string filter)
+        {
+            List<Tire> tires = _tiresService.SearchProducts(name, filter);
+            ViewData["filter"] = filter;
             return View(tires);
         }
         public IActionResult AddTire()

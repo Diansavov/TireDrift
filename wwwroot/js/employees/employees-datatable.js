@@ -1,13 +1,12 @@
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    console.log('es')
     LoadTable();
 });
 
 function searchSubmit() {
     table.destroy();
-    LoadTable(); 
+    LoadTable();
 }
 
 function LoadTable() {
@@ -20,7 +19,7 @@ function LoadTable() {
         dom: 'tp',
         pageLength: 6,
         "oLanguage": {
-            "sEmptyTable": "Няма непотвърдени потребители"
+            "sEmptyTable": "Няма персонал"
         },
         ajax: {
             url: '/Manager/GetEmployees',
@@ -29,21 +28,13 @@ function LoadTable() {
             },
             dataSrc: '',
         },
-        "createdRow": function (row, data) {
-            var isConfirmed = data.isConfirmed;
-
-            if (isConfirmed == false) {
-                $(row).addClass('red');
-            }
-        },
         columns: [
             { data: 'userName' },
-            { data: 'roles' },
+            { data: 'role' },
             { data: 'email' },
             { data: 'firstName' },
-            { data: 'email' },
-            { data: 'email' },
-
+            { data: 'lastName' },
+            { data: 'phoneNumber' },
         ]
     });
 }
