@@ -14,7 +14,7 @@ public class EmployeesController : Controller
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         WriteIndented = true,
-        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping // Ensures readable strings
+        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping 
     };
     public EmployeesController(IUserService userService, ISupplierService supplierService)
     {
@@ -34,9 +34,14 @@ public class EmployeesController : Controller
     [HttpPost]
     public async Task<IActionResult> AddSupplier(SupplierViewModel supplierViewModel)
     {
-        await _supplierService.AddSupplierAsync(supplierViewModel);
+        if (ModelState.IsValid)
+        {
 
-        return View();
+            await _supplierService.AddSupplierAsync(supplierViewModel);
+            return RedirectToAction("Suppliers");
+        }
+
+        return View(supplierViewModel);
     }
     public async Task<IActionResult> EditSupplier(string id)
     {
