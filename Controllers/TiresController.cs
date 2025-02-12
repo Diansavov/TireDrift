@@ -19,6 +19,10 @@ namespace TireDrift
             List<Tire> tires = _tiresService.SearchProducts(null, null);
             return View(tires);
         }
+        public IActionResult Services()
+        {
+            return View();
+        }
         //Search
         [HttpPost]
         public IActionResult Tires(string name, string filter)

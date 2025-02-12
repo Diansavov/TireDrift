@@ -14,6 +14,6 @@ namespace TireDrift.Models
         public List<Service> Services { get; set; }
         public int Quantity { get; set; }
         public decimal TotalPrice { get; set; }
-
+    
     }
 }

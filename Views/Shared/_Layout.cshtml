@@ -40,6 +40,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Manager"
                                 asp-action="ManagerPanel">Manager Panel</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart"
+                                asp-action="Cart">Cart</a>
+                        </li>
                     </ul>
                     <div class="d-flex gap-2">
                         @if (!User.Identity.IsAuthenticated)

@@ -38,7 +38,7 @@ All Tires
                 <span>@Math.Round(tire.Price, 2)</span>
             </div>
             <div>
-                <a class="btn btn-success">Buy</a>
+                <a class="btn btn-success" asp-controller="Cart" asp-action="AddTireToCart" asp-route-id="@tire.Id">Buy</a>
             </div>
             <div>
                 <a asp-controller="Tires" asp-action="EditTire" asp-route-id="@tire.Id" class="btn btn-warning">Edit</a>
