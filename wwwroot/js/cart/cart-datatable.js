@@ -4,13 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     LoadTable();
 });
 
-function searchSubmit() {
-    table.destroy();
-    LoadTable();
-}
-
 function LoadTable() {
-
     DataTable.type('num', 'className', '');
     DataTable.type('date', 'className', '');
 
@@ -18,19 +12,19 @@ function LoadTable() {
         dom: 'tp',
         pageLength: 6,
         "oLanguage": {
-            "sEmptyTable": "Няма продукти"
+            "sEmptyTable": "Няма кошница"
         },
         ajax: {
             url: '/Cart/GetCartJson',
-            dataSrc: '',
+            dataSrc: 'tires'
         },
         columns: [
             { data: 'id' },
-            { data: 'tires.imagePath' },
-            { data: 'tires.name' },
-            { data: 'tires.price' },
-            { data: 'tires.quantity' },
-            { data: 'totalPrice' },
+            { data: 'imagePath' },
+            { data: 'name' },
+            { data: 'price' },
+            { data: 'stock' },
+            { data: 'description' },
         ]
     });
 }

@@ -1,16 +1,24 @@
-Cart
+@section Styles {
+    <link rel="stylesheet" href="~/lib/datatables/datatables.min.css" />
+    <script src="~/lib/datatables/datatables.min.js"></script>
 
- <div class="users-container">
-        <table id="usersTable" class="table">
-            <thead>
-                <tr class="thead-row">
-                    <th>Премахване</th>
-                    <th>Снимка</th>
-                    <th>Продукт/Услуга</th>
-                    <th>Цена</th>
-                    <th>Количество</th>
-                    <th>Обща цена</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+}
+
+<div class="users-container">
+    <table id="usersTable" class="table">
+        <thead>
+            <tr class="thead-row">
+                <th>Премахване</th>
+                <th>Снимка</th>
+                <th>Продукт</th>
+                <th>Цена</th>
+                <th>Количество</th>
+                <th>ТоталнаЦена</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="~/js/cart/cart-datatable.js"></script>
+}
