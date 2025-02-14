@@ -12,11 +12,13 @@ function LoadTable() {
         dom: 'tp',
         pageLength: 6,
         "oLanguage": {
-            "sEmptyTable": "Няма кошница"
+            "sEmptyTable": "Няма продукти в кошницата"
         },
         ajax: {
             url: '/Cart/GetCartJson',
-            dataSrc: 'tires'
+            dataSrc: function (json) {
+                return json.tires.concat(json.services);
+            }
         },
         columns: [
             { data: 'id' },
@@ -25,6 +27,12 @@ function LoadTable() {
             { data: 'price' },
             { data: 'stock' },
             { data: 'description' },
+            {
+                data: null,
+                render: function (data, type, row) {
+                    return row.name ? 'Гуми' : 'Услуги';
+                }
+            }
         ]
     });
 }

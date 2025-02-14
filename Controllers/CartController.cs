@@ -29,7 +29,7 @@ public class CartController : Controller
     }
     public string GetCartJson()
     {
-        Order cart = GetCart();
+        Cart cart = GetCart();
         string json = JsonSerializer.Serialize(cart, _options);
 
         return json;
@@ -70,13 +70,13 @@ public class CartController : Controller
 
     }
 
-    private Order GetCart()
+    private Cart GetCart()
     {
-        Order cart = HttpContext.Session.GetObjectFromJson<Order>("Cart");
+        Cart cart = HttpContext.Session.GetObjectFromJson<Cart>("Cart");
 
         if (cart == null)
         {
-            cart = new Order
+            cart = new Cart
             {
                 Id = Guid.NewGuid().ToString(),
                 Tires = new List<Tire>(),
@@ -87,7 +87,7 @@ public class CartController : Controller
 
         return cart;
     }
-    private void SaveCart(Order cart)
+    private void SaveCart(Cart cart)
     {
         HttpContext.Session.SetObjectAsJson("Cart", cart);
     }
