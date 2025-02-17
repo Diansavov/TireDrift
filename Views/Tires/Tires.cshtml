@@ -38,7 +38,12 @@ All Tires
                 <span>@Math.Round(tire.Price, 2)</span>
             </div>
             <div>
-                <a class="btn btn-success" asp-controller="Cart" asp-action="AddTireToCart" asp-route-id="@tire.Id">Buy</a>
+                <form asp-controller="Cart" asp-action="AddTireToCart">
+                    <input name="id" value="@tire.Id" hidden>
+                    <input name="quantity">
+                    <button type="submit" class="btn btn-success">Buy</button>
+                </form>
+
             </div>
             <div>
                 <a asp-controller="Tires" asp-action="EditTire" asp-route-id="@tire.Id" class="btn btn-warning">Edit</a>
@@ -50,9 +55,9 @@ All Tires
     }
 </div>
 
-@section Scripts{
+@section Scripts {
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var selectedFilter = '@ViewData["filter"]';
             if (selectedFilter) {
                 var selectElement = document.querySelector('select[name="filter"]');

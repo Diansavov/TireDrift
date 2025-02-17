@@ -1,6 +1,6 @@
 namespace TireDrift.Models
 {
-    class Cart
+    public class Cart
     {
         public Cart()
         {

@@ -1,10 +1,9 @@
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Services;
+using TireDrift.Extensions;
 using TireDrift.Extenstions;
 using TireDrift.Models;
-using TireDrift.Models.ViewModels;
-using TireDrift.Services;
 
 namespace TireDrift.Controllers;
 
@@ -36,38 +35,86 @@ public class CartController : Controller
     }
 
 
-    public async Task<IActionResult> AddTireToCart(string id)
+    public async Task<IActionResult> AddTireToCart(string id, int quantity)
     {
         var cart = GetCart();
 
         Tire tire = await _ordersService.GetTireAsync(id);
-
-        if (tire != null)
+        if (quantity <= 0)
+        {
+            tire.Quantity = 1;
+        }
+        else
+        {
+            tire.Quantity = quantity;
+        }
+        //Invalid Stock
+        if (tire != null && tire.Stock - tire.Quantity >= 0)
         {
             cart.Tires.Add(tire);
-            cart.TotalPrice += tire.Price;
+            cart.TotalPrice += tire.Price * tire.Quantity;
         }
 
         SaveCart(cart);
 
         return RedirectToAction("Tires", "Tires");
     }
-    public async Task<IActionResult> AddServiceToCart(string id)
+    public async Task<IActionResult> AddServiceToCart(string id, int quantity)
     {
         var cart = GetCart();
 
         Service service = await _ordersService.GetServiceAsync(id);
+        if (quantity <= 0)
+        {
+            service.Quantity = 1;
+        }
+        else
+        {
+            service.Quantity = quantity;
+        }
 
         if (service != null)
         {
             cart.Services.Add(service);
-            cart.TotalPrice += service.Price;
+            cart.TotalPrice += service.Price * service.Quantity;
         }
 
         SaveCart(cart);
 
         return RedirectToAction("Services", "Tires");
 
+    }
+    public IActionResult RemoveFromCart(string id)
+    {
+        Cart cart = GetCart();
+        Tire tireToRemove = cart.Tires.FirstOrDefault(tire => tire.Id == id);
+
+        if (tireToRemove != null)
+        {
+            cart.Tires.Remove(tireToRemove);
+            cart.TotalPrice -= tireToRemove.Price * tireToRemove.Quantity;
+        }
+        else
+        {
+            var serviceToRemove = cart.Services.FirstOrDefault(service => service.Id == id);
+            if (serviceToRemove != null)
+            {
+                cart.Services.Remove(serviceToRemove);
+                cart.TotalPrice -= serviceToRemove.Price * serviceToRemove.Quantity;
+            }
+        }
+        SaveCart(cart);
+        return RedirectToAction("Cart");
+    }
+    public async Task<IActionResult> FinishOrder()
+    {
+        var cart = GetCart();
+
+       await _ordersService.FinishOrder(cart, User.Id());
+
+        SaveCart(null);
+        
+        return RedirectToAction("Index", "Home");
     }
 
     private Cart GetCart()
@@ -91,4 +138,5 @@ public class CartController : Controller
     {
         HttpContext.Session.SetObjectAsJson("Cart", cart);
     }
+
 }

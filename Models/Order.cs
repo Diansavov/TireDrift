@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace TireDrift.Models
 {
     public class Order
@@ -7,12 +9,15 @@ namespace TireDrift.Models
             Id = Guid.NewGuid().ToString();
         }
         public string Id { get; set; }
+        [ForeignKey("Client")]
+        public string ClientId { get; set; }
         public User Client { get; set; }
+        [ForeignKey("Supplier")]
+        public string SupplierId { get; set; }
         public Supplier Supplier { get; set; }
         public DateTime Date { get; set; }
         public List<Tire> Tires { get; set; }
         public List<Service> Services { get; set; }
-        public int Quantity { get; set; }
         public decimal TotalPrice { get; set; }
     
     }

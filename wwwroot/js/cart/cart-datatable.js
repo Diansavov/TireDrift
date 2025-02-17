@@ -17,22 +17,43 @@ function LoadTable() {
         ajax: {
             url: '/Cart/GetCartJson',
             dataSrc: function (json) {
+                document.getElementById("totalPrice").innerHTML = json.totalPrice;
+
                 return json.tires.concat(json.services);
             }
         },
         columns: [
-            { data: 'id' },
-            { data: 'imagePath' },
-            { data: 'name' },
+            {
+                data: 'id',
+                render: function (data) {
+                    return `<a class="btn btn-danger" href="/Cart/RemoveFromCart/${data}">X</a>`;
+                }
+            },
+            {
+                data: 'imagePath',
+                render: function (data) {
+                    return `<div style="width: 60px; height: 60px;">
+                            <img style="width: 100%; height: 100%; object-fit: cover;" src="${data}"></img>
+                        </div>`;
+                }
+            },
+            { data: 'name',},
             { data: 'price' },
-            { data: 'stock' },
-            { data: 'description' },
+            { data: 'quantity' },
             {
                 data: null,
                 render: function (data, type, row) {
-                    return row.name ? 'Гуми' : 'Услуги';
+                    return data.quantity * data.price
+                }
+            },
+            {
+                data: null,
+                render: function (data, type, row) {
+                    return row.stock ? 'Гуми' : 'Услуги';
                 }
             }
         ]
     });
+
+
 }
