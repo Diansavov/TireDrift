@@ -49,7 +49,7 @@ public class CartController : Controller
             tire.Quantity = quantity;
         }
         //Invalid Stock
-        if (tire != null && tire.Stock - tire.Quantity >= 0)
+        if (tire != null && tire.Stock - tire.Quantity >= 0 && !cart.Tires.Exists(x => x.Id == tire.Id))
         {
             cart.Tires.Add(tire);
             cart.TotalPrice += tire.Price * tire.Quantity;

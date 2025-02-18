@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using TireDrift.Data;
 using TireDrift.Models;
 using TireDrift.Services;
@@ -20,6 +21,10 @@ namespace Services
 
         public async Task FinishOrder(Cart cart, string clientId)
         {
+            if (cart.Tires.IsNullOrEmpty() && cart.Services.IsNullOrEmpty())
+            {
+                return;
+            }
             Random random = new Random();
             List<Supplier> suppliers = _supplierService.GetAll();
             Order order = new Order()
@@ -27,9 +32,9 @@ namespace Services
                 ClientId = clientId,
                 Date = DateTime.Now,
                 Supplier = suppliers[random.Next(0, suppliers.Count)],
-                Tires = cart.Tires,
-                Services = cart.Services,
-                TotalPrice = cart.TotalPrice
+                TotalPrice = cart.TotalPrice,
+                Tires = new List<OrderTires>(),
+                Services = new List<Service>()
             };
             foreach (var tire in cart.Tires)
             {
@@ -39,18 +44,20 @@ namespace Services
                 if (stockTire.Stock - tire.Quantity < 0)
                 {
                     //Invalid Stock (not enough of the item)
-                    cart.Tires.Remove(tire);
+                    order.TotalPrice -= stockTire.Price * stockTire.Quantity;
                 }
                 else
                 {
                     stockTire.Stock -= tire.Quantity;
+                    stockTire.Orders = new List<OrderTires> { order };
+                    order.Tires.Add(stockTire);
                     _tiresDbContext.Tires.Update(stockTire);
-                    await _tiresDbContext.SaveChangesAsync();
                 }
             }
             foreach (var service in cart.Services)
             {
                 _tiresDbContext.Entry(service).State = EntityState.Unchanged;
+                order.Services.Add(service);
             }
 
             await _tiresDbContext.Orders.AddAsync(order);

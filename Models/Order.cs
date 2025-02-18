@@ -16,7 +16,7 @@ namespace TireDrift.Models
         public string SupplierId { get; set; }
         public Supplier Supplier { get; set; }
         public DateTime Date { get; set; }
-        public List<Tire> Tires { get; set; }
+        public List<OrderTires> Tires { get; set; }
         public List<Service> Services { get; set; }
         public decimal TotalPrice { get; set; }
     

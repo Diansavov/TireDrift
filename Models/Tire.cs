@@ -20,7 +20,7 @@ namespace TireDrift.Models
         [NotMapped]
         public int Quantity { get; set; }
         public int Stock { get; set; }
-        public List<Order> Orders { get; set; }
+        public List<OrderTires> Orders { get; set; }
 
     }
 }
