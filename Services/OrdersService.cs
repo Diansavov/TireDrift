@@ -73,7 +73,12 @@ namespace Services
                 order.Services.Add(service);
             }
 
-            order.TotalPrice = cart.TotalPrice;
+            await _tiresDbContext.SaveChangesAsync();
+            
+            var orderAgain = await _tiresDbContext.Orders.FindAsync(order.Id);
+            orderAgain.TotalPrice = cart.TotalPrice;
+
+            _tiresDbContext.Orders.Update(orderAgain);
 
             await _tiresDbContext.SaveChangesAsync();
 
