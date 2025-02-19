@@ -49,7 +49,7 @@ public class CartController : Controller
             tire.Quantity = quantity;
         }
         //Invalid Stock
-        if (tire != null && tire.Stock - tire.Quantity >= 0 && !cart.Tires.Exists(x => x.Id == tire.Id))
+        if (tire != null && tire.Stock - tire.Quantity >= 0)
         {
             cart.Tires.Add(tire);
             cart.TotalPrice += tire.Price * tire.Quantity;
@@ -110,10 +110,10 @@ public class CartController : Controller
     {
         var cart = GetCart();
 
-       await _ordersService.FinishOrder(cart, User.Id());
+        await _ordersService.FinishOrder(cart, User.Id());
 
         SaveCart(null);
-        
+
         return RedirectToAction("Index", "Home");
     }
 

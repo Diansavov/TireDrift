@@ -21,10 +21,6 @@ namespace TireDrift.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configuring the many-to-many relationship using the Enrollment table
-            modelBuilder.Entity<OrderTires>()
-                .HasKey(e => new { e.OrderId, e.TireId }); // Composite primary key
-
             modelBuilder.Entity<OrderTires>()
                 .HasOne(e => e.Order)
                 .WithMany(s => s.Tires)

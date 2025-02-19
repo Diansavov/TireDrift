@@ -25,6 +25,7 @@ namespace Services
             {
                 return;
             }
+
             Random random = new Random();
             List<Supplier> suppliers = _supplierService.GetAll();
             Order order = new Order()
@@ -32,26 +33,38 @@ namespace Services
                 ClientId = clientId,
                 Date = DateTime.Now,
                 Supplier = suppliers[random.Next(0, suppliers.Count)],
-                TotalPrice = cart.TotalPrice,
+                TotalPrice = 0,
                 Tires = new List<OrderTires>(),
                 Services = new List<Service>()
             };
-            foreach (var tire in cart.Tires)
+
+            await _tiresDbContext.Orders.AddAsync(order);
+
+            foreach (Tire tire in cart.Tires)
             {
                 Tire stockTire = await _tiresService.GetAsync(tire.Id);
+                OrderTires orderTires = new OrderTires()
+                {
+                    OrderId = order.Id,
+                    TireId = tire.Id
+                };
+
                 stockTire.Stock -= tire.Quantity;
 
                 if (stockTire.Stock - tire.Quantity < 0)
                 {
                     //Invalid Stock (not enough of the item)
-                    order.TotalPrice -= stockTire.Price * stockTire.Quantity;
+                    cart.TotalPrice -= stockTire.Price * stockTire.Quantity;
                 }
                 else
                 {
+                    orderTires.TireQuanity = tire.Quantity;
                     stockTire.Stock -= tire.Quantity;
-                    stockTire.Orders = new List<OrderTires> { order };
-                    order.Tires.Add(stockTire);
+
                     _tiresDbContext.Tires.Update(stockTire);
+                    _tiresDbContext.Entry(stockTire).State = EntityState.Modified;
+                    await _tiresDbContext.OrderTires.AddAsync(orderTires);
+
                 }
             }
             foreach (var service in cart.Services)
@@ -60,8 +73,10 @@ namespace Services
                 order.Services.Add(service);
             }
 
-            await _tiresDbContext.Orders.AddAsync(order);
+            order.TotalPrice = cart.TotalPrice;
+
             await _tiresDbContext.SaveChangesAsync();
+
         }
 
         public async Task<Service> GetServiceAsync(string serviceId)
