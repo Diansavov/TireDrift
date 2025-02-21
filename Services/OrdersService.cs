@@ -20,7 +20,7 @@ namespace Services
             _supplierService = supplierService;
         }
 
-        public Task FinishInvoice(InvoiceViewModel invoiceViewModel, string orderId, string clientId)
+        public async Task FinishInvoice(InvoiceViewModel invoiceViewModel, string orderId, string clientId)
         {
             Invoice invoice = new Invoice()
             {
@@ -29,8 +29,9 @@ namespace Services
                 ClientId = clientId,
                 Date = DateTime.Now,
                 OrderId = orderId,
-
             };
+            await _tiresDbContext.Invoices.AddAsync(invoice);
+            await _tiresDbContext.SaveChangesAsync();
         }
 
         public async Task<string> FinishOrder(Cart cart, string clientId)

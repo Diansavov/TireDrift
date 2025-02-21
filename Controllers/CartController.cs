@@ -38,7 +38,7 @@ public class CartController : Controller
         invoiceViewModel.ClientLastName = user.LastName;
         return View(invoiceViewModel);
     }
-    
+
     public string GetCartJson()
     {
         Cart cart = GetCart();
@@ -132,10 +132,10 @@ public class CartController : Controller
     public async Task<IActionResult> FinishInvoice(InvoiceViewModel invoiceViewModel)
     {
         var cart = GetCart();
-        await _ordersService.FinishOrder(cart, User.Id());
+        string orderId = await _ordersService.FinishOrder(cart, User.Id());
         SaveCart(null);
+        await _ordersService.FinishInvoice(invoiceViewModel, orderId, User.Id());
 
-                
         return RedirectToAction("Index", "Home");
     }
 

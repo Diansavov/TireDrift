@@ -30,6 +30,12 @@ namespace TireDrift.Data
                 .HasOne(e => e.Tire)
                 .WithMany(c => c.Orders)
                 .HasForeignKey(e => e.TireId);
+
+            modelBuilder.Entity<Invoice>()
+                .HasOne(i => i.Order)
+                .WithMany()
+                .HasForeignKey(i => i.OrderId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
