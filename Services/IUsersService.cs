@@ -12,6 +12,7 @@ namespace TireDrift.Services
         Task DeleteAsync(string id);
         List<User> GetSearchedAsync(string firstName);
         Task<List<object>> GetEmployeesAsync(string firstName);
+        User Get(string id);
 
     }
 }

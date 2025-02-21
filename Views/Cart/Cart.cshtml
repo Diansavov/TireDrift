@@ -21,7 +21,9 @@
 </div>
 
 <span>Total Price: <span id="totalPrice"></span></span>
-<a type="submit" asp-controller="Cart" asp-action="FinishOrder">Make Order</a>
+<a type="submit" asp-controller="Cart" asp-action="FinishOrder">Direct Order</a>
+<br>
+<a type="submit" asp-controller="Cart" asp-action="Invoice">Invoice</a>
 
 @section Scripts {
     <script src="~/js/cart/cart-datatable.js"></script>

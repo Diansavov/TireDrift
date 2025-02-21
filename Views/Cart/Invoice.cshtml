@@ -1,0 +1,60 @@
+@model TireDrift.Models.ViewModels.InvoiceViewModel
+
+@section Styles {
+    <link rel="stylesheet" href="~/lib/datatables/datatables.min.css" />
+    <script src="~/lib/datatables/datatables.min.js"></script>
+
+}
+<div class="d-flex justify-content-center gap-5">
+
+    <div>
+        <form asp-action="AddSupplier" enctype="multipart/form-data">
+            <h2 class="form-title">Add Supplier</h2>
+            <div class="inputs-container">
+                <div class="input-field">
+                    <input type="text" placeholder="Име на компания" asp-for="CompanyName">
+                    <span asp-validation-for="CompanyName" class="text-danger"></span>
+                </div>
+                <div class="input-field">
+                    <input type="text" placeholder="БУЛСТАТ" asp-for="BulStat">
+                    <span asp-validation-for="BulStat" class="text-danger"></span>
+                </div>
+                <div class="input-field">
+                    <input type="text" placeholder="Цена" asp-for="ClientFirstName" disabled>
+                    <span asp-validation-for="ClientFirstName" class="text-danger"></span>
+                </div>
+                <div class="input-field">
+                    <input type="text" placeholder="Цена" asp-for="ClientLastName" disabled>
+                    <span asp-validation-for="ClientLastName" class="text-danger"></span>
+                </div>
+                <div class="submit-button">
+                    <button class="btn btn-primary" type="submit">Добавяне на доставчик</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <div class="users-container">
+            <table id="usersTable" class="table">
+                <thead>
+                    <tr class="thead-row">
+                        <th>Премахване</th>
+                        <th>Снимка</th>
+                        <th>Продукт</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Тотална Цена</th>
+                        <th>Тип</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+        <span>Total Price: <span id="totalPrice"></span></span>
+        <a type="submit" asp-controller="Cart" asp-action="FinishInvoice">Submit Order</a>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/cart/cart-datatable.js"></script>
+}

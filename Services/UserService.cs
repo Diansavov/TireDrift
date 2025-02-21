@@ -36,6 +36,10 @@ namespace TireDrift.Services
             }
             return SignInResult.Failed;
         }
+        public User Get(string id)
+        {
+            return _tiresDbContext.Users.FirstOrDefault(x => x.Id == id);
+        }
 
 
 

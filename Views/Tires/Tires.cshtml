@@ -38,6 +38,9 @@ All Tires
                 <span>@Math.Round(tire.Price, 2)</span>
             </div>
             <div>
+                <span>@tire.Stock</span>
+            </div>
+            <div>
                 <form asp-controller="Cart" asp-action="AddTireToCart">
                     <input name="id" value="@tire.Id" hidden>
                     <input name="quantity">

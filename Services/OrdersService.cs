@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TireDrift.Data;
 using TireDrift.Models;
+using TireDrift.Models.ViewModels;
 using TireDrift.Services;
 
 namespace Services
@@ -19,11 +20,24 @@ namespace Services
             _supplierService = supplierService;
         }
 
-        public async Task FinishOrder(Cart cart, string clientId)
+        public Task FinishInvoice(InvoiceViewModel invoiceViewModel, string orderId, string clientId)
+        {
+            Invoice invoice = new Invoice()
+            {
+                BulStat = invoiceViewModel.BulStat,
+                CompanyName = invoiceViewModel.CompanyName,
+                ClientId = clientId,
+                Date = DateTime.Now,
+                OrderId = orderId,
+
+            };
+        }
+
+        public async Task<string> FinishOrder(Cart cart, string clientId)
         {
             if (cart.Tires.IsNullOrEmpty() && cart.Services.IsNullOrEmpty())
             {
-                return;
+                return "";
             }
 
             Random random = new Random();
@@ -49,7 +63,6 @@ namespace Services
                     TireId = tire.Id
                 };
 
-                stockTire.Stock -= tire.Quantity;
 
                 if (stockTire.Stock - tire.Quantity < 0)
                 {
@@ -74,14 +87,14 @@ namespace Services
             }
 
             await _tiresDbContext.SaveChangesAsync();
-            
+
             var orderAgain = await _tiresDbContext.Orders.FindAsync(order.Id);
             orderAgain.TotalPrice = cart.TotalPrice;
 
             _tiresDbContext.Orders.Update(orderAgain);
 
             await _tiresDbContext.SaveChangesAsync();
-
+            return order.Id;
         }
 
         public async Task<Service> GetServiceAsync(string serviceId)

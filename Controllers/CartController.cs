@@ -4,21 +4,25 @@ using Services;
 using TireDrift.Extensions;
 using TireDrift.Extenstions;
 using TireDrift.Models;
+using TireDrift.Models.ViewModels;
+using TireDrift.Services;
 
 namespace TireDrift.Controllers;
 
 public class CartController : Controller
 {
     private readonly IOrdersService _ordersService;
+    private readonly IUserService _userService;
     private readonly JsonSerializerOptions _options = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         WriteIndented = true,
         Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
     };
-    public CartController(IOrdersService orderservice)
+    public CartController(IOrdersService orderservice, IUserService userService)
     {
         _ordersService = orderservice;
+        _userService = userService;
     }
 
 
@@ -26,6 +30,15 @@ public class CartController : Controller
     {
         return View();
     }
+    public IActionResult Invoice()
+    {
+        InvoiceViewModel invoiceViewModel = new InvoiceViewModel();
+        User user = _userService.Get(User.Id());
+        invoiceViewModel.ClientFirstName = user.FirstName;
+        invoiceViewModel.ClientLastName = user.LastName;
+        return View(invoiceViewModel);
+    }
+    
     public string GetCartJson()
     {
         Cart cart = GetCart();
@@ -114,6 +127,15 @@ public class CartController : Controller
 
         SaveCart(null);
 
+        return RedirectToAction("Index", "Home");
+    }
+    public async Task<IActionResult> FinishInvoice(InvoiceViewModel invoiceViewModel)
+    {
+        var cart = GetCart();
+        await _ordersService.FinishOrder(cart, User.Id());
+        SaveCart(null);
+
+                
         return RedirectToAction("Index", "Home");
     }
 
