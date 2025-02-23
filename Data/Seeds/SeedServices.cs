@@ -16,10 +16,10 @@ namespace TireDrift.Data.Seeds
             if (_context.Services.Any())
             {
                 await _context.Services.AddRangeAsync(
-                    new Service() {Name = "Смяна на гуми", Description = "Смяна на гумите на клиент с подходящи нови гуми", Price = 50},
-                    new Service() {Name = "Баланс и монтаж", Description = "Баланс и монтаж на нови гуми", Price = 35},
-                    new Service() {Name = "Диагностика", Description = "Диагностика на гуми (налягане, износване и др.)", Price = 20},
-                    new Service() {Name = "Хотел за гуми", Description = "Складиране на гуми, през несезонният период", Price = 45}
+                    new Service() {Name = "Смяна на гуми", Description = "Смяна на гумите на клиент с подходящи нови гуми", Price = 50, ImagePath = "/images/services/changeTires.png"},
+                    new Service() {Name = "Баланс и монтаж", Description = "Баланс и монтаж на нови гуми", Price = 35, ImagePath = "/images/services/moutingTires.png"},
+                    new Service() {Name = "Диагностика", Description = "Диагностика на гуми (налягане, износване и др.)", Price = 20, ImagePath = "/images/services/diagnosisTires.png"},
+                    new Service() {Name = "Хотел за гуми", Description = "Складиране на гуми, през несезонният период", Price = 45, ImagePath = "/images/services/hotelTires.png"}
                 );
                 await _context.SaveChangesAsync();
             }

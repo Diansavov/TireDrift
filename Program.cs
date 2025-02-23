@@ -51,6 +51,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-SeedTires.Seed(app);
+await SeedTires.Seed(app);
 
 app.Run();
