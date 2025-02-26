@@ -36,11 +36,6 @@ namespace Services
 
         public async Task<string> FinishOrder(Cart cart, string clientId)
         {
-            if (cart.Tires.IsNullOrEmpty() && cart.Services.IsNullOrEmpty())
-            {
-                return "";
-            }
-
             Random random = new Random();
             List<Supplier> suppliers = _supplierService.GetAll();
             Order order = new Order()
@@ -48,38 +43,22 @@ namespace Services
                 ClientId = clientId,
                 Date = DateTime.Now,
                 Supplier = suppliers[random.Next(0, suppliers.Count)],
-                TotalPrice = 0,
+                TotalPrice = cart.TotalPrice,
                 Tires = new List<OrderTires>(),
-                Services = new List<Service>()
+                Services = new List<Service>(),
             };
 
             await _tiresDbContext.Orders.AddAsync(order);
 
             foreach (Tire tire in cart.Tires)
             {
-                Tire stockTire = await _tiresService.GetAsync(tire.Id);
                 OrderTires orderTires = new OrderTires()
                 {
                     OrderId = order.Id,
                     TireId = tire.Id
                 };
 
-
-                if (stockTire.Stock - tire.Quantity < 0)
-                {
-                    //Invalid Stock (not enough of the item)
-                    cart.TotalPrice -= stockTire.Price * stockTire.Quantity;
-                }
-                else
-                {
-                    orderTires.TireQuanity = tire.Quantity;
-                    stockTire.Stock -= tire.Quantity;
-
-                    _tiresDbContext.Tires.Update(stockTire);
-                    _tiresDbContext.Entry(stockTire).State = EntityState.Modified;
-                    await _tiresDbContext.OrderTires.AddAsync(orderTires);
-
-                }
+                await _tiresDbContext.OrderTires.AddAsync(orderTires);
             }
             foreach (var service in cart.Services)
             {
@@ -88,11 +67,6 @@ namespace Services
             }
 
             await _tiresDbContext.SaveChangesAsync();
-
-            var orderAgain = await _tiresDbContext.Orders.FindAsync(order.Id);
-            orderAgain.TotalPrice = cart.TotalPrice;
-
-            _tiresDbContext.Orders.Update(orderAgain);
 
             await _tiresDbContext.SaveChangesAsync();
             return order.Id;

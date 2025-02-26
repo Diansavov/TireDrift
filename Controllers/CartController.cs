@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Services;
 using TireDrift.Extensions;
 using TireDrift.Extenstions;
@@ -13,16 +14,18 @@ public class CartController : Controller
 {
     private readonly IOrdersService _ordersService;
     private readonly IUserService _userService;
+    private readonly ITiresService _tiresService;
     private readonly JsonSerializerOptions _options = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         WriteIndented = true,
         Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
     };
-    public CartController(IOrdersService orderservice, IUserService userService)
+    public CartController(IOrdersService orderservice, IUserService userService, ITiresService tiresService)
     {
         _ordersService = orderservice;
         _userService = userService;
+        _tiresService = tiresService;
     }
 
 
@@ -66,6 +69,11 @@ public class CartController : Controller
         {
             cart.Tires.Add(tire);
             cart.TotalPrice += tire.Price * tire.Quantity;
+            TempData["success"] = "Успешно добавено в кошницата";
+        }
+        else if (tire.Stock - tire.Quantity < 0)
+        {
+            TempData["error"] = "Няма достатъчно количество от този продукт";
         }
 
         SaveCart(cart);
@@ -122,6 +130,39 @@ public class CartController : Controller
     public async Task<IActionResult> FinishOrder()
     {
         var cart = GetCart();
+        if (cart.Tires.IsNullOrEmpty() && cart.Services.IsNullOrEmpty())
+        {
+            TempData["error"] = "Кошницата е празна";
+            return RedirectToAction("Cart", "Cart");
+        }
+
+        bool invalidStockInCart = false;
+        List<Tire> invalidTires = new List<Tire>();
+        foreach (var tire in cart.Tires)
+        {
+            var updatedTire = await _tiresService.GetAsync(tire.Id);
+            if (updatedTire.Stock - tire.Quantity < 0)
+            {
+                invalidStockInCart = true;
+                cart.TotalPrice -= tire.Price * tire.Quantity;
+        	    invalidTires.Add(tire);
+            }
+            else
+            {
+                updatedTire.Stock -= tire.Quantity;
+                await _tiresService.EditAsync(new TireViewModel(updatedTire));
+            }
+        }
+        if (invalidStockInCart)
+        {
+            foreach (var tire in invalidTires)
+            {
+                cart.Tires.Remove(tire);
+            }
+            SaveCart(cart);
+            TempData["error"] = "Някои продукти не са налични във момента";
+            return RedirectToAction("Cart", "Cart");
+        }
 
         await _ordersService.FinishOrder(cart, User.Id());
 
