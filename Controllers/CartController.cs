@@ -66,24 +66,40 @@ public class CartController : Controller
         }
 
         //Invalid Stock
-        if (tire != null && tire.Stock - tire.Quantity >= 0)
+        if (tire != null)
         {
-            if (cart.Tires.Contains(tire))
+            var existingTire = cart.Tires.FirstOrDefault(x => x.Id == tire.Id);
+
+            if (existingTire != null)
             {
-                cart.Tires.First(x => x.Id == id).Quantity += tire.Quantity;
+                // Check if increasing quantity exceeds stock
+                if (tire.Stock >= existingTire.Quantity + tire.Quantity)
+                {
+                    existingTire.Quantity += tire.Quantity;
+                    cart.TotalPrice += tire.Price * tire.Quantity;
+                    TempData["success"] = "Успешно добавено в кошницата";
+                }
+                else
+                {
+                    TempData["error"] = "Няма достатъчно количество от този продукт";
+                }
             }
             else
             {
-                cart.Tires.Add(tire);
-
+                // Ensure there's enough stock before adding as a new item
+                if (tire.Stock >= tire.Quantity)
+                {
+                    cart.Tires.Add(tire);
+                    cart.TotalPrice += tire.Price * tire.Quantity;
+                    TempData["success"] = "Успешно добавено в кошницата";
+                }
+                else
+                {
+                    TempData["error"] = "Няма достатъчно количество от този продукт";
+                }
             }
-            cart.TotalPrice += tire.Price * tire.Quantity;
-            TempData["success"] = "Успешно добавено в кошницата";
         }
-        else if (tire.Stock - tire.Quantity < 0)
-        {
-            TempData["error"] = "Няма достатъчно количество от този продукт";
-        }
+
 
         SaveCart(cart);
 
