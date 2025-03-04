@@ -64,10 +64,19 @@ public class CartController : Controller
         {
             tire.Quantity = quantity;
         }
+
         //Invalid Stock
         if (tire != null && tire.Stock - tire.Quantity >= 0)
         {
-            cart.Tires.Add(tire);
+            if (cart.Tires.Contains(tire))
+            {
+                cart.Tires.First(x => x.Id == id).Quantity += tire.Quantity;
+            }
+            else
+            {
+                cart.Tires.Add(tire);
+
+            }
             cart.TotalPrice += tire.Price * tire.Quantity;
             TempData["success"] = "Успешно добавено в кошницата";
         }
@@ -145,12 +154,11 @@ public class CartController : Controller
             {
                 invalidStockInCart = true;
                 cart.TotalPrice -= tire.Price * tire.Quantity;
-        	    invalidTires.Add(tire);
+                invalidTires.Add(tire);
             }
             else
             {
                 updatedTire.Stock -= tire.Quantity;
-                await _tiresService.EditAsync(new TireViewModel(updatedTire));
             }
         }
         if (invalidStockInCart)
