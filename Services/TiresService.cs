@@ -1,8 +1,5 @@
 
-using System.Threading.Tasks;
-using AspNetCoreGeneratedDocument;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.IdentityModel.Tokens;
 using TireDrift.Data;
 using TireDrift.Models;
 using TireDrift.Models.ViewModels;
@@ -92,6 +89,44 @@ namespace Services
 
             _tiresDbContext.Tires.Remove(product);
             await _tiresDbContext.SaveChangesAsync();
+        }
+
+        public List<Tire> SearchProducts(string name, string filter)
+        {
+            var tires = _tiresDbContext.Tires.ToList();
+            //Search
+            if (!name.IsNullOrEmpty())
+            {
+                tires = tires.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
+            }
+            //Filter
+            switch (filter)
+            {
+                case "name":
+                    tires = tires.OrderBy(x => x.Name).ToList();
+                    break;
+                case "-name":
+                    tires = tires.OrderByDescending(x => x.Name).ToList();
+                    break;
+                case "stock":
+                    tires = tires.OrderBy(x => x.Stock).ToList();
+                    break;
+                case "-stock":
+                    tires = tires.OrderByDescending(x => x.Stock).ToList();
+                    break;
+                case "price":
+                    tires = tires.OrderBy(x => x.Price).ToList();
+
+                    break;
+                case "-price":
+                    tires = tires.OrderByDescending(x => x.Price).ToList();
+
+                    break;
+                    default:
+                    tires = tires.OrderBy(x => x.Name).ToList();
+                    break;
+            }
+            return tires;
         }
     }
 }

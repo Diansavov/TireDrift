@@ -12,24 +12,33 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<TiresDbContext>(options =>
-             options.UseMySql(builder.Configuration.GetConnectionString("TireDriftConnectionString"), new MySqlServerVersion(new Version(10, 0, 1))));
-
+             options.UseSqlServer(builder.Configuration.GetConnectionString("TireDriftConnectionString")));
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>().AddEntityFrameworkStores<TiresDbContext>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireNonAlphanumeric = false;
 });
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.Name = "UserCookie";
     options.LoginPath = "/Users/LogIn";
 });
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+        {
+            options.Cookie.HttpOnly = true;
+            options.Cookie.IsEssential = true;
+        });
+
 
 //Services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITiresService, TiresService>();
+builder.Services.AddScoped<ISupplierService, SupplierService>();
+builder.Services.AddScoped<IOrdersService, OrdersService>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
@@ -43,6 +52,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();

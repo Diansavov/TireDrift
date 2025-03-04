@@ -13,10 +13,12 @@ namespace TireDrift.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        public UserService(UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly TiresDbContext _tiresDbContext;
+        public UserService(UserManager<User> userManager, SignInManager<User> signInManager, TiresDbContext tiresDbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _tiresDbContext = tiresDbContext;
         }
 
         public async Task<SignInResult> LogIn(UserLoginViewModel logInRequest)
@@ -33,6 +35,10 @@ namespace TireDrift.Services
                 }
             }
             return SignInResult.Failed;
+        }
+        public User Get(string id)
+        {
+            return _tiresDbContext.Users.FirstOrDefault(x => x.Id == id);
         }
 
 
@@ -66,6 +72,59 @@ namespace TireDrift.Services
         {
             User user = await _userManager.FindByIdAsync(id);
             await _userManager.DeleteAsync(user);
+        }
+
+        public List<User> GetSearchedAsync(string firstName)
+        {
+            var users = _tiresDbContext.Users.ToList();
+            if (!firstName.IsNullOrEmpty())
+            {
+                users = users.Where(x => x.FirstName.ToLower().Contains(firstName.ToLower())).ToList();
+            }
+
+            return users;
+        }
+
+        public async Task<List<object>> GetEmployeesAsync(string firstName)
+        {
+            var users = GetSearchedAsync(firstName);
+            List<object> employees = new List<object>();
+            foreach (var user in users)
+            {
+                if (!await _userManager.IsInRoleAsync(user, "User"))
+                {
+                    var roleList = await _userManager.GetRolesAsync(user);
+                    string role = "";
+                    switch (roleList.FirstOrDefault())
+                    {
+                        case "Manager":
+                            role = "Мениджър";
+                            break;
+                        case "Consultant":
+                            role = "Консултант";
+
+                            break;
+                        case "Technician":
+                            role = "Техник";
+                            break;
+                        case "Logistics":
+                            role = "Логистичен персонал";
+                            break;
+                    }
+                    var employee = new
+                    {
+                        user.Id,
+                        user.UserName,
+                        user.FirstName,
+                        user.LastName,
+                        user.PhoneNumber,
+                        user.Email,
+                        Role = role
+                    };
+                    employees.Add(employee);
+                }
+            }
+            return employees;
         }
     }
 }

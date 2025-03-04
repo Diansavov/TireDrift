@@ -6,6 +6,20 @@
 
 All Tires
 <a class="btn btn-success" asp-controller="Tires" asp-action="AddTire">Add Tire</a>
+
+<form asp-controller="Tires" asp-action="Tires">
+
+    <input type="text" name="name" />
+    <select name="filter">
+        <option class="fw-bold" value="name">Име</option>
+        <option class="fw-bold" value="-name">Име (низходящо)</option>
+        <option class="fw-bold" value="stock">Стока</option>
+        <option class="fw-bold" value="-stock">Стока (низходяща)</option>
+        <option class="fw-bold" value="price">Цена</option>
+        <option class="fw-bold" value="-price">Цена (низходяща)</option>
+    </select>
+    <button class="btn btn-success" type="submit">Search</button>
+</form>
 <div style="display: flex;">
     @foreach (var tire in Model)
     {
@@ -24,7 +38,15 @@ All Tires
                 <span>@Math.Round(tire.Price, 2)</span>
             </div>
             <div>
-                <a class="btn btn-success">Buy</a>
+                <span>@tire.Stock</span>
+            </div>
+            <div>
+                <form asp-controller="Cart" asp-action="AddTireToCart">
+                    <input name="id" value="@tire.Id" hidden>
+                    <input name="quantity">
+                    <button type="submit" class="btn btn-success">Buy</button>
+                </form>
+
             </div>
             <div>
                 <a asp-controller="Tires" asp-action="EditTire" asp-route-id="@tire.Id" class="btn btn-warning">Edit</a>
@@ -35,3 +57,17 @@ All Tires
         </div>
     }
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var selectedFilter = '@ViewData["filter"]';
+            if (selectedFilter) {
+                var selectElement = document.querySelector('select[name="filter"]');
+                if (selectElement) {
+                    selectElement.value = selectedFilter;
+                }
+            }
+        });
+    </script>
+}

@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace TireDrift.Models
@@ -14,6 +15,8 @@ namespace TireDrift.Models
         public decimal Price { get; set; }
         public string Description { get; set; }
         public string ImagePath { get; set; }
+        [NotMapped]
+        public int Quantity { get; set; }
         public List<Order> Orders { get; set; }
     }
 }

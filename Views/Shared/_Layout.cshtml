@@ -4,10 +4,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TireDrift</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TireDrift.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/node_modules/toastr/build/toastr.min.css" asp-append-version="true" />
+
+    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+
     @RenderSection("Styles", false)
 </head>
 
@@ -32,6 +37,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Tires"
                                 asp-action="Tires">Tires</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Manager"
+                                asp-action="ManagerPanel">Manager Panel</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart"
+                                asp-action="Cart">Cart</a>
                         </li>
                     </ul>
                     <div class="d-flex gap-2">
@@ -63,9 +76,9 @@
             &copy; 2024 - TireDrift - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <partial name="_Notification" />
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

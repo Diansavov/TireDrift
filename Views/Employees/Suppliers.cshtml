@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Всички доставчици";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/lib/datatables/datatables.min.css" />
+    <script src="~/lib/datatables/datatables.min.js"></script>
+    <script src="~/js/employees/suppliers-datatable.js"></script>
+
+}
+<section class="section-container">
+    <div class="container-text text-title">
+        <h1>Всички доставчици</h1>
+    </div>
+    <form id="search-form">
+        <div class="search-names-container bg-light">
+            <div class="search-names">
+                <input type="text" name="name" class="form-control border-0 bg-transparent" placeholder="Лично име" />
+            </div>
+            <div class="col-1 search-icon-container">
+                <a type="submit" onclick="searchSubmit(); return false;">
+                    <i class="bi bi-search search-icon"></i>
+                </a>
+            </div>
+        </div>
+    </form>
+    <div class="users-container">
+        <table id="usersTable" class="table">
+            <thead>
+                <tr class="thead-row">
+                    <th>Потребителско име</th>
+                    <th>Телефонен номер</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</section>
+
+@section Scripts {
+}

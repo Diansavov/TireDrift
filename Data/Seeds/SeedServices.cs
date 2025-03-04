@@ -8,10 +8,10 @@ namespace TireDrift.Data.Seeds
             using (var scope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var _context = scope.ServiceProvider.GetService<TiresDbContext>();
-                await CreateRoles(_context);
+                await CreateServices(_context);
             }
         }
-        public static async Task CreateRoles(TiresDbContext _context)
+        public static async Task CreateServices(TiresDbContext _context)
         {
             if (_context.Services.Any())
             {
@@ -20,6 +20,7 @@ namespace TireDrift.Data.Seeds
                     new Service() {Name = "Баланс и монтаж", Description = "Баланс и монтаж на нови гуми", Price = 35, ImagePath = "/images/services/moutingTires.png"},
                     new Service() {Name = "Диагностика", Description = "Диагностика на гуми (налягане, износване и др.)", Price = 20, ImagePath = "/images/services/diagnosisTires.png"},
                     new Service() {Name = "Хотел за гуми", Description = "Складиране на гуми, през несезонният период", Price = 45, ImagePath = "/images/services/hotelTires.png"}
+
                 );
                 await _context.SaveChangesAsync();
             }

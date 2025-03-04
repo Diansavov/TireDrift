@@ -10,5 +10,6 @@ namespace Services
         Task<Tire> GetAsync(string id);
         Task EditAsync(TireViewModel editTireViewModel);
         Task DeleteAsync(string id);
+        List<Tire> SearchProducts(string name, string filter);
     }
 }
