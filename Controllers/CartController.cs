@@ -77,7 +77,7 @@ public class CartController : Controller
                 {
                     existingTire.Quantity += tire.Quantity;
                     cart.TotalPrice += tire.Price * tire.Quantity;
-                    TempData["success"] = "Успешно добавено в кошницата";
+                        TempData["success"] = "Успешно добавено в кошницата";
                 }
                 else
                 {

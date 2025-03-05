@@ -1,1 +1,26 @@
-Hi
+@section Styles {
+    <link rel="stylesheet" href="~/css/index-css/index-page.css" asp-append-version="true" />
+}
+
+<section class="section-container">
+    <div class="container-text text-title">
+        <h1>Админ панел</h1>
+    </div>
+    <div class="category-carousel swiper">
+        <div class="swiper-wrapper">
+            <a asp-controller="Admin" asp-action="AddMaster" class="category-item swiper-slide">
+                <div class="jewelry-type-container">
+                    <i class="bi bi-hammer"></i>
+                </div>
+                <h3 class="category-title">Добави майстор</h3>
+            </a>
+            <a asp-controller="Manager" asp-action="Employees" class="category-item swiper-slide">
+                <div class="jewelry-type-container">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+                <h3 class="category-title">Прегледай потребители</h3>
+            </a>
+
+        </div>
+    </div>
+</section>

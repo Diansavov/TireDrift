@@ -1,0 +1,201 @@
+/* category carousel */
+.category-carousel .category-item {
+    background: #FFFFFF;
+    border: 1px solid #FBFBFB;
+    box-shadow: 0px 5px 22px rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+    text-align: center;
+    padding: 60px 20px;
+    margin: 20px 0;
+    transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.category-carousel .category-item:hover {
+    transform: translate3d(0, -10px, 0);
+    box-shadow: 0px 21px 44px rgba(0, 0, 0, 0.08);
+}
+
+.category-carousel .category-item .category-title {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+    color: #222222;
+    margin-top: 20px;
+}
+
+.category-item {
+    width: 233.667px !important;
+    margin-right: 30px !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+.swiper-wrapper{
+    flex-wrap: wrap;
+    display: inherit;
+    justify-content: center;
+}
+.swiper-slide{
+  height: auto !important;
+}
+.jewelry-type-container{
+    width: 45px;
+    height: 45px;
+}
+.jewelry-type-container i{
+  font-size: 45px;
+}
+
+.section-title-buttons{
+    padding: 0 100px 0 100px;
+}
+.disabled-swiper{
+  cursor: not-allowed;
+  color: rgba(0, 0, 0, 0.45) !important;
+  background-color: rgba(38, 43, 40, 0.11) !important;
+}
+.disabled-swiper .category-title{
+  color: rgba(0, 0, 0, 0.45) !important;
+
+}
+.disabled-swiper:hover{
+  transform: translate(0) !important;
+}
+
+
+/*Product Item*/
+.product-items{
+  padding: 0;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.product-item {
+    position: relative;
+    padding: 16px;
+    background: #FFFFFF;
+    border: 1px solid #FBFBFB;
+    box-shadow: 0px 5px 22px rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+    margin-bottom: 30px;
+    transition: box-shadow 0.3s ease-out;
+    width: 250px;
+    height: 410px;
+  }
+  .product-item:hover {
+    box-shadow: 0px 21px 44px rgba(0, 0, 0, 0.08);
+  }
+  .product-item h3 {
+    display: block;
+    width: 100%;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    text-transform: capitalize;
+    color: #333333;
+    margin: 0;
+  }
+  .product-item figure {
+    background: #F9F9F9;
+    border-radius: 12px;
+    text-align: center;
+  }
+  .product-item figure img {
+    max-height: 210px;
+    height: auto;
+  }
+  .product-item .btn-wishlist {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid #d8d8d8;
+    transition: all 0.3s ease-out;
+  }
+  .product-item .btn-wishlist:hover {
+    background: rgb(240, 56, 56);
+    color: #fff;
+  }
+  .product-item .qty {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #9D9D9D;
+  }
+  .product-item .rating {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 18px;
+    text-transform: capitalize;
+    color: #222222;
+  }
+  .product-item .rating iconify-icon {
+    color: #FFC43F;
+  }
+  .product-item .price {
+    display: block;
+    width: 100%;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 30px;
+    text-transform: capitalize;
+    color: #222222;
+  }
+  .product-item .product-qty {
+    width: 85px;
+  }
+  .product-item .btn-link {
+    text-decoration: none;
+  }
+  .product-item #quantity {
+    height: auto;
+    width: 28px;
+    text-align: center;
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+  .product-item .btn-number {
+    width: 26px;
+    height: 26px;
+    line-height: 1;
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px solid #E2E2E2;
+    border-radius: 6px;
+    color: #222;
+    padding: 0;
+  }
+  .order .nav-link{
+    padding: 0;
+  }
+
+  .product-image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 216px;
+  }
+  .product-image-container img{
+    width: 100%;
+    height: 100%;
+  }
+  .container-fluid{
+    padding: 0;
+  }
+  .not-avaiable{
+    color: red;
+  }
