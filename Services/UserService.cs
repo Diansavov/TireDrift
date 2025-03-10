@@ -38,7 +38,7 @@ namespace TireDrift.Services
         }
         public User Get(string id)
         {
-            return _tiresDbContext.Users.FirstOrDefault(x => x.Id == id);
+            return _tiresDbContext.Users.Include(x => x.HotelTires).FirstOrDefault(x => x.Id == id);
         }
 
 

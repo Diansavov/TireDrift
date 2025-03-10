@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -31,6 +32,18 @@ public class CartController : Controller
 
     public IActionResult Cart()
     {
+        List<HotelTires> hotelTires = _userService.Get(User.Id()).HotelTires;
+
+        int totalTireQuantity = hotelTires.Sum(x => x.TireQuanity);
+        if (totalTireQuantity >= 25)
+        {
+            ViewData["Discount"] = $"Max discount is 25%";
+
+        }
+        else if (totalTireQuantity >= 5)
+        {
+            ViewData["Discount"] = $"Your discount is {totalTireQuantity}%";
+        }
         return View();
     }
     public IActionResult Invoice()
@@ -77,7 +90,7 @@ public class CartController : Controller
                 {
                     existingTire.Quantity += tire.Quantity;
                     cart.TotalPrice += tire.Price * tire.Quantity;
-                        TempData["success"] = "Успешно добавено в кошницата";
+                    TempData["success"] = "Успешно добавено в кошницата";
                 }
                 else
                 {
@@ -154,6 +167,19 @@ public class CartController : Controller
     }
     public async Task<IActionResult> FinishOrder()
     {
+        //Discount
+        int dicsountPercent = 0;
+        List<HotelTires> hotelTires = _userService.Get(User.Id()).HotelTires;
+
+        int totalTireQuantity = hotelTires.Sum(x => x.TireQuanity);
+        if (totalTireQuantity >= 25)
+        {
+            dicsountPercent = 25;
+        }
+        else if (totalTireQuantity >= 5)
+        {
+            dicsountPercent = totalTireQuantity;
+        }
         var cart = GetCart();
         if (cart.Tires.IsNullOrEmpty() && cart.Services.IsNullOrEmpty())
         {
@@ -187,7 +213,7 @@ public class CartController : Controller
             TempData["error"] = "Някои продукти не са налични във момента";
             return RedirectToAction("Cart", "Cart");
         }
-
+        cart.TotalPrice = cart.TotalPrice - ((cart.TotalPrice * dicsountPercent) / 100);
         await _ordersService.FinishOrder(cart, User.Id());
 
         SaveCart(null);
