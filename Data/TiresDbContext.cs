@@ -16,6 +16,7 @@ namespace TireDrift.Data
         public DbSet<Tire> Tires { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<OrderTires> OrderTires { get; set; }
+        public DbSet<HotelTires> HotelTires { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,4 +1,5 @@
 
+using System.Security.AccessControl;
 using Microsoft.IdentityModel.Tokens;
 using TireDrift.Data;
 using TireDrift.Models;
@@ -122,11 +123,49 @@ namespace Services
                     tires = tires.OrderByDescending(x => x.Price).ToList();
 
                     break;
-                    default:
+                default:
                     tires = tires.OrderBy(x => x.Name).ToList();
                     break;
             }
             return tires;
+        }
+
+        public List<HotelTires> GetUserHotelTires(string userId)
+        {
+            return _tiresDbContext.HotelTires.Where(x => x.UserId == userId).ToList();
+        }
+
+        public async Task AddUserHotelTire(TireViewModel tireViewModel, string userId)
+        {
+            HotelTires hotelTires = new HotelTires()
+            {
+                TireName = tireViewModel.Name,
+                UserId = userId,
+                TireQuanity = tireViewModel.Stock
+            };
+            string imagePath = "";
+            using (var memoryStream = new MemoryStream())
+            {
+                tireViewModel.Image.CopyTo(memoryStream);
+
+                imagePath = $"wwwroot/images/tires/{Guid.NewGuid().ToString()}.png";
+                Directory.CreateDirectory(Path.GetDirectoryName(imagePath));
+                FileStream fileStream = new FileStream(imagePath, FileMode.Create);
+                tireViewModel.Image.CopyTo(fileStream);
+            }
+            hotelTires.TireImageUrl = imagePath.Substring(7);
+
+            _tiresDbContext.HotelTires.Add(hotelTires);
+            await _tiresDbContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveUserHotelTire(string hotelTireId)
+        {
+            HotelTires hotelTire = _tiresDbContext.HotelTires.Where(x => x.Id == hotelTireId).FirstOrDefault();
+
+            _tiresDbContext.Remove(hotelTire);
+            await _tiresDbContext.SaveChangesAsync();
+
         }
     }
 }

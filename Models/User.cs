@@ -7,5 +7,6 @@ namespace TireDrift.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public List<HotelTires> HotelTires { get; set; }
     }
 }

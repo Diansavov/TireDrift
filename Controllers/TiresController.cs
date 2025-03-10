@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using Services;
+using TireDrift.Extensions;
 using TireDrift.Models;
 using TireDrift.Models.ViewModels;
 
@@ -23,6 +24,28 @@ namespace TireDrift
         {
             return View();
         }
+        public IActionResult TireHotel()
+        {
+            List<HotelTires> tires = _tiresService.GetUserHotelTires(User.Id());
+            return View(tires);
+        }
+        [HttpGet]
+        public async Task<IActionResult> AddTireToHotel()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddTireToHotel(TireViewModel tireViewModel)
+        {
+            await _tiresService.AddUserHotelTire(tireViewModel, User.Id());
+            return RedirectToAction("TireHotel");
+        }
+        public IActionResult RemoveTireFromHotel(string id)
+        {
+            _tiresService.RemoveUserHotelTire(id);
+            return RedirectToAction("TireHotel");
+        }
+
         //Search
         [HttpPost]
         public IActionResult Tires(string name, string filter)

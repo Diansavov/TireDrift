@@ -67,8 +67,6 @@ namespace Services
             }
 
             await _tiresDbContext.SaveChangesAsync();
-
-            await _tiresDbContext.SaveChangesAsync();
             return order.Id;
         }
 

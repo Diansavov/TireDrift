@@ -4,21 +4,19 @@ using TireDrift.Models;
 
 namespace TireDrift.Models
 {
-
-    public class OrderTires
+    public class HotelTires
     {
-        public OrderTires()
+        public HotelTires()
         {
             Id = Guid.NewGuid().ToString();
         }
         [Key]
         public string Id { get; set; }
-        [ForeignKey("Order")]
-        public string OrderId { get; set; }
-        public Order Order { get; set; }
-        [ForeignKey("Tire")]
-        public string TireId { get; set; }
-        public Tire Tire { get; set; }
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+        public User User { get; set; }
+        public string TireName { get; set; }
+        public string TireImageUrl { get; set; }
         public int TireQuanity { get; set; }
     }
 }

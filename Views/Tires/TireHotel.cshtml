@@ -1,0 +1,17 @@
+@model List<HotelTires>
+
+
+@{
+    ViewData["Title"] = "Tires Hotel";
+}
+
+Hotel Tires
+
+@foreach (var tire in Model)
+{
+    <div style="display: flex; width: 200px; height: 200px;">
+        <img src="@tire.TireImageUrl"></img>
+    </div>
+    <span>@tire.TireName</span>
+    <a asp-controller="Tires" asp-action="RemoveTireFromHotel" asp-route-id="@tire.Id">Remove Tire</a>
+}

@@ -22,5 +22,6 @@ namespace TireDrift.Models
         public int Stock { get; set; }
         public List<OrderTires> Orders { get; set; }
 
+
     }
 }
