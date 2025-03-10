@@ -79,5 +79,26 @@ namespace Services
         {
             return await _tiresDbContext.Tires.FindAsync(tireId);
         }
+
+        public List<UserOrderDto> GetUserOrder(string userId)
+        {
+            return _tiresDbContext.Orders
+                .Where(x => x.ClientId == userId)
+                .Include(x => x.Client)
+                .Include(x => x.Services)
+                .Include(x => x.Supplier)
+                .Include(x => x.Tires)
+                .Select(order => new UserOrderDto
+                {
+                    Id = order.Id,
+                    TotalPrice = order.TotalPrice,
+                    OrderDate = order.Date,
+                    SupplierUserName = order.Supplier.Name,
+                    SupplierPhoneNum = order.Supplier.PhoneNumber,
+                    OrderedServices = order.Services.Select(x => x.Name).ToList(),
+                    OrderedTires = order.Tires.Select(x => x.Tire).Select(x => x.Name).ToList(),
+                })
+                .ToList();
+        }
     }
 }

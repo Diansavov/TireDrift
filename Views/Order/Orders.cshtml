@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Поръчки";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/userformcss/login-signup.css">
+    <link rel="stylesheet" href="~/lib/datatables/datatables.min.css" />
+    <script src="~/lib/datatables/datatables.min.js"></script>
+}
+
+<section class="section-container">
+    <div class="container-text text-title">
+        <h1>Моите поръчки</h1>
+    </div>
+    <div class="users-container">
+        <table id="ordersTable" class="table">
+            <thead>
+                <tr class="thead-row">
+                    <th>Име на доставчик</th>
+                    <th>Телефон доставчик</th>
+                    <th>Дата на поръчка</th>
+                    <th>Тотална Цена</th>
+                    <th>Поръчани гуми</th>
+                    <th>Поръчани услуги</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/orders/user-order-datatable.js"></script>
+}
