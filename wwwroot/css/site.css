@@ -1,33 +1,97 @@
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Jost", serif;
-}
-html,
-body {
-  height: 100%;
-  margin: 0;
+--------------------------------------*/
+*{
+    padding: 0;
+    margin: 0;
 }
 
-img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
-  display: block;
+*{
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	box-sizing:border-box;
+}
+body{
+	font-family: 'Poppins', sans-serif;
+	font-size:14px;
+	color:#a09e9c;
+    text-transform:initial;
+    max-width:1920px;
+    margin:0 auto;
+	overflow-x:hidden;
 }
 
-body {
-  font-family: Arial, sans-serif; /* Default font-family */
-  font-size: 1rem; /* Default font size, relative to the html font size */
-  line-height: 1.5; /* Sets the line-height for readability */
-  background-color: #fff; /* Default background color */
-  color: #333; /* Default text color */
-  height: 100%; /* Ensures the body takes full height */
-  overflow-x: hidden; /* Prevents horizontal scrolling */
+a,a:hover,a:active,a:focus {
+	text-decoration:none;
+	color: #343a3f;
+	font-size:16px;
+	padding:0;
+    font-weight: 500;
+    text-transform: capitalize;
 }
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+h1,h2,h3,h4,h5,h6 { 
+	margin: 0;
+	color:#343a3f;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+p {
+	margin: 0;
+	color:#767f86;
+	font-size:14px;
+    line-height: 1.8;
+    text-transform: initial;
+}
+img{border:none;max-width:100%; height:auto;}
+ul{
+	padding: 0;
+    margin: 0 auto;
+    list-style: none;
+}
+ul li {
+	list-style: none;
+	
+}
+select,input,textarea,button{box-shadow:none;outline:0!important;}
+button {background: transparent;border: 0;font-size: 12px;}
+
+html,body{height: 100%;}
+
+[placeholder]:focus::-webkit-input-placeholder {
+  -webkit-transition: opacity 0.3s 0.3s ease; 
+  -moz-transition: opacity 0.3s 0.3s ease; 
+  -ms-transition: opacity 0.3s 0.3s ease; 
+  -o-transition: opacity 0.3s 0.3s ease; 
+  transition: opacity 0.3s 0.3s ease; 
+  opacity: 0;
+}
+
+/* section-header */
+.section-header{
+    position: relative;
+    text-align: center;
+}
+.section-header h2{
+    color: #505866;
+    font-size:24px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+}
+.section-header h2 span{text-transform: lowercase;}
+.section-header p{
+    font-size:16px;
+}
+/* section-header */
+.fix{position: relative;clear: both;}
+/*=============Style css=========*/
+
+.nav-bar-flex-container{
+  align-items: center;
+}
+.nav-link:hover{
+  color: #ff545a !important;
+  transition: 0.5s ease-in-out ;
 }
