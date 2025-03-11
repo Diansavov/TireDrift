@@ -11,19 +11,20 @@
     <link rel="stylesheet" href="~/lib/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/node_modules/toastr/build/toastr.min.css" asp-append-version="true" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+
 
 
     <link rel="stylesheet" href="~/css/assets/font-awesome.min.css">
 
     <link rel="stylesheet" href="~/css/assets/linearicons.css">
     <link rel="stylesheet" href="~/css/assets/animate.css">
-    <link rel="stylesheet" href="~/css/assets/flaticon.css">
     <link rel="stylesheet" href="~/css/assets/slick.css">
     <link rel="stylesheet" href="~/css/assets/slick-theme.css">
-    <link rel="stylesheet" href="~/css/assets/bootsnav.css">
     <link rel="stylesheet" href="~/css/assets/style.css">
     <link rel="stylesheet" href="~/css/assets/responsive.css">
 
@@ -69,15 +70,15 @@
                     <div class="d-flex gap-2">
                         @if (!User.Identity.IsAuthenticated)
                         {
-                            <a class="btn btn-outline-success" asp-area="" asp-controller="Users" asp-action="LogIn"
+                            <a class="btn btn-outline-secondary" asp-area="" asp-controller="Users" asp-action="LogIn"
                                 type="submit">Log In</a>
-                            <a class="btn btn-success" asp-area="" asp-controller="Users" asp-action="Register"
+                            <a class="btn btn-secondary" asp-area="" asp-controller="Users" asp-action="Register"
                                 type="submit">Register</a>
                         }
                         else
                         {
                             <div class="justify-content-center">
-                                <a class="btn btn-outline-success" asp-area="" asp-controller="Users" asp-action="LogOut"
+                                <a class="btn btn-outline-secondary" asp-area="" asp-controller="Users" asp-action="LogOut"
                                     type="submit">Log Out</a>
                             </div>
                         }
@@ -86,67 +87,53 @@
             </div>
         </nav>
     </header>
-    <!-- top-area Start -->
-    <section class="top-area">
-        <div class="header-area">
-            <!-- Start Navigation -->
-            <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy" data-minus-value-desktop="70"
-                data-minus-value-mobile="55" data-speed="1000">
 
-                <div class="container">
+    <main role="main" class="pb-3 content">
+        <div class="content-inside">
+            @RenderBody()
+        </div>
+    </main>
 
-                    <!-- Start Header Navigation -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <a class="navbar-brand" href="index.html">list<span>race</span></a>
-
-                    </div><!--/.navbar-header-->
-                    <!-- End Header Navigation -->
-
-                    <!-- Links -->
-                    <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
-                        <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                            <li class=" scroll active"><a href="#home">home</a></li>
+    <!--footer start-->
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="footer-menu">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="index.html">list<span>race</span></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <ul class="footer-menu-item">
                             <li class="scroll"><a href="#works">how it works</a></li>
                             <li class="scroll"><a href="#explore">explore</a></li>
                             <li class="scroll"><a href="#reviews">review</a></li>
                             <li class="scroll"><a href="#blog">blog</a></li>
                             <li class="scroll"><a href="#contact">contact</a></li>
+                            <li class=" scroll"><a href="#">my account</a></li>
                         </ul>
                     </div>
                 </div>
-            </nav>
-            <!-- End Navigation -->
+            </div>
         </div>
-        <div class="clearfix"></div>
 
-    </section>
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - TireDrift - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div id="scroll-Top">
+            <div class="return-to-top">
+                <i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title=""
+                    data-original-title="Back to Top" aria-hidden="true"></i>
+            </div>
         </div>
+
     </footer>
+
+    <partial name="_Notification" />
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <partial name="_Notification" />
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-    <script src="~/js/assets/bootsnav.js"></script>
-    <script src="~/js/assets/feather.min.js"></script>
-    <script src="~/js/assets/jquery.counterup.min.js"></script>
-    <script src="~/js/assets/waypoints.min.js"></script>
-    <script src="~/js/assets/slick.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="~/js/assets/slick.min.js" asp-append-version="true"></script>
 
     <!--Custom JS-->
-    <script src="assets/js/custom.js"></script>
+    <script src="~/js/assets/custom.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

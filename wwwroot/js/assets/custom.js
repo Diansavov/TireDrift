@@ -82,12 +82,4 @@ $(document).ready(function(){
 			]
 	    });
 
-	// 5. counter
-		$(window).on('load', function(){	
-			$('.counter').counterUp({
-				delay: 10,
-				time: 3000
-			});	
-		});
-
 });

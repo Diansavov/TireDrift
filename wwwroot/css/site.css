@@ -1,97 +1,193 @@
---------------------------------------*/
-*{
+:root {
+    --secondary: #ff545a;
+    --secondary-darker: rgb(151, 14, 19);
+    --secondary-outline: #000000;
+}
+
+* {
     padding: 0;
     margin: 0;
 }
 
-*{
-	-webkit-box-sizing:border-box;
-	-moz-box-sizing:border-box;
-	-o-box-sizing:border-box;
-	-ms-box-sizing:border-box;
-	box-sizing:border-box;
-}
-body{
-	font-family: 'Poppins', sans-serif;
-	font-size:14px;
-	color:#a09e9c;
-    text-transform:initial;
-    max-width:1920px;
-    margin:0 auto;
-	overflow-x:hidden;
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-a,a:hover,a:active,a:focus {
-	text-decoration:none;
-	color: #343a3f;
-	font-size:16px;
-	padding:0;
-    font-weight: 500;
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.content {
+    min-height: 100%;
+}
+
+.content-inside {
+    padding-bottom: 50px;
+}
+
+.footer {
+    height: 117px;
+    margin-top: -50px;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: #a09e9c;
+    text-transform: initial;
+    max-width: 1920px;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+a,
+a:hover,
+a:active,
+a:focus {
+    text-decoration: none;
+    color: #343a3f;
     text-transform: capitalize;
 }
-h1,h2,h3,h4,h5,h6 { 
-	margin: 0;
-	color:#343a3f;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    color: #343a3f;
     font-size: 18px;
     font-weight: 500;
     text-transform: capitalize;
 }
+
 p {
-	margin: 0;
-	color:#767f86;
-	font-size:14px;
+    margin: 0;
+    color: #767f86;
+    font-size: 14px;
     line-height: 1.8;
     text-transform: initial;
 }
-img{border:none;max-width:100%; height:auto;}
-ul{
-	padding: 0;
+
+img {
+    border: none;
+    max-width: 100%;
+    height: auto;
+}
+
+ul {
+    padding: 0;
     margin: 0 auto;
     list-style: none;
 }
-ul li {
-	list-style: none;
-	
-}
-select,input,textarea,button{box-shadow:none;outline:0!important;}
-button {background: transparent;border: 0;font-size: 12px;}
 
-html,body{height: 100%;}
+ul li {
+    list-style: none;
+
+}
+
+select,
+input,
+textarea,
+button {
+    box-shadow: none;
+    outline: 0 !important;
+}
+
+button {
+    background: transparent;
+    border: 0;
+    font-size: 12px;
+}
+
+html,
+body {
+    height: 100%;
+}
 
 [placeholder]:focus::-webkit-input-placeholder {
-  -webkit-transition: opacity 0.3s 0.3s ease; 
-  -moz-transition: opacity 0.3s 0.3s ease; 
-  -ms-transition: opacity 0.3s 0.3s ease; 
-  -o-transition: opacity 0.3s 0.3s ease; 
-  transition: opacity 0.3s 0.3s ease; 
-  opacity: 0;
+    -webkit-transition: opacity 0.3s 0.3s ease;
+    -moz-transition: opacity 0.3s 0.3s ease;
+    -ms-transition: opacity 0.3s 0.3s ease;
+    -o-transition: opacity 0.3s 0.3s ease;
+    transition: opacity 0.3s 0.3s ease;
+    opacity: 0;
 }
 
 /* section-header */
-.section-header{
+.section-header {
     position: relative;
     text-align: center;
 }
-.section-header h2{
+
+.section-header h2 {
     color: #505866;
-    font-size:24px;
+    font-size: 24px;
     font-weight: 500;
     margin-bottom: 24px;
     text-transform: uppercase;
     letter-spacing: 1.3px;
 }
-.section-header h2 span{text-transform: lowercase;}
-.section-header p{
-    font-size:16px;
+
+.section-header h2 span {
+    text-transform: lowercase;
 }
+
+.section-header p {
+    font-size: 16px;
+}
+
 /* section-header */
-.fix{position: relative;clear: both;}
+.fix {
+    position: relative;
+    clear: both;
+}
+
 /*=============Style css=========*/
 
-.nav-bar-flex-container{
-  align-items: center;
+.nav-bar-flex-container {
+    align-items: center;
 }
-.nav-link:hover{
-  color: #ff545a !important;
-  transition: 0.5s ease-in-out ;
+
+.nav-link:hover {
+    color: #ff545a !important;
+    transition: 0.5s ease-in-out;
+}
+
+.btn-secondary {
+    background-color: var(--secondary);
+    border-color: black;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-darker);
+    border-color: black;
+    color: rgb(255, 255, 255);
+}
+
+.btn-outline-secondary {
+    border-color: #ff545a;
+    color: black;
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--secondary);
+    border-color: black;
+    color: white;
+}
+.redirect-buttons{
+    display: flex;
+    justify-content: center;
+}
+.statistics-counter{
+    display: flex;
 }

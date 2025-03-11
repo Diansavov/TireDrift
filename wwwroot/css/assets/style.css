@@ -12,10 +12,12 @@
 11. Subscribe
 12. Footer
 
-
 /*-------------------------------------
-        2. Header-top
+2. Header-top
 --------------------------------------*/
+.nav-link{
+	font-size:16px;
+}
 .header-top{border-bottom:1px solid #f6f8fa;}
 
 .header-top ul li {display: inline-block;}
@@ -140,7 +142,7 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
 --------------------------------------*/
 .welcome-hero {
     position: relative;
-    background:url(../images/welcome-hero/banner.jpg)no-repeat;
+    background:url(/images/images/hero-image.jpg)no-repeat;
     background-position:center;
     background-size:cover;
     text-align: center;
@@ -576,15 +578,15 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     position:relative;
     display: flex;
     align-items: center;
-    background:url(../../assets/images/counter/counter-banner.jpg)no-repeat fixed;
+    background:url(/images/images/bmw-stats.jpg)no-repeat fixed;
     background-position:center;
     background-size:cover;
     padding:127px 0 120px;
+    filter: brightness(75%);
 }
 .statistics:before{
     position:absolute;
     content:'';
-    background: rgba(75,75,75,.60);
     height:100%;
     width:100%;
     top:0;
