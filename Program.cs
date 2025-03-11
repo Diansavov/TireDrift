@@ -39,6 +39,7 @@ builder.Services.AddSession(options =>
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITiresService, TiresService>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
+builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IOrdersService, OrdersService>();
 
 var app = builder.Build();
