@@ -11,9 +11,11 @@ namespace TireDrift
     public class TiresController : Controller
     {
         private readonly ITiresService _tiresService;
-        public TiresController(ITiresService tiresService)
+        private readonly IServiceService _serviceService;
+        public TiresController(ITiresService tiresService, IServiceService serviceService)
         {
             _tiresService = tiresService;
+            _serviceService = serviceService;
         }
         public IActionResult Tires()
         {
@@ -22,7 +24,8 @@ namespace TireDrift
         }
         public IActionResult Services()
         {
-            return View();
+            List<Service> services = _serviceService.GetAll();
+            return View(services);
         }
         public IActionResult TireHotel()
         {

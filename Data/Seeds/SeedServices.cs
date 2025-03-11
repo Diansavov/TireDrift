@@ -13,7 +13,7 @@ namespace TireDrift.Data.Seeds
         }
         public static async Task CreateServices(TiresDbContext _context)
         {
-            if (_context.Services.Any())
+            if (!_context.Services.Any())
             {
                 await _context.Services.AddRangeAsync(
                     new Service() {Name = "Смяна на гуми", Description = "Смяна на гумите на клиент с подходящи нови гуми", Price = 50, ImagePath = "/images/services/changeTires.png"},

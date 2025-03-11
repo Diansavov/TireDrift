@@ -118,24 +118,17 @@ public class CartController : Controller
 
         return RedirectToAction("Tires", "Tires");
     }
-    public async Task<IActionResult> AddServiceToCart(string id, int quantity)
+    public async Task<IActionResult> AddServiceToCart(string id)
     {
         var cart = GetCart();
 
         Service service = await _ordersService.GetServiceAsync(id);
-        if (quantity <= 0)
-        {
-            service.Quantity = 1;
-        }
-        else
-        {
-            service.Quantity = quantity;
-        }
-
+        service.Quantity = 1;
         if (service != null)
         {
             cart.Services.Add(service);
-            cart.TotalPrice += service.Price * service.Quantity;
+            cart.TotalPrice += service.Price;
+            TempData["success"] = "Успешно добавено в кошницата";
         }
 
         SaveCart(cart);
