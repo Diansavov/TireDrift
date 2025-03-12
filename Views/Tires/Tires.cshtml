@@ -3,61 +3,101 @@
 @{
     ViewData["Title"] = "Tires";
 }
-
-All Tires
-<a class="btn btn-success" asp-controller="Tires" asp-action="AddTire">Add Tire</a>
-
-<form asp-controller="Tires" asp-action="Tires">
-
-    <input type="text" name="name" />
-    <select name="filter">
-        <option class="fw-bold" value="name">Име</option>
-        <option class="fw-bold" value="-name">Име (низходящо)</option>
-        <option class="fw-bold" value="stock">Стока</option>
-        <option class="fw-bold" value="-stock">Стока (низходяща)</option>
-        <option class="fw-bold" value="price">Цена</option>
-        <option class="fw-bold" value="-price">Цена (низходяща)</option>
-    </select>
-    <button class="btn btn-success" type="submit">Search</button>
-</form>
-<div style="display: flex;">
-    @foreach (var tire in Model)
-    {
-        <div style="display: flex; flex-direction: column;">
-
-            <div style="display: flex; width: 200px; height: 200px;">
-                <img src="@tire.ImagePath"></img>
-            </div>
-            <div>
-                <span>@tire.Name</span>
-            </div>
-            <div>
-                <span>@tire.Description</span>
-            </div>
-            <div>
-                <span>@Math.Round(tire.Price, 2)</span>
-            </div>
-            <div>
-                <span>@tire.Stock</span>
-            </div>
-            <div>
-                <form asp-controller="Cart" asp-action="AddTireToCart">
-                    <input name="id" value="@tire.Id" hidden>
-                    <input name="quantity">
-                    <button type="submit" class="btn btn-success">Buy</button>
-                </form>
-
-            </div>
-            <div>
-                <a asp-controller="Tires" asp-action="EditTire" asp-route-id="@tire.Id" class="btn btn-warning">Edit</a>
-            </div>
-            <div>
-                <a asp-controller="Tires" asp-action="DeleteTire" asp-route-id="@tire.Id" class="btn btn-danger">Del</a>
-            </div>
+@section Styles {
+    <link rel="stylesheet" href="~/css/tires/tires.css">
+}
+<section id="home" class="welcome-hero-tires">
+    <div class="container hero-container">
+        <div class="welcome-hero-txt">
+            <h2><span class="bmw-color">Всичк</span>и Гуми</h2>
         </div>
-    }
-</div>
 
+    </div>
+</section>
+<section id="list-topics" class="search-tires">
+    <div class="container redirect-buttons">
+        <form asp-controller="Tires" asp-action="Tires" class="search-form">
+            <div class="welcome-hero-form">
+                <div class="single-welcome-hero-form shadow">
+                    <h3>Търсите гуми?</h3>
+                    <input type="text" name="name" placeholder="напр: Мишлен, Гудиър, Бриджстоун" value="@ViewData["search-param"]" />
+                    <select name="filter" class="form-select">
+                        <option class="fw-bold" value="name">Име</option>
+                        <option class="fw-bold" value="-name">Име (низходящо)</option>
+                        <option class="fw-bold" value="stock">Стока</option>
+                        <option class="fw-bold" value="-stock">Стока (низходяща)</option>
+                        <option class="fw-bold" value="price">Цена</option>
+                        <option class="fw-bold" value="-price">Цена (низходяща)</option>
+                    </select>
+                    <div class="welcome-hero-form-icon">
+                        <i class="flaticon-list-with-dots"></i>
+                    </div>
+                </div>
+                <button class="welcome-hero-btn">
+                    Търсене <i class="bi bi-search search-icon"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+<section id="explore" class="explore">
+	<div class="container">
+		<!--/.section-header-->
+		<div class="explore-content">
+			<div class="row">
+				@foreach(Tire tire in Model){
+					<!-- Card -->
+					<div class="col-md-4 col-sm-6">
+						<div class="single-explore-item">
+							<div class="single-explore-img">
+								<img src="@tire.ImagePath" alt="explore image">
+								@if (tire.Orders.Count > 3)
+								{
+									<div class="single-explore-img-info">
+										<span>Популярен</span>
+									</div>
+								}
+							</div>
+							<div class="single-explore-txt bg-theme-1">
+								<h2>@tire.Name</h2>
+								<p class="explore-rating-price">
+									<span>@tire.Stock бр. стока</span>
+									<span class="explore-price-box">
+										<span class="explore-price">@Math.Round(tire.Price, 2) лв.</span>
+									</span>
+								</p>
+								<div class="explore-person">
+									<div class="row">
+										<div class="col-sm-10">
+											<p>
+												@tire.Description
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="explore-open-close-part">
+									<form asp-controller="Cart" asp-action="AddTireToCart">
+										<div class="row card-buying">
+											<div class="col-sm-5">
+												<input class="form-control" name="quantity" type="number" min="1" max="@tire.Stock" value="1">
+												<input hidden name="id" value="@tire.Id">
+											</div>
+											<div class="col-sm-5">
+												<button type="submit" class="btn">Добави в количка</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Card End-->
+				}
+
+			</div>
+		</div>
+	</div>
+</section>
 @section Scripts {
     <script>
         document.addEventListener('DOMContentLoaded', function () {

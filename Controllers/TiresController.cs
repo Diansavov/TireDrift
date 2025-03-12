@@ -55,6 +55,7 @@ namespace TireDrift
         {
             List<Tire> tires = _tiresService.SearchProducts(name, filter);
             ViewData["filter"] = filter;
+            ViewData["search-param"] = name;
             return View(tires);
         }
         public IActionResult AddTire()

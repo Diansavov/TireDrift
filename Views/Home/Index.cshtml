@@ -1,17 +1,20 @@
-﻿@{
+﻿@model List<Tire>
+
+@{
 	ViewData["Title"] = "Home Page";
 }
+
 <section id="home" class="welcome-hero">
 	<div class="container hero-container">
 		<div class="welcome-hero-txt">
 			<h2>Място за продажба <br> и обслужване на гуми </h2>
 		</div>
 		<div class="welcome-hero-serch-box">
-			<form action="index.html" class="search-form">
+			<form asp-controller="Tires" asp-action="Tires" class="search-form">
 				<div class="welcome-hero-form">
 					<div class="single-welcome-hero-form">
 						<h3>Търсите гуми?</h3>
-						<input type="text" placeholder="напр: Мишелин, Гудиър, Бриджстоун" />
+						<input type="text" name="name" placeholder="напр: Мишлен, Гудиър, Бриджстоун" />
 						<div class="welcome-hero-form-icon">
 							<i class="flaticon-list-with-dots"></i>
 						</div>
@@ -31,31 +34,31 @@
 		<div class="list-topics-content">
 			<ul>
 				<li>
-					<div class="single-list-topics-content">
+					<a asp-controller="Tires" asp-action="Tires" class="single-list-topics-content">
 						<div class="single-list-topics-icon">
 							<img src="~/images/images/tire.png" alt="Category Thumbnail">
 						</div>
-						<h2><a href="#">Видове гуми</a></h2>
-						<p>150 listings</p>
-					</div>
+						<h2><span>Видове гуми</span></h2>
+						<p>@Model.Count вида</p>
+					</a>
 				</li>
 				<li>
-					<div class="single-list-topics-content">
+					<a asp-controller="Tires" asp-action="Services" class="single-list-topics-content">
 						<div class="single-list-topics-icon">
 							<img src="~/images/images/service.png" alt="Category Thumbnail">
 						</div>
-						<h2><a href="#">Услуги</a></h2>
+						<h2><span>Услуги</span></h2>
 						<p>4 избора</p>
-					</div>
+					</a>
 				</li>
 				<li>
-					<div class="single-list-topics-content">
+					<a asp-controller="Tires" asp-action="TireHotel" class="single-list-topics-content">
 						<div class="single-list-topics-icon">
 							<img src="~/images/images/tireRack.png" alt="Category Thumbnail">
 						</div>
-						<h2><a href="#">Хотел за гуми</a></h2>
+						<h2><span>Хотел за гуми</span></h2>
 						<p>0 ваши гуми</p>
-					</div>
+					</a>
 				</li>
 			</ul>
 		</div>
@@ -68,7 +71,7 @@
 <section id="works" class="works">
 	<div class="container">
 		<div class="works-content">
-			<div class="col-md-4 col-sm-6">
+			<a class="col-md-4 col-sm-6" asp-controller="Order" asp-action="Orders">
 				<div class="single-how-works">
 					<div>
 						<div class="single-how-works-icon">
@@ -80,12 +83,12 @@
 							Може да преглеждайте поръчките си и контактната информация на доставчиците им.
 						</p>
 					</div>
-					<button class="welcome-hero-btn how-work-btn" onclick="window.location.href='#'">
+					<button class="welcome-hero-btn how-work-btn">
 						Поръчки
 					</button>
 				</div>
-			</div>
-			<div class="col-md-4 col-sm-6">
+			</a>
+			<a class="col-md-4 col-sm-6" asp-controller="Order" asp-action="Invoices">
 				<div class="single-how-works">
 					<div>
 						<div class="single-how-works-icon">
@@ -101,13 +104,12 @@
 						Фактури
 					</button>
 				</div>
-			</div>
+			</a>
 		</div>
 	</div>
 
 </section>
 <!--works end -->
-
 <!-- statistics strat -->
 <section id="statistics" class="statistics">
 	<div class="container stats-container">
@@ -115,33 +117,33 @@
 			<div class="col-md-3 col-sm-6">
 				<div class="single-ststistics-box">
 					<div class="statistics-content">
-						<div class="counter">90 </div> <span>K+</span>
+						<span class="counter">@Model.Count</span>
 					</div>
-					<h3>listings</h3>
+					<h3>Видове гуми</h3>
 				</div>
 			</div>
 			<div class="col-md-3 col-sm-6">
 				<div class="single-ststistics-box">
 					<div class="statistics-content">
-						<div class="counter">40</div> <span>k+</span>
+						<span class="counter">4</span>
 					</div>
-					<h3>listing categories</h3>
+					<h3>вида услуги</h3>
 				</div>
 			</div>
 			<div class="col-md-3 col-sm-6">
 				<div class="single-ststistics-box">
 					<div class="statistics-content">
-						<div class="counter">65</div> <span>k+</span>
+						<span class="counter">1250+</span>
 					</div>
-					<h3>visitors</h3>
+					<h3>Посетителя</h3>
 				</div>
 			</div>
 			<div class="col-md-3 col-sm-6">
 				<div class="single-ststistics-box">
 					<div class="statistics-content">
-						<div class="counter">50</div> <span>k+</span>
+						<span class="counter">1000+</span>
 					</div>
-					<h3>happy clients</h3>
+					<h3>Доволни Клиента</h3>
 				</div>
 			</div>
 		</div>
@@ -155,412 +157,62 @@
 		<!--/.section-header-->
 		<div class="explore-content">
 			<div class="row">
-				<div class=" col-md-4 col-sm-6">
-					<div class="single-explore-item">
-						<div class="single-explore-img">
-							<img src="/images/tires/0eb298df-fe7d-4b23-806a-05fa11528403.png" alt="explore image">
-							<div class="single-explore-img-info">
-								<button onclick="window.location.href='#'">best rated</button>
-								<div class="single-explore-image-icon-box">
-									<ul>
-										<li>
-											<div class="single-explore-image-icon">
-												<i class="fa fa-arrows-alt"></i>
-											</div>
-										</li>
-										<li>
-											<div class="single-explore-image-icon">
-												<i class="fa fa-bookmark-o"></i>
-											</div>
-										</li>
-									</ul>
-								</div>
+				@for (int i = 0; i < (Model.Count > 5 ? 5 : Model.Count); i++)
+				{
+					<!-- Card -->
+					<div class="col-md-4 col-sm-6">
+						<div class="single-explore-item">
+							<div class="single-explore-img">
+								<img src="@Model[i].ImagePath" alt="explore image">
+								@if (Model[i].Orders.Count > 3)
+								{
+									<div class="single-explore-img-info">
+										<span>Популярен</span>
+									</div>
+								}
 							</div>
-						</div>
-						<div class="single-explore-txt bg-theme-1">
-							<h2><a href="#">tommy helfinger bar</a></h2>
-							<p class="explore-rating-price">
-								<span class="explore-rating">5.0</span>
-								<a href="#"> 10 ratings</a>
-								<span class="explore-price-box">
-									form
-									<span class="explore-price">5$-300$</span>
-								</span>
-								<a href="#">resturent</a>
-							</p>
-							<div class="explore-person">
-								<div class="row">
-									<div class="col-sm-2">
-										<div class="explore-person-img">
-											<a href="#">
-												<img src="assets/images/explore/person.png" alt="explore person">
-											</a>
+							<div class="single-explore-txt bg-theme-1">
+								<h2>@Model[i].Name</h2>
+								<p class="explore-rating-price">
+									<span>@Model[i].Stock бр. стока</span>
+									<span class="explore-price-box">
+										<span class="explore-price">@Math.Round(Model[i].Price, 2) лв.</span>
+									</span>
+								</p>
+								<div class="explore-person">
+									<div class="row">
+										<div class="col-sm-10">
+											<p>
+												@Model[i].Description
+											</p>
 										</div>
 									</div>
-									<div class="col-sm-10">
-										<p>
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-											tempor incid ut labore et dolore magna aliqua....
-										</p>
-									</div>
 								</div>
-							</div>
-							<div class="explore-open-close-part">
-								<div class="row">
-									<div class="col-sm-5">
-										<button class="close-btn" onclick="window.location.href='#'">close now</button>
-									</div>
-									<div class="col-sm-7">
-										<div class="explore-map-icon">
-											<a href="#"><i data-feather="map-pin"></i></a>
-											<a href="#"><i data-feather="upload"></i></a>
-											<a href="#"><i data-feather="heart"></i></a>
+								<div class="explore-open-close-part">
+									<form asp-controller="Cart" asp-action="AddTireToCartIndex">
+										<div class="row card-buying">
+											<div class="col-sm-5">
+												<input class="form-control" name="quantity" type="number" min="1" max="@Model[i].Stock" value="1">
+												<input hidden name="id" value="@Model[i].Id">
+											</div>
+											<div class="col-sm-5">
+												<button type="submit" class="btn">Добави в количка</button>
+											</div>
 										</div>
-									</div>
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-4 col-sm-6">
-					<div class="single-explore-item">
-						<div class="single-explore-img">
-							<img src="assets/images/explore/e2.jpg" alt="explore image">
-							<div class="single-explore-img-info">
-								<button onclick="window.location.href='#'">featured</button>
-								<div class="single-explore-image-icon-box">
-									<ul>
-										<li>
-											<div class="single-explore-image-icon">
-												<i class="fa fa-arrows-alt"></i>
-											</div>
-										</li>
-										<li>
-											<div class="single-explore-image-icon">
-												<i class="fa fa-bookmark-o"></i>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="single-explore-txt bg-theme-2">
-							<h2><a href="#">swim and dine resort</a></h2>
-							<p class="explore-rating-price">
-								<span class="explore-rating">4.5</span>
-								<a href="#"> 8 ratings</a>
-								<span class="explore-price-box">
-									form
-									<span class="explore-price">50$-500$</span>
-								</span>
-								<a href="#">hotel</a>
-							</p>
-							<div class="explore-person">
-								<div class="row">
-									<div class="col-sm-2">
-										<div class="explore-person-img">
-											<a href="#">
-												<img src="assets/images/explore/person.png" alt="explore person">
-											</a>
-										</div>
-									</div>
-									<div class="col-sm-10">
-										<p>
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-											tempor incid ut labore et dolore magna aliqua....
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="explore-open-close-part">
-								<div class="row">
-									<div class="col-sm-5">
-										<button class="close-btn open-btn" onclick="window.location.href='#'">open
-											now</button>
-									</div>
-									<div class="col-sm-7">
-										<div class="explore-map-icon">
-											<a href="#"><i data-feather="map-pin"></i></a>
-											<a href="#"><i data-feather="upload"></i></a>
-											<a href="#"><i data-feather="heart"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-6">
-					<div class="single-explore-item">
-						<div class="single-explore-img">
-							<img src="assets/images/explore/e3.jpg" alt="explore image">
-							<div class="single-explore-img-info">
-								<button onclick="window.location.href='#'">best rated</button>
-								<div class="single-explore-image-icon-box">
-									<ul>
-										<li>
-											<div class="single-explore-image-icon">
-												<i class="fa fa-arrows-alt"></i>
-											</div>
-										</li>
-										<li>
-											<div class="single-explore-image-icon">
-												<i class="fa fa-bookmark-o"></i>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="single-explore-txt bg-theme-3">
-							<h2><a href="#">europe tour</a></h2>
-							<p class="explore-rating-price">
-								<span class="explore-rating">5.0</span>
-								<a href="#"> 15 ratings</a>
-								<span class="explore-price-box">
-									form
-									<span class="explore-price">5k$-10k$</span>
-								</span>
-								<a href="#">destination</a>
-							</p>
-							<div class="explore-person">
-								<div class="row">
-									<div class="col-sm-2">
-										<div class="explore-person-img">
-											<a href="#">
-												<img src="assets/images/explore/person.png" alt="explore person">
-											</a>
-										</div>
-									</div>
-									<div class="col-sm-10">
-										<p>
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-											tempor incid ut labore et dolore magna aliqua....
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="explore-open-close-part">
-								<div class="row">
-									<div class="col-sm-5">
-										<button class="close-btn" onclick="window.location.href='#'">close now</button>
-									</div>
-									<div class="col-sm-7">
-										<div class="explore-map-icon">
-											<a href="#"><i data-feather="map-pin"></i></a>
-											<a href="#"><i data-feather="upload"></i></a>
-											<a href="#"><i data-feather="heart"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class=" col-md-4 col-sm-6">
-					<div class="single-explore-item">
-						<div class="single-explore-img">
-							<img src="assets/images/explore/e4.jpg" alt="explore image">
-							<div class="single-explore-img-info">
-								<button onclick="window.location.href='#'">most view</button>
-								<div class="single-explore-image-icon-box">
-									<ul>
-										<li>
-											<div class="single-explore-image-icon">
-												<i class="fa fa-arrows-alt"></i>
-											</div>
-										</li>
-										<li>
-											<div class="single-explore-image-icon">
-												<i class="fa fa-bookmark-o"></i>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="single-explore-txt bg-theme-4">
-							<h2><a href="#">banglow with swiming pool</a></h2>
-							<p class="explore-rating-price">
-								<span class="explore-rating">5.0</span>
-								<a href="#"> 10 ratings</a>
-								<span class="explore-price-box">
-									form
-									<span class="explore-price">10k$-15k$</span>
-								</span>
-								<a href="#">real estate</a>
-							</p>
-							<div class="explore-person">
-								<div class="row">
-									<div class="col-sm-2">
-										<div class="explore-person-img">
-											<a href="#">
-												<img src="assets/images/explore/person.png" alt="explore person">
-											</a>
-										</div>
-									</div>
-									<div class="col-sm-10">
-										<p>
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-											tempor incid ut labore et dolore magna aliqua....
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="explore-open-close-part">
-								<div class="row">
-									<div class="col-sm-5">
-										<button class="close-btn" onclick="window.location.href='#'">close now</button>
-									</div>
-									<div class="col-sm-7">
-										<div class="explore-map-icon">
-											<a href="#"><i data-feather="map-pin"></i></a>
-											<a href="#"><i data-feather="upload"></i></a>
-											<a href="#"><i data-feather="heart"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-6">
-					<div class="single-explore-item">
-						<div class="single-explore-img">
-							<img src="assets/images/explore/e5.jpg" alt="explore image">
-							<div class="single-explore-img-info">
-								<button onclick="window.location.href='#'">featured</button>
-								<div class="single-explore-image-icon-box">
-									<ul>
-										<li>
-											<div class="single-explore-image-icon">
-												<i class="fa fa-arrows-alt"></i>
-											</div>
-										</li>
-										<li>
-											<div class="single-explore-image-icon">
-												<i class="fa fa-bookmark-o"></i>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="single-explore-txt bg-theme-2">
-							<h2><a href="#">vintage car expo</a></h2>
-							<p class="explore-rating-price">
-								<span class="explore-rating">4.2</span>
-								<a href="#"> 8 ratings</a>
-								<span class="explore-price-box">
-									form
-									<span class="explore-price">500$-1200$</span>
-								</span>
-								<a href="#">automotion</a>
-							</p>
-							<div class="explore-person">
-								<div class="row">
-									<div class="col-sm-2">
-										<div class="explore-person-img">
-											<a href="#">
-												<img src="assets/images/explore/person.png" alt="explore person">
-											</a>
-										</div>
-									</div>
-									<div class="col-sm-10">
-										<p>
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-											tempor incid ut labore et dolore magna aliqua....
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="explore-open-close-part">
-								<div class="row">
-									<div class="col-sm-5">
-										<button class="close-btn open-btn" onclick="window.location.href='#'">open
-											now</button>
-									</div>
-									<div class="col-sm-7">
-										<div class="explore-map-icon">
-											<a href="#"><i data-feather="map-pin"></i></a>
-											<a href="#"><i data-feather="upload"></i></a>
-											<a href="#"><i data-feather="heart"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-6">
-					<div class="single-explore-item">
-						<div class="single-explore-img">
-							<img src="assets/images/explore/e6.jpg" alt="explore image">
-							<div class="single-explore-img-info">
-								<button onclick="window.location.href='#'">best rated</button>
-								<div class="single-explore-image-icon-box">
-									<ul>
-										<li>
-											<div class="single-explore-image-icon">
-												<i class="fa fa-arrows-alt"></i>
-											</div>
-										</li>
-										<li>
-											<div class="single-explore-image-icon">
-												<i class="fa fa-bookmark-o"></i>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="single-explore-txt bg-theme-5">
-							<h2><a href="#">thailand tour</a></h2>
-							<p class="explore-rating-price">
-								<span class="explore-rating">5.0</span>
-								<a href="#"> 15 ratings</a>
-								<span class="explore-price-box">
-									form
-									<span class="explore-price">5k$-10k$</span>
-								</span>
-								<a href="#">destination</a>
-							</p>
-							<div class="explore-person">
-								<div class="row">
-									<div class="col-sm-2">
-										<div class="explore-person-img">
-											<a href="#">
-												<img src="assets/images/explore/person.png" alt="explore person">
-											</a>
-										</div>
-									</div>
-									<div class="col-sm-10">
-										<p>
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-											tempor incid ut labore et dolore magna aliqua....
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="explore-open-close-part">
-								<div class="row">
-									<div class="col-sm-5">
-										<button class="close-btn" onclick="window.location.href='#'">close now</button>
-									</div>
-									<div class="col-sm-7">
-										<div class="explore-map-icon">
-											<a href="#"><i data-feather="map-pin"></i></a>
-											<a href="#"><i data-feather="upload"></i></a>
-											<a href="#"><i data-feather="heart"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+					<!-- Card End-->
+				}
+
 			</div>
 		</div>
 	</div>
 </section>
 <!--explore end -->
+
+@section Scripts {
+	<script src="~/js/assets/counter.js"></script>
+}

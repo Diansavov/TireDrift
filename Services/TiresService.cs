@@ -1,5 +1,6 @@
 
 using System.Security.AccessControl;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TireDrift.Data;
 using TireDrift.Models;
@@ -49,7 +50,7 @@ namespace Services
 
         public List<Tire> GetAll()
         {
-            return _tiresDbContext.Tires.ToList();
+            return _tiresDbContext.Tires.Include(x => x.Orders).ToList();
         }
 
         public async Task EditAsync(TireViewModel editTireViewModel)
@@ -94,7 +95,7 @@ namespace Services
 
         public List<Tire> SearchProducts(string name, string filter)
         {
-            var tires = _tiresDbContext.Tires.ToList();
+            var tires = GetAll();
             //Search
             if (!name.IsNullOrEmpty())
             {

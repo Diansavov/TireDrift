@@ -1,21 +1,24 @@
+using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Services;
 using TireDrift.Models;
 
 namespace TireDrift.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ITiresService _tiresService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ITiresService tiresService)
     {
-        _logger = logger;
+        _tiresService = tiresService;
     }
 
     public IActionResult Index()
     {
-        return View();
+        List<Tire> tires = _tiresService.GetAll();
+        return View(tires);
     }
 
     public IActionResult Privacy()

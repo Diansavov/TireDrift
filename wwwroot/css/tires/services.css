@@ -1,0 +1,23 @@
+.welcome-hero-tires {
+    position: relative;
+    background: url(/images/images/bmw-flat.png)no-repeat;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    height: 450px;
+    z-index: 1;
+}
+.bmw-color{
+    color: 	var(--secondary);
+}
+.search-tires{
+    position: relative;
+    transform: translateY(-35px);
+    z-index: 2;
+}
+.search-form{
+    width: 85%;
+}
+.card-services{
+    justify-content: center;
+}

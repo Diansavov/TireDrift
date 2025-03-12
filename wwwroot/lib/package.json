@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "counterup": "^1.0.2",
+    "counterup2": "^2.0.2",
+    "jquery": "^3.7.1",
     "toastr": "^2.1.4",
     "waypoints": "^4.0.1"
   }

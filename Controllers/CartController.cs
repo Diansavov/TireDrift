@@ -32,17 +32,20 @@ public class CartController : Controller
 
     public IActionResult Cart()
     {
-        List<HotelTires> hotelTires = _userService.Get(User.Id()).HotelTires;
-
-        int totalTireQuantity = hotelTires.Sum(x => x.TireQuanity);
-        if (totalTireQuantity >= 25)
+        if (User.Identity.IsAuthenticated)
         {
-            ViewData["Discount"] = $"Max discount is 25%";
+            List<HotelTires> hotelTires = _userService.Get(User.Id()).HotelTires;
 
-        }
-        else if (totalTireQuantity >= 5)
-        {
-            ViewData["Discount"] = $"Your discount is {totalTireQuantity}%";
+            int totalTireQuantity = hotelTires.Sum(x => x.TireQuanity);
+            if (totalTireQuantity >= 25)
+            {
+                ViewData["Discount"] = $"Max discount is 25%";
+
+            }
+            else if (totalTireQuantity >= 5)
+            {
+                ViewData["Discount"] = $"Your discount is {totalTireQuantity}%";
+            }
         }
         return View();
     }
@@ -118,6 +121,60 @@ public class CartController : Controller
 
         return RedirectToAction("Tires", "Tires");
     }
+    public async Task<IActionResult> AddTireToCartIndex(string id, int quantity)
+    {
+        var cart = GetCart();
+
+        Tire tire = await _ordersService.GetTireAsync(id);
+        if (quantity <= 0)
+        {
+            tire.Quantity = 1;
+        }
+        else
+        {
+            tire.Quantity = quantity;
+        }
+
+        //Invalid Stock
+        if (tire != null)
+        {
+            var existingTire = cart.Tires.FirstOrDefault(x => x.Id == tire.Id);
+
+            if (existingTire != null)
+            {
+                // Check if increasing quantity exceeds stock
+                if (tire.Stock >= existingTire.Quantity + tire.Quantity)
+                {
+                    existingTire.Quantity += tire.Quantity;
+                    cart.TotalPrice += tire.Price * tire.Quantity;
+                    TempData["success"] = "Успешно добавено в кошницата";
+                }
+                else
+                {
+                    TempData["error"] = "Няма достатъчно количество от този продукт";
+                }
+            }
+            else
+            {
+                // Ensure there's enough stock before adding as a new item
+                if (tire.Stock >= tire.Quantity)
+                {
+                    cart.Tires.Add(tire);
+                    cart.TotalPrice += tire.Price * tire.Quantity;
+                    TempData["success"] = "Успешно добавено в кошницата";
+                }
+                else
+                {
+                    TempData["error"] = "Няма достатъчно количество от този продукт";
+                }
+            }
+        }
+
+
+        SaveCart(cart);
+
+        return RedirectToAction("Index", "Home");
+    }
     public async Task<IActionResult> AddServiceToCart(string id)
     {
         var cart = GetCart();
@@ -126,9 +183,17 @@ public class CartController : Controller
         service.Quantity = 1;
         if (service != null)
         {
-            cart.Services.Add(service);
-            cart.TotalPrice += service.Price;
-            TempData["success"] = "Успешно добавено в кошницата";
+            if (cart.Services.Any(x => x.Id == id))
+            {
+                TempData["error"] = "Вече е добавена тази услуга";
+            }
+            else
+            {
+                cart.Services.Add(service);
+                cart.TotalPrice += service.Price;
+                TempData["success"] = "Успешно добавено в кошницата";
+
+            }
         }
 
         SaveCart(cart);

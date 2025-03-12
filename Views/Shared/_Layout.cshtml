@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="~/lib/node_modules/toastr/build/toastr.min.css" asp-append-version="true" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
 
 
 
@@ -26,14 +28,14 @@
     <link rel="stylesheet" href="~/css/assets/style.css">
     <link rel="stylesheet" href="~/css/assets/responsive.css">
 
-    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+    <script src="~/lib/node_modules/jquery/dist/jquery.min.js"></script>
 
     @RenderSection("Styles", false)
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow ">
+        <nav id="nav-bar" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow ">
             <div class="container-fluid container-navbar">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TireDrift</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
@@ -43,11 +45,11 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1 nav-bar-flex-container">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Начална страница</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Начална
+                                страница</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tires"
-                                asp-action="Tires">Гуми</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Tires" asp-action="Tires">Гуми</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Tires"
@@ -57,11 +59,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Manager"
                                 asp-action="ManagerPanel">Панел на мениджър</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Cart">Кошница</a>
-                        </li>
                     </ul>
                     <div class="d-flex gap-2">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart"
+                                asp-action="Cart"><i class="bi bi-cart-fill cart-icon"></i></a>
                         @if (!User.Identity.IsAuthenticated)
                         {
                             <a class="btn btn-outline-secondary" asp-area="" asp-controller="Users" asp-action="LogIn"
@@ -95,17 +96,14 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="index.html">list<span>race</span></a>
+                            <a class="navbar-brand" href="#nav-bar">TireDrift</a>
                         </div>
                     </div>
                     <div class="col-sm-9">
                         <ul class="footer-menu-item">
-                            <li class="scroll"><a href="#works">how it works</a></li>
-                            <li class="scroll"><a href="#explore">explore</a></li>
-                            <li class="scroll"><a href="#reviews">review</a></li>
-                            <li class="scroll"><a href="#blog">blog</a></li>
-                            <li class="scroll"><a href="#contact">contact</a></li>
-                            <li class=" scroll"><a href="#">my account</a></li>
+                            <li class="scroll"><a href="#nav-bar">Начална страница</a></li>
+                            <li class="scroll"><a asp-controller="Tires" asp-action="Tires">Гуми</a></li>
+                            <li class="scroll"><a asp-controller="Tires" asp-action="Services">Услуги</a></li>
                         </ul>
                     </div>
                 </div>
@@ -114,7 +112,7 @@
 
         <div id="scroll-Top">
             <div class="return-to-top">
-                <i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title=""
+                <i class="bi bi-arrow-up" id="scroll-top" data-toggle="tooltip" data-placement="top" title=""
                     data-original-title="Back to Top" aria-hidden="true"></i>
             </div>
         </div>
@@ -126,6 +124,8 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/assets/slick.min.js" asp-append-version="true"></script>
 
+    <script src="~/lib/node_modules/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="~/lib/node_modules/counterup2/dist/index.js"></script>
     <!--Custom JS-->
     <script src="~/js/assets/custom.js"></script>
 

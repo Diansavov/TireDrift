@@ -268,13 +268,6 @@ nav.navbar.bootsnav .navbar-toggle i {
     background: transparent;
 }
 
-.single-welcome-hero-form input[type="text"] {
-    font-size: 14px;
-    color: #859098;
-    text-transform: capitalize;
-    font-weight: 500;
-}
-
 .welcome-hero-form-icon {
     position: absolute;
     top: 20px;
@@ -521,7 +514,7 @@ nav.navbar.bootsnav .navbar-toggle i {
     bottom: 0px
 }
 
-.single-explore-img-info button {
+.single-explore-img-info span {
     position: absolute;
     bottom: 15px;
     left: 15px;
@@ -1132,4 +1125,25 @@ nav.navbar.bootsnav .navbar-toggle i {
     100% {
         bottom: 7px;
     }
+}
+.single-explore-img{
+    width: auto;
+    height: 300px;
+}
+.single-explore-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cuts off the image if it overflows */
+    object-position: center; /* Keeps the image centered */
+}
+.card-buying{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.card-buying button{
+    color: #000000;
+}
+.card-buying button:hover{
+    color: #ff545a;
 }
