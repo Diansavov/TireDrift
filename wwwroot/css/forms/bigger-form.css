@@ -1,0 +1,28 @@
+.form-container{
+    width: 850px;
+    height: auto;
+    min-height: 700px;
+    max-height: 840px;
+}
+.input-names{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+}
+.input-names input{
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid rgba(0,0,0,0.15);
+}
+.input-name{
+    width: 255px;
+}
+.master-container{
+    min-height: 720px;
+    max-height: 890px;
+}
+.the-container{
+    min-height: 510px;
+    max-height: 590px;
+}
