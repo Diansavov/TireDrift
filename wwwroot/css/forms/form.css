@@ -40,3 +40,22 @@
     width: 100%;
     height: 45px;
 }
+.input-field textarea{
+    width: 100%;
+    height: 135px;
+    resize: none;
+}
+.form-image-container{
+    display: flex;
+    justify-content: space-between;
+}
+.form-image{
+    width: 300px;
+    height: 300px;
+}
+.inputs-next-to-image{
+    width:450px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

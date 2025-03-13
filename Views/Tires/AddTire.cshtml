@@ -3,31 +3,55 @@
 @{
     ViewData["Title"] = "Добавяне на гума";
 }
-@section Styles{
+@section Styles {
     <link rel="stylesheet" href="~/css/forms/form.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/forms/bigger-form.css" asp-append-version="true" />
 }
 
 <section class="login-register-container">
     <div class="form-container the-container">
-        <form asp-action="AddJewelry" enctype="multipart/form-data">
-            <h2 class="form-title">Добавяне на бижу</h2>
+        <form asp-action="AddTire" enctype="multipart/form-data">
+            <h2 class="form-title">Добавяне на гума</h2>
             <div class="inputs-container">
-                    <div class="input-field">
-                        <label>Снимка</label>
-                        <input id="image-input" class="image-input" accept="image/png" type="file" asp-for="Image">
-                        <span asp-validation-for="Image" class="text-danger"></span>
+                <div class="form-image-container">
+                    <div class="form-image">
+                        <a id="image-link" class="image-display">
+                            <img id="image" src="/images/images/defaultImage.jpg" />
+                        </a>
+                        <input id="image-input" class="image-input" hidden accept="image/png" type="file"
+                            asp-for="Image">
                     </div>
-                    <div class="input-field">
-                        <input type="text" placeholder="Цена" asp-for="Price">
-                        <span asp-validation-for="Price" class="text-danger"></span>
+                    <div class="inputs-next-to-image">
+                        <div class="input-field">
+                            <input type="text" placeholder="Име" asp-for="Name">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" placeholder="Цена" asp-for="Price">
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" placeholder="Стока" asp-for="Stock">
+                            <span asp-validation-for="Stock" class="text-danger"></span>
+                        </div>
+                        <div class="input-field">
+                            <textarea type="text" #nav-bar placeholder="Описание" asp-for="Description"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="submit-button">
-                        <button class="btn btn-primary" type="submit">Добавяне на бижу</button>
-                    </div>
+                </div>
+
+
+                <div class="submit-button">
+                    <button class="btn btn-outline-secondary" type="submit">Добавяне на гума</button>
+                </div>
         </form>
     </div>
 </section>
+@section Scripts {
+    <script src="~/js/tires/tire-image.js"></script>
+}
+
 @*
 <form asp-action="AddTire" enctype="multipart/form-data">
     <h2 class="form-title">Добавяне на гума</h2>
