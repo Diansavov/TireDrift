@@ -27,15 +27,15 @@
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                         <div class="input-field">
-                            <input type="text" placeholder="Цена" asp-for="Price">
+                            <input type="number" min="1" placeholder="Цена" asp-for="Price">
                             <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
                         <div class="input-field">
-                            <input type="text" placeholder="Стока" asp-for="Stock">
+                            <input type="number" min="1" placeholder="Стока" asp-for="Stock">
                             <span asp-validation-for="Stock" class="text-danger"></span>
                         </div>
                         <div class="input-field">
-                            <textarea type="text" #nav-bar placeholder="Описание" asp-for="Description"></textarea>
+                            <textarea type="text" placeholder="Описание" asp-for="Description"></textarea>
                             <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
                     </div>
@@ -51,34 +51,3 @@
 @section Scripts {
     <script src="~/js/tires/tire-image.js"></script>
 }
-
-@*
-<form asp-action="AddTire" enctype="multipart/form-data">
-    <h2 class="form-title">Добавяне на гума</h2>
-    <div class="inputs-container">
-        <div class="input-field">
-            <label>Снимка</label>
-            <input id="image-input" class="image-input" accept="image/png" type="file" asp-for="Image">
-            <span asp-validation-for="Image" class="text-danger"></span>
-        </div>
-        <div class="input-field">
-            <input type="text" placeholder="Име" asp-for="Name">
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-        <div class="input-field">
-            <input type="text" placeholder="Наличност" asp-for="Stock">
-            <span asp-validation-for="Stock" class="text-danger"></span>
-        </div>
-        <div class="input-field">
-            <input type="text" placeholder="Описание" asp-for="Description">
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
-        <div class="input-field">
-            <input type="text" placeholder="Цена" asp-for="Price">
-            <span asp-validation-for="Price" class="text-danger"></span>
-        </div>
-        <div class="submit-button">
-            <button class="btn btn-primary" type="submit">Добавяне на бижу</button>
-        </div>
-</form>
-*@

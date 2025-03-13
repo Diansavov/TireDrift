@@ -1,3 +1,7 @@
+h2{
+    text-transform: none !important;
+}
+
 .login-register-container{
     display: flex;
     justify-content: center;

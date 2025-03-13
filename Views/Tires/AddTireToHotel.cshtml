@@ -1,9 +1,49 @@
 @model TireDrift.Models.ViewModels.TireViewModel
 
 @{
-    ViewData["Title"] = "Tires Hotel";
+    ViewData["Title"] = "Добавяне на гума в хотел";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/forms/form.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/forms/bigger-form.css" asp-append-version="true" />
 }
 
+<section class="login-register-container">
+    <div class="form-container the-container">
+        <form asp-action="AddTireToHotel" enctype="multipart/form-data">
+            <h2 class="form-title">Добавяне на гума в хотел</h2>
+            <div class="inputs-container">
+                <div class="form-image-container">
+                    <div class="form-image">
+                        <a id="image-link" class="image-display">
+                            <img id="image" src="/images/images/defaultImage.jpg" />
+                        </a>
+                        <input id="image-input" class="image-input" hidden accept="image/png" type="file"
+                            asp-for="Image">
+                    </div>
+                    <div class="inputs-next-to-image">
+                        <div class="input-field">
+                            <input type="text" placeholder="Име" asp-for="Name">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="input-field">
+                            <input type="number" placeholder="Количество" min="1" asp-for="Stock">
+                            <span asp-validation-for="Stock" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="submit-button">
+                    <button class="btn btn-outline-secondary" type="submit">Добавяне на гума в хотел</button>
+                </div>
+        </form>
+    </div>
+</section>
+@section Scripts {
+    <script src="~/js/tires/tire-image.js"></script>
+}
+@*
 <form asp-action="AddTireToHotel" enctype="multipart/form-data">
     <h2 class="form-title">Add Tire</h2>
     <div class="inputs-container">
@@ -24,3 +64,4 @@
             <button class="btn btn-primary" type="submit">Добавяне на гума към хотел</button>
         </div>
 </form>
+*@
