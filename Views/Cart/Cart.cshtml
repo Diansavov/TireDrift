@@ -1,29 +1,39 @@
 @section Styles {
     <link rel="stylesheet" href="~/lib/datatables/datatables.min.css" />
+    <link rel="stylesheet" href="~/css/table/table.css" />
     <script src="~/lib/datatables/datatables.min.js"></script>
 
 }
-Discount = @ViewData["Discount"]
-<div class="users-container">
-    <table id="usersTable" class="table">
-        <thead>
-            <tr class="thead-row">
-                <th>Премахване</th>
-                <th>Снимка</th>
-                <th>Продукт</th>
-                <th>Цена</th>
-                <th>Количество</th>
-                <th>Тотална Цена</th>
-                <th>Тип</th>
-            </tr>
-        </thead>
-    </table>
-</div>
+@{
+    ViewData["Title"] = "Кошница";
+}
 
-<span>Total Price: <span id="totalPrice"></span></span>
-<a type="submit" asp-controller="Cart" asp-action="FinishOrder">Direct Order</a>
-<br>
-<a type="submit" asp-controller="Cart" asp-action="Invoice">Invoice</a>
+
+
+Discount = @ViewData["Discount"]
+<div class="section-table">
+
+    <div class="users-container">
+        <table id="usersTable" class="table">
+            <thead>
+                <tr class="thead-row">
+                    <th>Премахване</th>
+                    <th>Снимка</th>
+                    <th>Продукт</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Тотална Цена</th>
+                    <th>Тип</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <span>Total Price: <span id="totalPrice"></span></span>
+    <a type="submit" asp-controller="Cart" asp-action="FinishOrder">Direct Order</a>
+    <br>
+    <a type="submit" asp-controller="Cart" asp-action="Invoice">Invoice</a>
+</div>
 
 @section Scripts {
     <script src="~/js/cart/cart-datatable.js"></script>
