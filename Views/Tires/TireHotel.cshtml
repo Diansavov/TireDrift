@@ -1,9 +1,59 @@
 @model List<HotelTires>
-
-
 @{
-    ViewData["Title"] = "Tires Hotel";
+    ViewData["Title"] = "Хотел за гуми";
 }
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/tires/tires.css">
+    <link rel="stylesheet" href="~/css/tires/hotel-tire.css">
+}
+<section id="home" class="welcome-hero-tires">
+    <div class="container hero-container">
+        <div class="welcome-hero-txt">
+            <h2><span class="bmw-color">Хотелът В</span>и за Гуми </h2>
+        </div>
+
+    </div>
+</section>
+<section id="explore" class="explore">
+    <div class="container">
+        <!--/.section-header-->
+        <div class="explore-content">
+            <div class="row">
+                @foreach (HotelTires tire in Model)
+                {
+                    <!-- Card -->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="single-explore-item">
+                            <div class="single-explore-img">
+                                <img src="@tire.TireImageUrl" alt="explore image">
+                            </div>
+                            <div class="single-explore-txt bg-theme-1">
+                                <h2>@tire.TireName</h2>
+                                <p class="explore-rating-price">
+                                    <span>@tire.TireQuanity бр. в хотелът</span>
+                                </p>
+                                <div class="explore-open-close-part">
+                                    <form asp-controller="Cart" asp-action="AddTireToCart">
+                                        <div class="row card-buying">
+                                                <button type="submit" class="btn">Премахни</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card End-->
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@*
+
+
 
 Hotel Tires
 
@@ -15,3 +65,4 @@ Hotel Tires
     <span>@tire.TireName</span>
     <a asp-controller="Tires" asp-action="RemoveTireFromHotel" asp-route-id="@tire.Id">Remove Tire</a>
 }
+*@

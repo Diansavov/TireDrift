@@ -39,12 +39,12 @@ public class CartController : Controller
             int totalTireQuantity = hotelTires.Sum(x => x.TireQuanity);
             if (totalTireQuantity >= 25)
             {
-                ViewData["Discount"] = $"Max discount is 25%";
+                ViewData["Discount"] = -25;
 
             }
             else if (totalTireQuantity >= 5)
             {
-                ViewData["Discount"] = $"Your discount is {totalTireQuantity}%";
+                ViewData["Discount"] = -totalTireQuantity;
             }
         }
         return View();
@@ -55,6 +55,19 @@ public class CartController : Controller
         User user = _userService.Get(User.Id());
         invoiceViewModel.ClientFirstName = user.FirstName;
         invoiceViewModel.ClientLastName = user.LastName;
+
+        List<HotelTires> hotelTires = _userService.Get(User.Id()).HotelTires;
+        int totalTireQuantity = hotelTires.Sum(x => x.TireQuanity);
+        if (totalTireQuantity >= 25)
+        {
+            ViewData["Discount"] = -25;
+
+        }
+        else if (totalTireQuantity >= 5)
+        {
+            ViewData["Discount"] = -totalTireQuantity;
+        }
+        
         return View(invoiceViewModel);
     }
 
@@ -281,6 +294,11 @@ public class CartController : Controller
     public async Task<IActionResult> FinishInvoice(InvoiceViewModel invoiceViewModel)
     {
         var cart = GetCart();
+        if (cart.Tires.IsNullOrEmpty() && cart.Services.IsNullOrEmpty())
+        {
+            TempData["error"] = "Кошницата е празна";
+            return RedirectToAction("Invoice", "Cart");
+        }
         string orderId = await _ordersService.FinishOrder(cart, User.Id());
         SaveCart(null);
         await _ordersService.FinishInvoice(invoiceViewModel, orderId, User.Id());

@@ -1,0 +1,16 @@
+.welcome-hero-tires {
+    position: relative;
+    background: url(/images/images/hotel-tire.png)no-repeat;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    height: 450px;
+    z-index: 1;
+}
+.explore{
+    padding-top: 0;
+}
+.card-buying{
+    justify-content: center;
+    align-items: center;
+}

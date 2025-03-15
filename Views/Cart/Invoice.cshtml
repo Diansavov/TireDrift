@@ -1,12 +1,48 @@
 @model TireDrift.Models.ViewModels.InvoiceViewModel
 
+@{
+    ViewData["Title"] = "Издаване на фактура";
+}
+
 @section Styles {
     <link rel="stylesheet" href="~/lib/datatables/datatables.min.css" />
     <script src="~/lib/datatables/datatables.min.js"></script>
+    <link rel="stylesheet" href="~/css/forms/form.css" asp-append-version="true" />
+
 
 }
 <div class="d-flex justify-content-center gap-5">
+    <section class="login-register-container">
+        <div class="form-container the-container">
+            <form asp-action="FinishInvoice" enctype="multipart/form-data">
+                <h2 class="form-title">Издаване на фактура</h2>
+                <div class="inputs-container">
+                    <div class="input-field">
+                        <input type="text" placeholder="Име на компания" asp-for="CompanyName">
+                        <span asp-validation-for="CompanyName" class="text-danger"></span>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" placeholder="БУЛСТАТ" asp-for="BulStat">
+                        <span asp-validation-for="BulStat" class="text-danger"></span>
+                    </div>
+                    <div class="input-field">
+                        <input class="form-control" type="text" placeholder="Цена" asp-for="ClientFirstName" disabled>
+                        <span asp-validation-for="ClientFirstName" class="text-danger"></span>
+                    </div>
+                    <div class="input-field">
+                        <input class="form-control" type="text" placeholder="Цена" asp-for="ClientLastName" disabled>
+                        <span asp-validation-for="ClientLastName" class="text-danger"></span>
+                    </div>
+                    <div class="submit-button">
+                        <button class="btn btn-outline-secondary" type="submit">Издаване на фактура</button>
+                    </div>
+                </div>
 
+
+            </form>
+        </div>
+    </section>
+    @*
     <div>
         <form asp-controller="Cart" asp-action="FinishInvoice" enctype="multipart/form-data">
             <h2 class="form-title">Add Supplier</h2>
@@ -33,25 +69,66 @@
             </div>
         </form>
     </div>
-    <div>
-        <div class="users-container">
-            <table id="usersTable" class="table">
-                <thead>
-                    <tr class="thead-row">
-                        <th>Премахване</th>
-                        <th>Снимка</th>
-                        <th>Продукт</th>
-                        <th>Цена</th>
-                        <th>Количество</th>
-                        <th>Тотална Цена</th>
-                        <th>Тип</th>
-                    </tr>
-                </thead>
-            </table>
+    *@
+    <div class="section-table">
+        <div>
+
+            <div class="section-header">
+                <h2>Количка</h2>
+            </div>
+            <div class="users-container">
+                <table id="usersTable" class="table">
+                    <thead>
+                        <tr class="thead-row">
+                            <th>Премахване</th>
+                            <th>Снимка</th>
+                            <th>Продукт</th>
+                            <th>Цена</th>
+                            <th>Количество</th>
+                            <th>Тотална Цена</th>
+                            <th>Тип</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
 
-        <span>Total Price: <span id="totalPrice"></span></span>
-        <a type="submit" asp-controller="Cart" asp-action="FinishInvoice">Submit Order</a>
+        <div class="total-price-container">
+            <div>
+                <div class="total-price">
+                    <table class="table price-table">
+                        <tr>
+                            <th>
+                                Обща цена
+                            </th>
+                            <th>
+                                <span id="totalPrice"></span> лв.
+                            </th>
+                        </tr>
+                        @if (ViewData["Discount"] != null)
+                        {
+
+                            <tr>
+                                <th>
+                                    Намаление
+                                </th>
+                                <th>
+                                    <span id="discount">@ViewData["Discount"]</span>%
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Намалена цена
+                                </th>
+                                <th>
+                                    <span id="discounted-price"></span> лв.
+                                </th>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -18,7 +18,9 @@ function LoadTable() {
             url: '/Cart/GetCartJson',
             dataSrc: function (json) {
                 document.getElementById("totalPrice").innerHTML = json.totalPrice;
-
+                if (document.getElementById('discounted-price') != null) {
+                    document.getElementById("discounted-price").innerHTML = json.totalPrice + (document.getElementById('discount').innerHTML * json.totalPrice) / 100;
+                }
                 return json.tires.concat(json.services);
             }
         },
@@ -37,7 +39,7 @@ function LoadTable() {
                         </div>`;
                 }
             },
-            { data: 'name',},
+            { data: 'name', },
             { data: 'price' },
             { data: 'quantity' },
             {

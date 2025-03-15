@@ -45,7 +45,7 @@ namespace Services
 
         public async Task<Tire> GetAsync(string id)
         {
-            return await _tiresDbContext.Tires.FindAsync(id);
+            return await _tiresDbContext.Tires.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public List<Tire> GetAll()

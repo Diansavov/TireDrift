@@ -5,34 +5,74 @@
 
 }
 @{
-    ViewData["Title"] = "Кошница";
+    ViewData["Title"] = "Количка";
 }
 
-
-
-Discount = @ViewData["Discount"]
 <div class="section-table">
+    <div>
 
-    <div class="users-container">
-        <table id="usersTable" class="table">
-            <thead>
-                <tr class="thead-row">
-                    <th>Премахване</th>
-                    <th>Снимка</th>
-                    <th>Продукт</th>
-                    <th>Цена</th>
-                    <th>Количество</th>
-                    <th>Тотална Цена</th>
-                    <th>Тип</th>
-                </tr>
-            </thead>
-        </table>
+        <div class="section-header">
+            <h2>Количка</h2>
+        </div>
+        <div class="users-container">
+            <table id="usersTable" class="table">
+                <thead>
+                    <tr class="thead-row">
+                        <th>Премахване</th>
+                        <th>Снимка</th>
+                        <th>Продукт</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Тотална Цена</th>
+                        <th>Тип</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 
-    <span>Total Price: <span id="totalPrice"></span></span>
-    <a type="submit" asp-controller="Cart" asp-action="FinishOrder">Direct Order</a>
-    <br>
-    <a type="submit" asp-controller="Cart" asp-action="Invoice">Invoice</a>
+    <div class="total-price-container">
+        <div>
+            <div class="total-price">
+                <table class="table price-table">
+                    <tr>
+                        <th>
+                            Обща цена
+                        </th>
+                        <th>
+                            <span id="totalPrice"></span> лв.
+                        </th>
+                    </tr>
+                    @if (ViewData["Discount"] != null)
+                    {
+
+                        <tr>
+                            <th>
+                                Намаление
+                            </th>
+                            <th>
+                                <span id="discount">@ViewData["Discount"]</span>%
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Намалена цена
+                            </th>
+                            <th>
+                                <span id="discounted-price"></span> лв.
+                            </th>
+                        </tr>
+                    }
+                </table>
+                <div class="order-buttons">
+                    <a type="submit" class="btn btn-outline-secondary" asp-controller="Cart"
+                        asp-action="FinishOrder">Поръчване</a>
+                    <a type="submit" class="btn btn-outline-secondary" asp-controller="Cart"
+                        asp-action="Invoice">Издаване на фактура</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
