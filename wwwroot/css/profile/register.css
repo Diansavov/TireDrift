@@ -1,0 +1,15 @@
+.wrapper {
+    width: 550px;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid black;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .split-inputs-container{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+  }

@@ -1,13 +1,13 @@
 @model TireDrift.Models.ViewModels.UserLoginViewModel
 
 @{
-    ViewData["Title"] = "Log In";
+    ViewData["Title"] = "Влизане";
 }
 
 @section Styles {
     <link rel="stylesheet" href="~/css/profile/login.css" asp-append-version="true" />
 }
-
+@*
 <form asp-action="LogIn">
     <div class="input-field">
         <input id="loginInput" type="text" asp-for="UserName">
@@ -23,6 +23,26 @@
         <button type="submit" class="btn-submit">Log In</button>
     </div>
 </form>
+*@
+<section class="login-section">
+    <div class="wrapper">
+        <form asp-action="LogIn">
+            <h2>Влизане</h2>
+            <div class="input-field">
+                <input type="text" asp-for="UserName" required>
+                <label>Потребителско име</label>
+            </div>
+            <div class="input-field">
+                <input type="password" asp-for="Password" required>
+                <label>Парола</label>
+            </div>
+            <button class="btn login-button"type="submit">Влизане</button>
+            <div class="register">
+                <p>Нямате акаунт? <a asp-controller="Users" asp-action="Register">Регистрирайте се!</a></p>
+            </div>
+        </form>
+    </div>
+</section>
 
 @section Scripts {
     <script src="~/js/profile/logIn/logInTextAnimation.js"></script>
