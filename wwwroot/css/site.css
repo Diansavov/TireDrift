@@ -200,12 +200,25 @@ body {
 .statistics-counter {
     display: flex;
 }
-.search-icon{
+
+.search-icon {
     font-size: 18px;
 }
-.hero-container{
+
+.hero-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.page-item.active .page-link {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+}
+.page-link{
+    color: black;
+}
+.page-link:hover{
+    color: var(--secondary);
 }

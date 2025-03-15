@@ -37,8 +37,8 @@ function LoadTable() {
                 render: function (data) {
                     return `
                     <div class="d-flex justify-content-center gap-1">
-                        <a class="btn btn-warning" href="/Employees/EditSupplier/${data}">Edit</a>
-                        <a class="btn btn-danger" href="/Employees/DeleteSupplier/${data}">Delete</a>
+                        <a class="btn btn-warning" href="/Employees/EditSupplier/${data}">Редактиране</a>
+                        <a class="btn btn-danger" href="/Employees/DeleteSupplier/${data}">Изтриване</a>
                     </div>`;
                 },
             },

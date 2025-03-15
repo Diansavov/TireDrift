@@ -55,7 +55,8 @@ namespace Services
                 OrderTires orderTires = new OrderTires()
                 {
                     OrderId = order.Id,
-                    TireId = tire.Id
+                    TireId = tire.Id,
+                    TireQuanity = tire.Quantity
                 };
 
                 await _tiresDbContext.OrderTires.AddAsync(orderTires);
@@ -96,7 +97,7 @@ namespace Services
                     SupplierUserName = order.Supplier.Name,
                     SupplierPhoneNum = order.Supplier.PhoneNumber,
                     OrderedServices = order.Services.Select(x => x.Name).ToList(),
-                    OrderedTires = order.Tires.Select(x => x.Tire).Select(x => x.Name).ToList(),
+                    OrderedTires = order.Tires.Select(t => $"{t.TireQuanity} {t.Tire.Name}").ToList(),
                 })
                 .ToList();
         }

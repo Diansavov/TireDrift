@@ -1,23 +1,39 @@
-.section-table{
-    margin-top: 50px;
-    padding: 0 300px 0 300px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-  .total-price-container{
-    display: flex;
-    justify-content: flex-end;
-  }
-  .total-price{
-    display: flex;
-    flex-direction: column;
-  }
-  .price-table{
-    width: 250px;
-  }
-  .order-buttons{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
+.section-table {
+  margin-top: 50px;
+  padding: 0 300px 0 300px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.total-price-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.total-price {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-table {
+  width: 250px;
+}
+
+.order-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.single-welcome-hero-form{
+  padding-right: 0;
+  height: 50px;
+}
+.welcome-hero-btn{
+  height: 50px;
+
+}
+.table-search{
+  display: flex;
+  justify-content: center;
+}

@@ -1,23 +1,30 @@
 @model TireDrift.Models.ViewModels.SupplierViewModel
 
 @{
-    ViewData["Title"] = "Tires";
+    ViewData["Title"] = "Редактиране на достачик";
 }
 
-<form asp-action="EditSupplier" enctype="multipart/form-data">
-    <h2 class="form-title">Edit Supplier</h2>
-    <input type="text" hidden asp-for="Id">
-
-    <div class="inputs-container">
-        <div class="input-field">
-            <input type="text" placeholder="Име" asp-for="Name">
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-        <div class="input-field">
-            <input type="text" placeholder="Цена" asp-for="PhoneNumber">
-            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-        </div>
-        <div class="submit-button">
-            <button class="btn btn-primary" type="submit">Редактиране на доставчик</button>
-        </div>
-</form>
+@section Styles {
+    <link rel="stylesheet" href="~/css/forms/form.css" asp-append-version="true" />
+}
+<section class="login-register-container">
+    <div class="form-container the-container">
+        <form asp-action="EditSupplier" enctype="multipart/form-data">
+            <h2 class="form-title">Редактиране на доставчик</h2>
+            <div class="inputs-container">
+                    <div class="input-field">
+                        <label>Име</label>
+                        <input type="text" placeholder="Име" asp-for="Name">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="input-field">
+                        <label>Телефонен номер</label>
+                        <input type="text" placeholder="Телефонен номер" asp-for="PhoneNumber">
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                <div class="submit-button">
+                    <button class="btn btn-outline-secondary" type="submit">Редактиране на доставчик</button>
+                </div>
+        </form>
+    </div>
+</section>

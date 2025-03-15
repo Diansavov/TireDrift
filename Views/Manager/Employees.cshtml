@@ -5,34 +5,37 @@
 @section Styles {
     <link rel="stylesheet" href="~/lib/datatables/datatables.min.css" />
     <script src="~/lib/datatables/datatables.min.js"></script>
+    <link rel="stylesheet" href="~/css/table/table.css" />
+
 
 }
-<section class="section-container">
-    <div class="container-text text-title">
-        <h1>Всички потребители</h1>
+
+<section class="section-table">
+    <div class="section-header">
+        <h2>Всички доставчици</h2>
     </div>
-    <form id="search-form">
-        <div class="search-names-container bg-light">
-            <div class="search-names">
-                <input type="text" name="firstName" class="form-control border-0 bg-transparent"
-                    placeholder="Лично име" />
+    <div class="table-search">
+        <form id="search-form">
+            <div class="single-welcome-hero-form bg-light">
+                <input type="text" name="firstName" placeholder="Лично име" />
+                <div class="welcome-hero-form-icon">
+                    <i class="flaticon-list-with-dots"></i>
+                </div>
+                <button class="welcome-hero-btn" onclick="searchSubmit(); return false;">
+                    Търсене <i class="bi bi-search search-icon"></i>
+                </button>
             </div>
-            <div class="col-1 search-icon-container">
-                <a type="submit" onclick="searchSubmit(); return false;">
-                    <i class="bi bi-search search-icon"></i>
-                </a>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
     <div class="users-container">
         <table id="usersTable" class="table">
             <thead>
                 <tr class="thead-row">
+                    <th>Лично име</th>
+                    <th>Фамилно име</th>
                     <th>Потребителско име</th>
                     <th>Роля</th>
                     <th>Имейл</th>
-                    <th>Лично име</th>
-                    <th>Фамилно име</th>
                     <th>Телефонен номер</th>
                 </tr>
             </thead>

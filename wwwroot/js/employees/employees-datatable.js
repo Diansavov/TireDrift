@@ -29,11 +29,11 @@ function LoadTable() {
             dataSrc: '',
         },
         columns: [
+            { data: 'firstName' },
+            { data: 'lastName' },
             { data: 'userName' },
             { data: 'role' },
             { data: 'email' },
-            { data: 'firstName' },
-            { data: 'lastName' },
             { data: 'phoneNumber' },
         ]
     });

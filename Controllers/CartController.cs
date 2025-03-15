@@ -67,7 +67,7 @@ public class CartController : Controller
         {
             ViewData["Discount"] = -totalTireQuantity;
         }
-        
+
         return View(invoiceViewModel);
     }
 
@@ -293,17 +293,22 @@ public class CartController : Controller
     }
     public async Task<IActionResult> FinishInvoice(InvoiceViewModel invoiceViewModel)
     {
-        var cart = GetCart();
-        if (cart.Tires.IsNullOrEmpty() && cart.Services.IsNullOrEmpty())
+        if (ModelState.IsValid)
         {
-            TempData["error"] = "Кошницата е празна";
-            return RedirectToAction("Invoice", "Cart");
-        }
-        string orderId = await _ordersService.FinishOrder(cart, User.Id());
-        SaveCart(null);
-        await _ordersService.FinishInvoice(invoiceViewModel, orderId, User.Id());
 
-        return RedirectToAction("Index", "Home");
+            var cart = GetCart();
+            if (cart.Tires.IsNullOrEmpty() && cart.Services.IsNullOrEmpty())
+            {
+                TempData["error"] = "Кошницата е празна";
+                return RedirectToAction("Invoice", "Cart");
+            }
+            string orderId = await _ordersService.FinishOrder(cart, User.Id());
+            SaveCart(null);
+            await _ordersService.FinishInvoice(invoiceViewModel, orderId, User.Id());
+            return RedirectToAction("Index", "Home");
+        }
+        return RedirectToAction("Invoice", "Cart");
+
     }
 
     private Cart GetCart()
