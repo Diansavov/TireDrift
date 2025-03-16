@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TireDrift.Models;
 using TireDrift.Services;
@@ -18,26 +19,19 @@ public class ManagerController : Controller
     {
         _userService = userService;
     }
+    [Authorize(Roles = "Manager, Technician, Logistics")]
     public IActionResult ManagerPanel()
     {
 
         return View();
     }
-    public IActionResult AddWorker()
-    {
-        
-        return View();
-    }
-    public IActionResult EditWorker()
-    {
-        
-        return View();
-    }
+    [Authorize(Roles = "Manager")]
     public IActionResult Employees()
     {
         
         return View();  
     }
+    [Authorize(Roles = "Manager")]
     public async Task<string> GetEmployees(string firstName)
     {
        List<object> users = await _userService.GetEmployeesAsync(firstName);

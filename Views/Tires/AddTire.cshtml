@@ -27,11 +27,11 @@
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                         <div class="input-field">
-                            <input type="number" min="1" placeholder="Цена" asp-for="Price">
+                            <input type="number" placeholder="Цена" asp-for="Price">
                             <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
                         <div class="input-field">
-                            <input type="number" min="1" placeholder="Стока" asp-for="Stock">
+                            <input type="number" placeholder="Стока" asp-for="Stock">
                             <span asp-validation-for="Stock" class="text-danger"></span>
                         </div>
                         <div class="input-field">
@@ -50,4 +50,5 @@
 </section>
 @section Scripts {
     <script src="~/js/tires/tire-image.js"></script>
+    <partial name="_ValidationScriptsPartial" />
 }

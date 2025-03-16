@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using Services;
@@ -27,17 +28,20 @@ namespace TireDrift
             List<Service> services = _serviceService.GetAll();
             return View(services);
         }
+        [Authorize]
         public IActionResult TireHotel()
         {
             List<HotelTires> tires = _tiresService.GetUserHotelTires(User.Id());
             return View(tires);
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> AddTireToHotel()
         {
             return View();
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddTireToHotel(TireViewModel tireViewModel)
         {
             await _tiresService.AddUserHotelTire(tireViewModel, User.Id());
@@ -58,11 +62,13 @@ namespace TireDrift
             ViewData["search-param"] = name;
             return View(tires);
         }
+        [Authorize(Roles = "Manager, Technician, Logistics")]
         public IActionResult AddTire()
         {
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Manager, Technician, Logistics")]
         public async Task<IActionResult> AddTire(TireViewModel addTireViewModel)
         {
             if (ModelState.IsValid)
@@ -72,6 +78,7 @@ namespace TireDrift
             }
             return View(addTireViewModel);
         }
+        [Authorize(Roles = "Manager, Technician, Logistics")]
         public async Task<IActionResult> EditTire(string id)
         {
             Tire tire = await _tiresService.GetAsync(id);
@@ -81,6 +88,7 @@ namespace TireDrift
             return View(tireViewModel);
         }
         [HttpPost]
+        [Authorize(Roles = "Manager, Technician, Logistics")]
         public async Task<IActionResult> EditTire(TireViewModel editTireViewModel)
         {
             await _tiresService.EditAsync(editTireViewModel);

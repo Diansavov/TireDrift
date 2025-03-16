@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TireDrift.Models;
 using TireDrift.Models.ViewModels;
@@ -6,6 +7,7 @@ using TireDrift.Services;
 
 namespace TireDrift.Controllers;
 
+[Authorize(Roles = "Manager, Technician, Logistics")]
 public class EmployeesController : Controller
 {
     private readonly IUserService _userService;

@@ -42,26 +42,5 @@
 </section>
 @section Scripts {
     <script src="~/js/tires/tire-image.js"></script>
+    <partial name="_ValidationScriptsPartial" />
 }
-@*
-<form asp-action="AddTireToHotel" enctype="multipart/form-data">
-    <h2 class="form-title">Add Tire</h2>
-    <div class="inputs-container">
-        <div class="input-field">
-            <label>Снимка</label>
-            <input id="image-input" class="image-input" accept="image/png" type="file" asp-for="Image">
-            <span asp-validation-for="Image" class="text-danger"></span>
-        </div>
-        <div class="input-field">
-            <input type="text" placeholder="Име" asp-for="Name">
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-        <div class="input-field">
-            <input type="text" placeholder="Количество" asp-for="Stock">
-            <span asp-validation-for="Stock" class="text-danger"></span>
-        </div>
-        <div class="submit-button">
-            <button class="btn btn-primary" type="submit">Добавяне на гума към хотел</button>
-        </div>
-</form>
-*@

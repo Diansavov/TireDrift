@@ -18,15 +18,17 @@ namespace TireDrift.Models.ViewModels
         {
             
         }
-        [Required]
+        [Required(ErrorMessage = "Името на гумата е задължително")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Цената е задължителна")]
+        [Range(0, double.MaxValue, ErrorMessage = "Цената трябва да е положителна")]
         public decimal Price { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Количеството е задължително")]
+        [Range(0, double.MaxValue, ErrorMessage = "Количеството трябва да е положително")]
         public int Stock { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Описанието е задължително")]
         public string Description { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Изображението е задължително")]
         public IFormFile Image { get; set; }
         public string? EditImagePath { get; set; }
         public string? Id { get; set; }

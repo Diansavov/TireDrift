@@ -25,6 +25,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.Name = "UserCookie";
     options.LoginPath = "/Users/LogIn";
+    options.AccessDeniedPath = "/Home/Index";
 });
 
 builder.Services.AddDistributedMemoryCache();

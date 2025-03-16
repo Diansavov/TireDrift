@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Services;
@@ -49,6 +50,7 @@ public class CartController : Controller
         }
         return View();
     }
+    [Authorize]
     public IActionResult Invoice()
     {
         InvoiceViewModel invoiceViewModel = new InvoiceViewModel();
@@ -236,6 +238,7 @@ public class CartController : Controller
         SaveCart(cart);
         return RedirectToAction("Cart");
     }
+    [Authorize]
     public async Task<IActionResult> FinishOrder()
     {
         //Discount
@@ -295,7 +298,6 @@ public class CartController : Controller
     {
         if (ModelState.IsValid)
         {
-
             var cart = GetCart();
             if (cart.Tires.IsNullOrEmpty() && cart.Services.IsNullOrEmpty())
             {

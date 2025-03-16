@@ -2,6 +2,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using AspNetCoreGeneratedDocument;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using TireDrift.Extensions;
@@ -9,7 +10,7 @@ using TireDrift.Models;
 using TireDrift.Services;
 
 namespace TireDrift.Controllers;
-
+[Authorize]
 public class OrderController : Controller
 {
     private readonly IOrdersService _ordersService;
