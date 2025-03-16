@@ -57,7 +57,7 @@
 							<img src="~/images/images/tireRack.png" alt="Category Thumbnail">
 						</div>
 						<h2><span>Хотел за гуми</span></h2>
-						<p>0 ваши гуми</p>
+						<p><span id="user-hotel-tires"></span> ваши гуми</p>
 					</a>
 				</li>
 			</ul>
@@ -155,8 +155,8 @@
 <section id="explore" class="explore">
 	<div class="container">
 		<div class="section-header">
-					<h2>Популярни гуми</h2>
-				</div>
+			<h2>Популярни гуми</h2>
+		</div>
 		<!--/.section-header-->
 		<div class="explore-content">
 			<div class="row">
@@ -195,7 +195,8 @@
 									<form asp-controller="Cart" asp-action="AddTireToCartIndex">
 										<div class="row card-buying">
 											<div class="col-sm-5">
-												<input class="form-control" name="quantity" type="number" min="1" max="@Model[i].Stock" value="1">
+												<input class="form-control" name="quantity" type="number" min="1"
+													max="@Model[i].Stock" value="1">
 												<input hidden name="id" value="@Model[i].Id">
 											</div>
 											<div class="col-sm-5">
@@ -218,4 +219,14 @@
 
 @section Scripts {
 	<script src="~/js/assets/counter.js"></script>
+	@if (User.Identity.IsAuthenticated)
+	{
+		<script src="~/js/orders/user-invoices-count.js"></script>
+	}
+	else
+	{
+		<script>
+			document.getElementById('user-hotel-tires').innerHTML = 0; // Handle the successful response
+		</script>
+	}
 }

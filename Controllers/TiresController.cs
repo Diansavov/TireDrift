@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,12 @@ namespace TireDrift
     {
         private readonly ITiresService _tiresService;
         private readonly IServiceService _serviceService;
+        private readonly JsonSerializerOptions _options = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        WriteIndented = true,
+        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+    };
         public TiresController(ITiresService tiresService, IServiceService serviceService)
         {
             _tiresService = tiresService;
@@ -32,6 +39,19 @@ namespace TireDrift
         public IActionResult TireHotel()
         {
             List<HotelTires> tires = _tiresService.GetUserHotelTires(User.Id());
+            int totalTireQuantity = tires.Sum(x => x.TireQuanity);
+            if (totalTireQuantity >= 25)
+            {
+                ViewData["Discount"] = -25;
+
+            }
+            else if (totalTireQuantity >= 5)
+            {
+                ViewData["Discount"] = -totalTireQuantity;
+            }
+            else if(totalTireQuantity < 5){
+                ViewData["Discount"] = 0;
+            }
             return View(tires);
         }
         [HttpGet]
@@ -51,6 +71,13 @@ namespace TireDrift
         {
             _tiresService.RemoveUserHotelTire(id);
             return RedirectToAction("TireHotel");
+        }
+        [Authorize]
+        public string GetUserHotelTiresCount()
+        {
+            int tiresCount = _tiresService.GetUserHotelTires(User.Id()).Sum(x=>x.TireQuanity);
+            string json = JsonSerializer.Serialize(tiresCount, _options);
+        return json;
         }
 
         //Search

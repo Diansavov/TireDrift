@@ -14,3 +14,11 @@
     justify-content: center;
     align-items: center;
 }
+.discount-field{
+    border-radius: 10px;
+    background-color: #51A351;
+}
+.discount-field h2{
+    
+    color: white !important;
+}

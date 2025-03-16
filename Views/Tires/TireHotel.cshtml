@@ -17,15 +17,19 @@
 </section>
 <section id="list-topics" class="search-tires">
     <div class="container redirect-buttons">
-            <div class="welcome-hero-form">
-                <a asp-controller="Tires" asp-action="AddTireToHotel" class="welcome-hero-btn w-100">
-                    Добавяне на гума В хотела
-                </a>
-            </div>
+        <div class="welcome-hero-form">
+            <a asp-controller="Tires" asp-action="AddTireToHotel" class="welcome-hero-btn w-100">
+                Добавяне на гума В хотела
+            </a>
+        </div>
     </div>
 </section>
 <section id="explore" class="explore">
     <div class="container">
+        <div class="section-header discount-field">
+            <h2 id="discount-outer">Получавате намаление от покупката на нови гуми в зависимост от количеството гуми в
+                хотелът ви: <span id="discount">@ViewData["Discount"]</span>% (до -25%)</h2>
+        </div>
         <!--/.section-header-->
         <div class="explore-content">
             <div class="row">
@@ -43,11 +47,10 @@
                                     <span>@tire.TireQuanity бр. в хотелът</span>
                                 </p>
                                 <div class="explore-open-close-part">
-                                    <form asp-controller="Cart" asp-action="AddTireToCart">
-                                        <div class="row card-buying">
-                                                <button type="submit" class="btn">Премахни</button>
-                                        </div>
-                                    </form>
+                                    <div class="row card-buying">
+                                        <a type="submit" asp-controller="Tires" asp-action="RemoveTireFromHotel"
+                                            asp-route-id="@tire.Id" class="btn">Премахни</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -59,19 +62,11 @@
         </div>
     </div>
 </section>
-
-@*
-
-
-
-Hotel Tires
-
-@foreach (var tire in Model)
-{
-    <div style="display: flex; width: 200px; height: 200px;">
-        <img src="@tire.TireImageUrl"></img>
-    </div>
-    <span>@tire.TireName</span>
-    <a asp-controller="Tires" asp-action="RemoveTireFromHotel" asp-route-id="@tire.Id">Remove Tire</a>
+@section Scripts {
+    @if ((int)(ViewData["Discount"]) == 0)
+    {
+        <script>
+            document.getElementById('discount-outer').innerHTML = "Трябва над 5 гуми в хотелът за отстъпка. Всяка гума след това е по 1% отстъпка до 25%"
+        </script>
+    }
 }
-*@
