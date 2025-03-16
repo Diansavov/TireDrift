@@ -32,11 +32,22 @@ public class OrderController : Controller
     {
         return View();
     }
+    public IActionResult Invoices()
+    {
+        return View();
+    }
 
     public async Task<string> GetOrdersJson()
     {
         List<UserOrderDto> orders = _ordersService.GetUserOrder(User.Id());
         string json = JsonSerializer.Serialize(orders, _options);
+
+        return json;
+    }
+    public async Task<string> GetInvoicesJson()
+    {
+        List<UserInvoiceDto> invoices = _ordersService.GetUserInvoices(User.Id());
+        string json = JsonSerializer.Serialize(invoices, _options);
 
         return json;
     }

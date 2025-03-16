@@ -101,5 +101,26 @@ namespace Services
                 })
                 .ToList();
         }
+        public List<UserInvoiceDto> GetUserInvoices(string userId)
+        {
+            return _tiresDbContext.Invoices
+                .Where(x => x.ClientId == userId)
+                .Include(x => x.Client)
+                .Include(x => x.Order)
+                .ThenInclude(x => x.Services)
+                .Include(x => x.Order)
+                .ThenInclude(x => x.Services)
+                .Select(invoice => new UserInvoiceDto
+                {
+                    Id = invoice.Id,
+                    TotalPrice = invoice.Order.TotalPrice,
+                    InvoiceDate = invoice.Date,
+                    BulStat = invoice.BulStat,
+                    CompanyName = invoice.CompanyName,
+                    OrderedServices = invoice.Order.Services.Select(x => x.Name).ToList(),
+                    OrderedTires = invoice.Order.Tires.Select(t => $"{t.TireQuanity} {t.Tire.Name}").ToList(),
+                })
+                .ToList();
+        }
     }
 }

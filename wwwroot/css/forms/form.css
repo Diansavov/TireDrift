@@ -12,10 +12,12 @@ h2{
     display: flex;
     justify-content: center;
     width: 350px;
-    height: 400px;
+    min-height: 400px;
+    height: auto;
     padding: 60px 32px;
     background: rgba(255,255,255,0.04);
     box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+
 }
 .form-container form{
     width: 100%;

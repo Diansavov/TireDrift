@@ -55,14 +55,26 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Tires"
                                 asp-action="Services">Услуги</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Manager"
-                                asp-action="ManagerPanel">Панел на мениджър</a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Tires"
+                                    asp-action="TireHotel">Хотел за гуми</a>
+                            </li>
+
+                        }
+                        @if (User.IsInRole("Manager") || User.IsInRole("Technician") || User.IsInRole("Logistics") ||
+                                                User.IsInRole("Consultant"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Manager"
+                                    asp-action="ManagerPanel">Панел на мениджър</a>
+                            </li>
+                        }
                     </ul>
                     <div class="d-flex gap-2">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart"
-                                asp-action="Cart"><i class="bi bi-cart-fill cart-icon"></i></a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Cart"><i
+                                class="bi bi-cart-fill cart-icon"></i></a>
                         @if (!User.Identity.IsAuthenticated)
                         {
                             <a class="btn btn-outline-secondary" asp-area="" asp-controller="Users" asp-action="LogIn"
@@ -72,6 +84,13 @@
                         }
                         else
                         {
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Orders"><i
+                                    class="bi bi-bag-check-fill cart-icon"></i></a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Invoices"><i
+                                    class="bi bi-receipt cart-icon"></i></a>
+                            <ul class="navbar-nav flex-grow-1 nav-bar-flex-container">
+                                    <h2>@User.Identity.Name</h2>
+                            </ul>
                             <div class="justify-content-center">
                                 <a class="btn btn-outline-secondary" asp-area="" asp-controller="Users" asp-action="LogOut"
                                     type="submit">Излизане</a>

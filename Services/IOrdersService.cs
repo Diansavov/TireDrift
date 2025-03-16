@@ -10,5 +10,6 @@ namespace TireDrift.Services
         Task<string> FinishOrder(Cart cart, string clientId);
         Task FinishInvoice(InvoiceViewModel invoiceViewModel, string orderId, string clientId);
         List<UserOrderDto> GetUserOrder(string userId);
+        List<UserInvoiceDto> GetUserInvoices(string userId);
     }
 }
