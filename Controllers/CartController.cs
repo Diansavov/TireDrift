@@ -242,17 +242,17 @@ public class CartController : Controller
     public async Task<IActionResult> FinishOrder()
     {
         //Discount
-        int dicsountPercent = 0;
+        int discountPercent = 0;
         List<HotelTires> hotelTires = _userService.Get(User.Id()).HotelTires;
 
         int totalTireQuantity = hotelTires.Sum(x => x.TireQuanity);
         if (totalTireQuantity >= 25)
         {
-            dicsountPercent = 25;
+            discountPercent = 25;
         }
         else if (totalTireQuantity >= 5)
         {
-            dicsountPercent = totalTireQuantity;
+            discountPercent = totalTireQuantity;
         }
         var cart = GetCart();
         if (cart.Tires.IsNullOrEmpty() && cart.Services.IsNullOrEmpty())
@@ -287,7 +287,7 @@ public class CartController : Controller
             TempData["error"] = "Някои продукти не са налични във момента";
             return RedirectToAction("Cart", "Cart");
         }
-        cart.TotalPrice = cart.TotalPrice - ((cart.TotalPrice * dicsountPercent) / 100);
+        cart.TotalPrice = cart.TotalPrice - ((cart.TotalPrice * discountPercent) / 100);
         await _ordersService.FinishOrder(cart, User.Id());
 
         SaveCart(null);
@@ -298,12 +298,52 @@ public class CartController : Controller
     {
         if (ModelState.IsValid)
         {
+            int discountPercent = 0;
+            List<HotelTires> hotelTires = _userService.Get(User.Id()).HotelTires;
+
+            int totalTireQuantity = hotelTires.Sum(x => x.TireQuanity);
+            if (totalTireQuantity >= 25)
+            {
+                discountPercent = 25;
+            }
+            else if (totalTireQuantity >= 5)
+            {
+                discountPercent = totalTireQuantity;
+            }
             var cart = GetCart();
             if (cart.Tires.IsNullOrEmpty() && cart.Services.IsNullOrEmpty())
             {
                 TempData["error"] = "Кошницата е празна";
                 return RedirectToAction("Invoice", "Cart");
             }
+            bool invalidStockInCart = false;
+            List<Tire> invalidTires = new List<Tire>();
+            foreach (var tire in cart.Tires)
+            {
+                var updatedTire = await _tiresService.GetAsync(tire.Id);
+                if (updatedTire.Stock - tire.Quantity < 0)
+                {
+                    invalidStockInCart = true;
+                    cart.TotalPrice -= tire.Price * tire.Quantity;
+                    invalidTires.Add(tire);
+                }
+                else
+                {
+                    updatedTire.Stock -= tire.Quantity;
+                }
+            }
+            if (invalidStockInCart)
+            {
+                foreach (var tire in invalidTires)
+                {
+                    cart.Tires.Remove(tire);
+                }
+                SaveCart(cart);
+                TempData["error"] = "Някои продукти не са налични във момента";
+                return RedirectToAction("Cart", "Cart");
+            }
+            cart.TotalPrice = cart.TotalPrice - ((cart.TotalPrice * discountPercent) / 100);
+
             string orderId = await _ordersService.FinishOrder(cart, User.Id());
             SaveCart(null);
             await _ordersService.FinishInvoice(invoiceViewModel, orderId, User.Id());
