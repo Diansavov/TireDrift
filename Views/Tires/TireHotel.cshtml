@@ -30,6 +30,13 @@
             <h2 id="discount-outer">Получавате намаление от покупката на нови гуми в зависимост от количеството гуми в
                 хотелът ви: <span id="discount">@ViewData["Discount"]</span>% (до -25%)</h2>
         </div>
+         <div class="section-header">
+            <h2 id="discount-outer">Цена за съхранение на една гума (за 6 месеца): 12лв.</h2>
+        @if(Model.Count > 0){   
+            <h2 id="discount-outer">Заплащате: @(Model.Sum(x => x.TireQuanity) * 12)лв. всеки 6 месеца</h2>
+        }
+        </div>
+        
         <!--/.section-header-->
         <div class="explore-content">
             <div class="row">

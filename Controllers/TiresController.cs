@@ -67,9 +67,9 @@ namespace TireDrift
             await _tiresService.AddUserHotelTire(tireViewModel, User.Id());
             return RedirectToAction("TireHotel");
         }
-        public IActionResult RemoveTireFromHotel(string id)
+        public async Task<IActionResult> RemoveTireFromHotel(string id)
         {
-            _tiresService.RemoveUserHotelTire(id);
+            await _tiresService.RemoveUserHotelTire(id);
             return RedirectToAction("TireHotel");
         }
         [Authorize]
