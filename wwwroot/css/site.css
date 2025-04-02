@@ -222,3 +222,25 @@ body {
 .page-link:hover{
     color: var(--secondary);
 }
+.logo-container{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 200px;
+}
+.main-logo{
+   
+    width: 100%;
+    height: 25px;
+
+}
+.main-logo a{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img-fluid{
+    width: 120px;
+    max-width: 100%;
+}

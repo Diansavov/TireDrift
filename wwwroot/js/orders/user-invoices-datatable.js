@@ -11,7 +11,7 @@ function LoadTable() {
         dom: 'tp',
         pageLength: 6,
         "oLanguage": {
-            "sEmptyTable": "Няма поръчки в кошницата"
+            "sEmptyTable": "Нямате фактури"
         },
         ajax: {
             url: '/Order/GetInvoicesJson',

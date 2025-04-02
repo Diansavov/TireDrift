@@ -33,7 +33,13 @@
     <header>
         <nav id="nav-bar" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow ">
             <div class="container-fluid container-navbar">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TireDrift</a>
+                <div class="logo-container">
+                    <div class="main-logo">
+                        <a asp-controller="Home" asp-action="Index">
+                            <img src="~/images/images/logo.png" alt="logo" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -85,7 +91,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Invoices"><i
                                     class="bi bi-receipt cart-icon"></i></a>
                             <ul class="navbar-nav flex-grow-1 nav-bar-flex-container">
-                                    <h2>@User.Identity.Name</h2>
+                                <h2>@User.Identity.Name</h2>
                             </ul>
                             <div class="justify-content-center">
                                 <a class="btn btn-outline-secondary" asp-area="" asp-controller="Users" asp-action="LogOut"
@@ -111,7 +117,13 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="#nav-bar">TireDrift</a>
+                            <div class="logo-container">
+                                <div class="main-logo">
+                                    <a asp-controller="Home" asp-action="Index">
+                                        <img src="~/images/images/logo.png" alt="logo" class="img-fluid">
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-9">
