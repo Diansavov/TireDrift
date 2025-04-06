@@ -41,6 +41,10 @@
 											</p>
 										</div>
 									</div>
+									@if (User.IsInRole("Manager") || User.IsInRole("Technician"))
+									{
+										<a asp-controller="Tires" asp-action="EditService" asp-route-id="@service.Id" type="submit" class="btn">Редактиране</a>
+									}
 								</div>
 								<div class="explore-open-close-part">
 									<form asp-controller="Cart" asp-action="AddServiceToCart">
@@ -59,26 +63,3 @@
 				}
     </div>
 </section>
-@*
-<section class="section-container">
-    <div class="container-text text-title">
-        <h1>Админ панел</h1>
-    </div>
-    <div class="category-carousel swiper">
-        <div class="swiper-wrapper d-flex">
-            @foreach (var service in Model)
-            {
-                <a asp-controller="Cart" asp-action="AddServiceToCart" asp-route-id="@service.Id" class="category-item swiper-slide">
-                    <div>
-                        <img src="@service.ImagePath"></img>
-                    </div>
-                     fix the class "category-title" 
-                    <span class="category-title">@service.Name</span>
-                    <span class="category-title">@Math.Round(service.Price, 2) лв</span>
-                    <button class="btn btn-success">Add to cart</button>
-                </a>
-            }
-        </div>
-    </div>
-</section>
-*@

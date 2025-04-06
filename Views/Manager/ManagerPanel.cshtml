@@ -10,74 +10,117 @@
 <section id="works" class="works">
     <div class="container">
         <div class="works-content">
-            <a class="col-md-4 col-sm-6" asp-controller="Employees" asp-action="AddSupplier">
-                <div class="single-how-works">
-                    <div>
-                        <div class="single-how-works-icon">
-                            <i class="bi bi-person-gear single-how-works-icon"></i>
-                        </div>
+            @if (User.IsInRole("Logistics") || User.IsInRole("Manager"))
+            {
+                <a class="col-md-4 col-sm-6" asp-controller="Tires" asp-action="AllHotelTires">
+                    <div class="single-how-works">
+                        <div>
+                            <div class="single-how-works-icon">
+                                <i class="bi bi-hdd-rack"></i>
+                            </div>
 
-                        <h2>Добавяне на доставчици</h2>
-                        <p>
-                            Добавяне на ново назначен доставчик.
-                        </p>
-                    </div>
-                    <button class="welcome-hero-btn how-work-btn">
-                        Добави
-                    </button>
-                </div>
-            </a>
-            <a class="col-md-4 col-sm-6" asp-controller="Employees" asp-action="Suppliers">
-                <div class="single-how-works">
-                    <div>
-                        <div class="single-how-works-icon">
-                            <i class="bi bi-person-lines-fill single-how-works-icon"></i>
+                            <h2>Преглед на склад</h2>
+                            <p>
+                                Преглеждане на всички гуми в хотела.
+                            </p>
                         </div>
-                        <h2>Преглед на всички доставчици</h2>
-                        <p>
-                            Преглеждане на назначените доставчици, редактиране и изтриване. 
-                        </p>
+                        <button class="welcome-hero-btn how-work-btn">
+                            Преглед
+                        </button>
                     </div>
-                    <button class="welcome-hero-btn how-work-btn" onclick="window.location.href='#'">
-                        Доставчици
-                    </button>
-                </div>
-            </a>
-            <a class="col-md-4 col-sm-6" asp-controller="Manager" asp-action="Employees">
-                <div class="single-how-works">
-                    <div>
-                        <div class="single-how-works-icon">
-                            <i class="bi bi-person-vcard single-how-works-icon"></i>
-                        </div>
+                </a>
+                <a class="col-md-4 col-sm-6" asp-controller="Tires" asp-action="AddTire">
+                    <div class="single-how-works">
+                        <div>
+                            <div class="single-how-works-icon">
+                                <i class="bi bi-box2 single-how-works-icon"></i>
+                            </div>
 
-                        <h2>Преглед на служителите</h2>
-                        <p>
-                            Преглед на всички служители на фирмата.
-                        </p>
-                    </div>
-                    <button class="welcome-hero-btn how-work-btn">
-                        Прегледай
-                    </button>
-                </div>
-            </a>
-            <a class="col-md-4 col-sm-6" asp-controller="Tires" asp-action="AddTire">
-                <div class="single-how-works">
-                    <div>
-                        <div class="single-how-works-icon">
-                            <i class="bi bi-box2 single-how-works-icon"></i>
+                            <h2>Добавяне на гуми</h2>
+                            <p>
+                                Добавяне на нови гуми, автоматично добавени в стоката на сайта.
+                            </p>
                         </div>
-
-                        <h2>Добавяне на гуми</h2>
-                        <p>
-                            Добавяне на нови гуми, автоматично добавени в стоката на сайта.
-                        </p>
+                        <button class="welcome-hero-btn how-work-btn">
+                            Добави
+                        </button>
                     </div>
-                    <button class="welcome-hero-btn how-work-btn">
-                        Добави
-                    </button>
-                </div>
-            </a>
-            
+                </a>
+            }
+            @if (User.IsInRole("Manager"))
+            {
+                <a class="col-md-4 col-sm-6" asp-controller="Employees" asp-action="AddSupplier">
+                    <div class="single-how-works">
+                        <div>
+                            <div class="single-how-works-icon">
+                                <i class="bi bi-person-gear single-how-works-icon"></i>
+                            </div>
+
+                            <h2>Добавяне на доставчици</h2>
+                            <p>
+                                Добавяне на ново назначен доставчик.
+                            </p>
+                        </div>
+                        <button class="welcome-hero-btn how-work-btn">
+                            Добави
+                        </button>
+                    </div>
+                </a>
+                
+                <a class="col-md-4 col-sm-6" asp-controller="Employees" asp-action="Suppliers">
+                    <div class="single-how-works">
+                        <div>
+                            <div class="single-how-works-icon">
+                                <i class="bi bi-person-lines-fill single-how-works-icon"></i>
+                            </div>
+                            <h2>Преглед на всички доставчици</h2>
+                            <p>
+                                Преглеждане на назначените доставчици, редактиране и изтриване.
+                            </p>
+                        </div>
+                        <button class="welcome-hero-btn how-work-btn" onclick="window.location.href='#'">
+                            Доставчици
+                        </button>
+                    </div>
+                </a>
+                <a class="col-md-4 col-sm-6" asp-controller="Manager" asp-action="AddEmployee">
+                    <div class="single-how-works">
+                        <div>
+                            <div class="single-how-works-icon">
+                               <i class="bi bi-person-fill-add"></i>
+                            </div>
+
+                            <h2>Добавяне на служители</h2>
+                            <p>
+                                Добавяне на ново назначен служител.
+                            </p>
+                        </div>
+                        <button class="welcome-hero-btn how-work-btn">
+                            Добави
+                        </button>
+                    </div>
+                </a>
+                <a class="col-md-4 col-sm-6" asp-controller="Manager" asp-action="Employees">
+                    <div class="single-how-works">
+                        <div>
+                            <div class="single-how-works-icon">
+                                <i class="bi bi-person-vcard single-how-works-icon"></i>
+                            </div>
+
+                            <h2>Преглед на служителите</h2>
+                            <p>
+                                Преглед на всички служители на фирмата.
+                            </p>
+                        </div>
+                        <button class="welcome-hero-btn how-work-btn">
+                            Прегледай
+                        </button>
+                    </div>
+                </a>
+            }
+
+
+
         </div>
     </div>
 

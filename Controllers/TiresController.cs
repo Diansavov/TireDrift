@@ -15,11 +15,11 @@ namespace TireDrift
         private readonly ITiresService _tiresService;
         private readonly IServiceService _serviceService;
         private readonly JsonSerializerOptions _options = new()
-    {
-        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        WriteIndented = true,
-        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-    };
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            WriteIndented = true,
+            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+        };
         public TiresController(ITiresService tiresService, IServiceService serviceService)
         {
             _tiresService = tiresService;
@@ -49,7 +49,8 @@ namespace TireDrift
             {
                 ViewData["Discount"] = -totalTireQuantity;
             }
-            else if(totalTireQuantity < 5){
+            else if (totalTireQuantity < 5)
+            {
                 ViewData["Discount"] = 0;
             }
             return View(tires);
@@ -75,9 +76,9 @@ namespace TireDrift
         [Authorize]
         public string GetUserHotelTiresCount()
         {
-            int tiresCount = _tiresService.GetUserHotelTires(User.Id()).Sum(x=>x.TireQuanity);
+            int tiresCount = _tiresService.GetUserHotelTires(User.Id()).Sum(x => x.TireQuanity);
             string json = JsonSerializer.Serialize(tiresCount, _options);
-        return json;
+            return json;
         }
 
         //Search
@@ -125,6 +126,34 @@ namespace TireDrift
         {
             await _tiresService.DeleteAsync(id);
             return RedirectToAction("Tires");
+        }
+        [Authorize(Roles = "Manager, Technician, Logistics")]
+        public async Task<IActionResult> EditService(string id)
+        {
+            Service service = await _serviceService.GetAsync(id);
+
+            ServiceViewModel serviceViewModel = new ServiceViewModel(service);
+
+            return View(serviceViewModel);
+        }
+        [HttpPost]
+        [Authorize(Roles = "Manager, Technician, Logistics")]
+        public async Task<IActionResult> EditService(ServiceViewModel editServiceViewModel)
+        {
+            await _serviceService.EditAsync(editServiceViewModel);
+            return RedirectToAction("Services");
+        }
+        [Authorize(Roles = "Manager, Technician, Logistics")]
+        public async Task<IActionResult> AllHotelTires()
+        {
+            return View();
+        }
+        [Authorize]
+        public string GetAllHotelTires()
+        {
+            var hotelTires = _tiresService.GetAllHotelTiresDto();
+            string json = JsonSerializer.Serialize(hotelTires, _options);
+            return json;
         }
     }
 }

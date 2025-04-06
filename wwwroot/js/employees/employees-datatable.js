@@ -35,6 +35,17 @@ function LoadTable() {
             { data: 'role' },
             { data: 'email' },
             { data: 'phoneNumber' },
+            {
+                orderable: false,
+                data: 'id',
+                render: function (data) {
+                    return `
+                    <div class="d-flex justify-content-center gap-1">
+                        <a class="btn btn-warning" href="/Manager/EditEmployee/${data}">Редактиране</a>
+                        <a class="btn btn-danger" href="/Manager/DeleteEmployee/${data}">Изтриване</a>
+                    </div>`;
+                },
+            },
         ]
     });
 }

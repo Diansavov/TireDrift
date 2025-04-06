@@ -36,7 +36,7 @@ namespace TireDrift.Data.Seeds
                         UserName = "Pavlov",
                         Email = "pafkata@gmail.com",
                         FirstName = "Pavlov",
-                        LastName = "PupnovaVruv",
+                        LastName = "Pavlovov",
                         PhoneNumber = "0885321426"
                     };
                     await _userManager.CreateAsync(consultant, "123%Ab");
@@ -68,7 +68,7 @@ namespace TireDrift.Data.Seeds
                         UserName = "Izmeralda",
                         Email = "izi@gmail.com",
                         FirstName = "Izmeralda",
-                        LastName = "Temperaturaizmervovala",
+                        LastName = "Izmeraldova",
                         PhoneNumber = "0885321426"
                     };
                     User logisticsMan1 = new User()

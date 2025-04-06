@@ -34,7 +34,7 @@ h2{
 .inputs-container{
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 30px;
 }
 .input-field input{
     width: 100%;

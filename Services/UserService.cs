@@ -126,5 +126,43 @@ namespace TireDrift.Services
             }
             return employees;
         }
+
+        public async Task AddEmployee(EmployeeRegister employeeRegister)
+        {
+            User user = new User()
+            {
+                UserName = employeeRegister.UserName,
+                Email = employeeRegister.Email,
+                FirstName = employeeRegister.FirstName,
+                LastName = employeeRegister.LastName,
+                PhoneNumber = employeeRegister.PhoneNumber,
+            };
+            var result = await _userManager.CreateAsync(user, employeeRegister.Password);
+
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, employeeRegister.Role);
+            }
+        }
+
+        public async Task EditEmployee(EmployeeRegister employeeRegister)
+        {
+            var user = Get(employeeRegister.Id);
+            user.UserName = employeeRegister.UserName;
+            user.Email = employeeRegister.Email;
+            user.FirstName = employeeRegister.FirstName;
+            user.LastName = employeeRegister.LastName;
+            user.PhoneNumber = employeeRegister.PhoneNumber;
+
+            var roles = await _userManager.GetRolesAsync(user);
+            foreach (var role in roles)
+            {
+                await _userManager.RemoveFromRoleAsync(user, role);
+            }
+            await _userManager.AddToRoleAsync(user, employeeRegister.Role);
+
+            _tiresDbContext.Users.Update(user);
+            await _tiresDbContext.SaveChangesAsync();
+        }
     }
 }

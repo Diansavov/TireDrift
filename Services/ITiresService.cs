@@ -12,6 +12,7 @@ namespace Services
         Task DeleteAsync(string id);
         List<Tire> SearchProducts(string name, string filter);
         List<HotelTires> GetUserHotelTires(string userId);
+        List<HotelTiresDto> GetAllHotelTiresDto();
         Task AddUserHotelTire(TireViewModel tireViewModel, string userId);
         Task RemoveUserHotelTire(string hotelTireId);
     }

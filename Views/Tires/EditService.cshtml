@@ -1,0 +1,37 @@
+@model TireDrift.Models.ViewModels.ServiceViewModel
+
+@{
+    ViewData["Title"] = "Редактиране на услуга";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/forms/form.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/forms/bigger-form.css" asp-append-version="true" />
+}
+
+<section class="login-register-container">
+    <div class="form-container the-container">
+        <form asp-action="EditService" enctype="multipart/form-data">
+            <h2 class="form-title">Редактиране на услугата "@Model.Name"</h2>
+            <div class="inputs-container">
+                    <div class="inputs-next-to-image just-inputs">
+                        <div class="input-field">
+                            <label>Цена</label>
+                            <input type="text" placeholder="Цена" asp-for="Price">
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                        <div class="input-field">
+                            <label>Описание</label>
+                            <textarea type="text" placeholder="Описание" asp-for="Description"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                </div>
+                <div class="submit-button">
+                    <button class="btn btn-outline-secondary" type="submit">Редактиране на услуга</button>
+                </div>
+        </form>
+    </div>
+</section>
+@section Scripts {
+    <script src="~/js/tires/tire-image.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}

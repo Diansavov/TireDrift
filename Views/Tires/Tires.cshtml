@@ -76,7 +76,7 @@
 											</p>
 										</div>
 									</div>
-									@if (User.IsInRole("Manager"))
+									@if (User.IsInRole("Manager") || User.IsInRole("Logistics"))
 									{
 										<a asp-controller="Tires" asp-action="EditTire" asp-route-id="@tire.Id" type="submit" class="btn">Редактиране</a>
 										<a asp-controller="Tires" asp-action="DeleteTire" asp-route-id="@tire.Id" type="submit" class="btn">Изтриване</a>

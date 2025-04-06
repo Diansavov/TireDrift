@@ -24,5 +24,7 @@
 }
 .the-container{
     min-height: 510px;
-    max-height: 590px;
+}
+.just-inputs{
+    width: 100%;
 }

@@ -20,6 +20,7 @@
                         </a>
                         <input id="image-input" class="image-input" hidden accept="image/png" type="file"
                             asp-for="Image">
+                        <span asp-validation-for="Image" class="text-danger"></span>
                     </div>
                     <div class="inputs-next-to-image">
                         <div class="input-field">

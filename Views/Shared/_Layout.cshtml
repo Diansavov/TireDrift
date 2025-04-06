@@ -65,8 +65,7 @@
                             </li>
 
                         }
-                        @if (User.IsInRole("Manager") || User.IsInRole("Technician") || User.IsInRole("Logistics") ||
-                                                User.IsInRole("Consultant"))
+                        @if (User.IsInRole("Manager") || User.IsInRole("Logistics"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Manager"
