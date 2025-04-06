@@ -14,5 +14,8 @@ namespace TireDrift.Services
         Task<List<object>> GetEmployeesAsync(string firstName);
         User Get(string id);
 
+        Task AddEmployee(EmployeeRegister employeeRegister);
+        Task EditEmployee(EmployeeRegister employeeRegister);
+
     }
 }

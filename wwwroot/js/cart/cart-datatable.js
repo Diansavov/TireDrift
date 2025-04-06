@@ -40,18 +40,23 @@ function LoadTable() {
                 }
             },
             { data: 'name', },
-            { data: 'price' },
+            { 
+                data: 'price', 
+                render: function (data) {
+                    return data.toFixed(2) + ' лв';  // Format price
+                }
+            },
             { data: 'quantity' },
             {
                 data: null,
                 render: function (data, type, row) {
-                    return data.quantity * data.price
+                    return data.quantity * data.price + ' лв'
                 }
             },
             {
                 data: null,
                 render: function (data, type, row) {
-                    return row.stock ? 'Гуми' : 'Услуги';
+                    return row.stock ? 'Гуми' : 'Услуга';
                 }
             }
         ]

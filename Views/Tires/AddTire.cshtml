@@ -20,6 +20,7 @@
                         </a>
                         <input id="image-input" class="image-input" hidden accept="image/png" type="file"
                             asp-for="Image">
+                        <span asp-validation-for="Image" class="text-danger"></span>
                     </div>
                     <div class="inputs-next-to-image">
                         <div class="input-field">
@@ -27,11 +28,11 @@
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                         <div class="input-field">
-                            <input type="number" placeholder="Цена" asp-for="Price">
+                            <input type="text" placeholder="Цена" asp-for="Price">
                             <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
                         <div class="input-field">
-                            <input type="number" placeholder="Стока" asp-for="Stock">
+                            <input type="text" placeholder="Стока" asp-for="Stock">
                             <span asp-validation-for="Stock" class="text-danger"></span>
                         </div>
                         <div class="input-field">

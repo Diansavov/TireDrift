@@ -135,6 +135,19 @@ namespace Services
         {
             return _tiresDbContext.HotelTires.Where(x => x.UserId == userId).ToList();
         }
+        public List<HotelTiresDto> GetAllHotelTiresDto()
+        {
+            return _tiresDbContext.HotelTires.Include(x => x.User)
+        .Select(ht => new HotelTiresDto
+        {
+            Id = ht.Id,
+            UserName = ht.User.FirstName,
+            TireName = ht.TireName,
+            TireImageUrl = ht.TireImageUrl,
+            TireQuanity = ht.TireQuanity
+        })
+        .ToList();
+        }
 
         public async Task AddUserHotelTire(TireViewModel tireViewModel, string userId)
         {

@@ -1,4 +1,5 @@
 using TireDrift.Models;
+using TireDrift.Models.ViewModels;
 
 namespace Services
 {
@@ -6,5 +7,6 @@ namespace Services
     {
         List<Service> GetAll();
         Task<Service> GetAsync(string id);
+        Task EditAsync(ServiceViewModel serviceViewModel);
     }
 }

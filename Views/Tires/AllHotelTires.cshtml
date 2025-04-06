@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "Всички гуми в хотела";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/lib/datatables/datatables.min.css" />
+    <script src="~/lib/datatables/datatables.min.js"></script>
+    <link rel="stylesheet" href="~/css/table/table.css" />
+
+
+}
+
+<section class="section-table">
+    <div class="section-header">
+        <h2>Всички гуми в хотела</h2>
+    </div>
+    <div class="users-container">
+        <table id="usersTable" class="table">
+            <thead>
+                <tr class="thead-row">
+                    <th>Снимка</th>
+                    <th>Име на гума</th>
+                    <th>Количество в хотела</th>
+                    <th>Потребител</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/tires/all-hotel-tires.js"></script>
+
+}

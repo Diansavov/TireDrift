@@ -1,0 +1,62 @@
+@model TireDrift.Models.ViewModels.EmployeeRegister
+
+@{
+    ViewData["Title"] = "Редактиране на служител";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/forms/form.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/forms/bigger-form.css" asp-append-version="true" />
+}
+
+<section class="login-register-container">
+    <div class="form-container the-container">
+        <form asp-action="EditEmployee" enctype="multipart/form-data">
+            <input type="text" asp-for="Id" hidden>
+            <h2 class="form-title">Редактиране на служител</h2>
+            <div class="inputs-container">
+                <div class="inputs-next-to-image just-inputs">
+                    <div class="input-field">
+                        <label>Лично име</label>
+                        <input type="text" placeholder="Лично име" asp-for="FirstName">
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="input-field">
+                        <label>Фамилно име</label>
+                        <input type="text" placeholder="Фамилно име" asp-for="LastName">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="input-field">
+                        <label>Потребителско име</label>
+                        <input type="text" placeholder="Потребителско име" asp-for="UserName">
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="input-field">
+                        <label>Имейл</label>
+                        <input type="email" placeholder="Имейл" asp-for="Email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="input-field">
+                        <label>Телефонен номер</label>
+                        <input type="text" placeholder="Телефонен номер" asp-for="PhoneNumber">
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating">
+                        <select class="form-select" asp-for="Role">
+                            <option value="Technician">Техник</option>
+                            <option value="Logistics">Логистичен персонал</option>
+                            <option value="Consultant">Консултант</option>
+                        </select>
+                        <label>Роля</label>
+                    </div>
+                </div>
+                <div class="submit-button">
+                    <button class="btn btn-outline-secondary" type="submit">Редактиране</button>
+                </div>
+        </form>
+    </div>
+</section>
+@section Scripts {
+    <script src="~/js/tires/tire-image.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}

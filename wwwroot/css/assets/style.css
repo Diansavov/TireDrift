@@ -363,9 +363,14 @@ nav.navbar.bootsnav .navbar-toggle i {
 
 .works-content {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
     margin-top: 73px;
+}
+.works-content a{
+    flex: 0 0 31%;
+    
 }
 
 .single-how-works {

@@ -22,9 +22,11 @@ namespace TireDrift.Models.ViewModels
         public string Name { get; set; }
         [Required(ErrorMessage = "Цената е задължителна")]
         [Range(0, double.MaxValue, ErrorMessage = "Цената трябва да е положителна")]
+        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Въведете число")]
         public decimal Price { get; set; }
         [Required(ErrorMessage = "Количеството е задължително")]
         [Range(0, double.MaxValue, ErrorMessage = "Количеството трябва да е положително")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "Въведете цяло число")]
         public int Stock { get; set; }
         [Required(ErrorMessage = "Описанието е задължително")]
         public string Description { get; set; }
