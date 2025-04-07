@@ -71,6 +71,10 @@ namespace TireDrift.Services
         public async Task DeleteAsync(string id)
         {
             User user = await _userManager.FindByIdAsync(id);
+            if (await _userManager.IsInRoleAsync(user, "Manager"))
+            {
+                return;
+            }
             await _userManager.DeleteAsync(user);
         }
 

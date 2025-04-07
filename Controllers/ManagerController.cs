@@ -89,6 +89,6 @@ public class ManagerController : Controller
     public async Task<IActionResult> DeleteEmployee(string id)
     {
         await _userService.DeleteAsync(id);
-        return RedirectToAction("ManagerPanel");  
+        return RedirectToAction("Employees");  
     }
 }
